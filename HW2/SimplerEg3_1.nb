@@ -1,0 +1,226 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7036,        218]
+NotebookOptionsPosition[      6486,        194]
+NotebookOutlinePosition[      6840,        210]
+CellTagsIndexPosition[      6797,        207]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Rational", " ", "Approximation", " ", "of", " ", "Pi"}], " ", 
+   "*)"}], "\n", "\n", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"M", " ", "=", " ", 
+     RowBox[{"Input", "[", "\"\<Enter M  \>\"", "]"}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{"Initialize", " ", "best", " ", "q"}], ",", " ", 
+     RowBox[{"best", " ", "p"}], ",", " ", 
+     RowBox[{"and", " ", "error", " ", "term"}]}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"qBest", " ", "=", " ", "1"}], ";", " ", 
+    RowBox[{"pBest", " ", "=", " ", "1"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"errorpq", " ", "=", " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{"N", "[", 
+       RowBox[{
+        RowBox[{"pBest", "/", "qBest"}], " ", "-", " ", "Pi"}], "]"}], 
+      "]"}]}], ";"}], "\n", "\n", 
+   RowBox[{"Do", "[", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Check", " ", "all", " ", "possible", " ", "Denominators", " ", "q"}], 
+     " ", "*)"}], "\n", " ", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Find", " ", "the", " ", "best", " ", "numerator", " ", "p", " ", "for", 
+      " ", "this", " ", "denominator", " ", "q"}], " ", "*)"}], "\n", "\n", 
+    " ", 
+    RowBox[{
+     RowBox[{"Do", "[", " ", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "check", " ", "all", " ", "possible", " ", "numerators", " ", "p"}], 
+       " ", "*)"}], "\n", "   ", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"N", "[", 
+            RowBox[{
+             RowBox[{"p", "/", "q"}], " ", "-", " ", "Pi"}], "]"}], "]"}], 
+          " ", "<", " ", "errorpq"}], ",", " ", 
+         RowBox[{"(*", " ", 
+          RowBox[{"new", " ", "best", " ", "numerator", " ", "found"}], " ", 
+          "*)"}], " ", "\n", "    ", 
+         RowBox[{
+          RowBox[{"pBest", " ", "=", " ", "p"}], ";", 
+          RowBox[{"qBest", "=", "q"}], ";", " ", 
+          RowBox[{"errorpq", " ", "=", " ", 
+           RowBox[{"Abs", "[", 
+            RowBox[{"N", "[", 
+             RowBox[{
+              RowBox[{"p", "/", "q"}], " ", "-", " ", "Pi"}], "]"}], "]"}]}], 
+          ";"}]}], "\n", "    ", "]"}], ",", "\n", "   ", 
+       RowBox[{"{", 
+        RowBox[{"p", ",", " ", "1", ",", " ", "M"}], "}"}]}], "]"}], ",", " ",
+      "\n", " ", 
+     RowBox[{"{", 
+      RowBox[{"q", ",", " ", "1", ",", " ", "M"}], "}"}]}], "]"}], "\n", "\n", 
+   RowBox[{
+    RowBox[{"myPi", " ", "=", " ", 
+     RowBox[{"pBest", "/", "qBest"}]}], ";"}], "\n", 
+   RowBox[{"(*", " ", 
+    RowBox[{"Print", " ", "output"}], " ", "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<M     =   \>\"", ",", " ", 
+      RowBox[{"NumberForm", "[", 
+       RowBox[{"M", ",", "10"}], "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<pBest =   \>\"", ",", " ", 
+      RowBox[{"NumberForm", "[", 
+       RowBox[{"pBest", ",", "10"}], "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<qBest =   \>\"", ",", " ", 
+      RowBox[{"NumberForm", "[", 
+       RowBox[{"qBest", ",", "10"}], "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<myPi  =   \>\"", ",", " ", 
+      RowBox[{"N", "[", 
+       RowBox[{"myPi", ",", " ", "16"}], "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<Pi    =   \>\"", ",", " ", 
+      RowBox[{"N", "[", 
+       RowBox[{"Pi", ",", " ", "16"}], "]"}]}], "]"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"\"\<error =   \>\"", ",", " ", 
+      RowBox[{"N", "[", "errorpq", "]"}]}], "]"}], ";"}], 
+   "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.682271680794599*^9, 3.682271686623458*^9}, {
+   3.6822717336398497`*^9, 3.682271864925744*^9}, 3.682271974956653*^9, {
+   3.682272128828835*^9, 3.6822721389854097`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"M     =   \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox["\<\"500\"\>",
+     500,
+     Editable->False],
+    NumberForm[#, 10]& ]}],
+  SequenceForm["M     =   ", 
+   NumberForm[500, 10]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.682271996045508*^9, 3.682272148259357*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"pBest =   \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox["\<\"355\"\>",
+     355,
+     Editable->False],
+    NumberForm[#, 10]& ]}],
+  SequenceForm["pBest =   ", 
+   NumberForm[355, 10]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.682271996045508*^9, 3.6822721482664223`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"qBest =   \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox["\<\"113\"\>",
+     113,
+     Editable->False],
+    NumberForm[#, 10]& ]}],
+  SequenceForm["qBest =   ", 
+   NumberForm[113, 10]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.682271996045508*^9, 3.682272148273766*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"myPi  =   \"\>", "\[InvisibleSpace]", 
+   "3.14159292035398230088495575221238938053`16."}],
+  SequenceForm["myPi  =   ", 3.14159292035398230088495575221238938053`16.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.682271996045508*^9, 3.6822721482764797`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"Pi    =   \"\>", "\[InvisibleSpace]", 
+   "3.1415926535897932384626433832795028842`16."}],
+  SequenceForm["Pi    =   ", 3.1415926535897932384626433832795028842`16.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.682271996045508*^9, 3.682272148279158*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\"error =   \"\>", "\[InvisibleSpace]", 
+   "2.667641894049666`*^-7"}],
+  SequenceForm["error =   ", 2.667641894049666*^-7],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.682271996045508*^9, 3.682272148281869*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 696},
+WindowMargins->{{159, Automatic}, {Automatic, 3}},
+FrontEndVersion->"11.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 28, \
+2016)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 3916, 103, 558, "Input"],
+Cell[CellGroupData[{
+Cell[4521, 129, 345, 11, 24, "Print"],
+Cell[4869, 142, 347, 11, 24, "Print"],
+Cell[5219, 155, 345, 11, 24, "Print"],
+Cell[5567, 168, 312, 6, 24, "Print"],
+Cell[5882, 176, 308, 6, 24, "Print"],
+Cell[6193, 184, 265, 6, 25, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

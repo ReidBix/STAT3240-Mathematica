@@ -1,0 +1,109 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3280,        100]
+NotebookOptionsPosition[      2919,         82]
+NotebookOutlinePosition[      3275,         98]
+CellTagsIndexPosition[      3232,         95]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"SeedRandom", "[", "1234", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"win", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{"0", ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", "20"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Do", "[", " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"door", "=", 
+     RowBox[{"RandomInteger", "[", 
+      RowBox[{"{", 
+       RowBox[{"1", ",", "3"}], "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+    RowBox[{"switch", "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"RandomInteger", "[", "]"}], "\[Equal]", "1"}], "}"}]}], ";", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"win", "[", 
+      RowBox[{"[", "k", "]"}], "]"}], "=", 
+     RowBox[{"chooseDoor", "[", 
+      RowBox[{"door", ",", "switch"}], "]"}]}], ";"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"k", ",", "1", ",", "20"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"expected", "=", 
+   RowBox[{"{", 
+    RowBox[{
+    "0", ",", "1", ",", "1", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0",
+      ",", "0", ",", "0", ",", "0", ",", "1", ",", "1", ",", "0", ",", "0", 
+     ",", "0", ",", "0", ",", "0", ",", "0", ",", "0"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"error", "=", 
+  RowBox[{"Total", "[", 
+   RowBox[{"Abs", "[", 
+    RowBox[{"win", "-", "expected"}], "]"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6230673862641172`*^9, 3.623067581809984*^9}, {
+  3.623067729153892*^9, 3.623067761007707*^9}, {3.6230677922501383`*^9, 
+  3.62306782037005*^9}, {3.6230701151237707`*^9, 3.6230701158504133`*^9}, {
+  3.623147533495307*^9, 3.623147592739614*^9}, {3.623147668288113*^9, 
+  3.623147689385393*^9}, {3.6231477355969543`*^9, 3.623147866583494*^9}, {
+  3.685190344976231*^9, 3.685190346829969*^9}, {3.685190448958486*^9, 
+  3.685190459812875*^9}, {3.685210529251562*^9, 3.685210551907159*^9}}],
+
+Cell[BoxData["0"], "Output",
+ CellChangeTimes->{3.623160154749996*^9, 3.623340173833187*^9, 
+  3.6233403277703743`*^9, 3.6533176789637117`*^9, 3.685190392247052*^9, 
+  3.6851904539573317`*^9, 3.685190530057445*^9, 3.685201970371646*^9, 
+  3.685210495127596*^9, 3.6852105644373837`*^9, 3.6853797102250443`*^9}]
+}, Open  ]],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{3.653317654534672*^9}]
+},
+WindowSize->{808, 696},
+WindowMargins->{{Automatic, 8}, {46, Automatic}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1940, 48, 148, "Input"],
+Cell[2523, 72, 309, 4, 62, "Output"]
+}, Open  ]],
+Cell[2847, 79, 68, 1, 28, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

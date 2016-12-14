@@ -1,0 +1,195 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7335,        186]
+NotebookOptionsPosition[      7037,        171]
+NotebookOutlinePosition[      7396,        187]
+CellTagsIndexPosition[      7353,        184]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"myFactorial", "[", "n_", "]"}], ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "fact", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"myFactorial", 
+       RowBox[{"(", "n", ")"}]}], ":", " ", 
+      RowBox[{
+      "calculate", " ", "the", " ", "factorial", " ", "of", " ", "the", " ", 
+       "given", " ", "n"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "n", ":", " ", 
+      RowBox[{
+      "the", " ", "value", " ", "that", " ", "you", " ", "want", " ", "to", 
+       " ", "find", " ", "the", " ", "factorial", " ", "of", " ", 
+       RowBox[{"(", 
+        RowBox[{"aka", " ", 
+         RowBox[{"n", "!"}]}], ")"}], "      ", "\[IndentingNewLine]", "   ", 
+       
+       RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{
+         RowBox[{
+         "the", " ", "output", " ", "is", " ", "either", " ", "the", " ", 
+          "single", " ", "value", " ", "of", " ", 
+          RowBox[{"n", "!"}], " ", "or", " ", "if", " ", "n"}], " ", "<", " ", 
+         RowBox[{
+         "0", " ", "then", " ", "it", " ", "prints", " ", "\"\<Error\>\"", 
+          " ", "and", " ", "returns", " ", "Indeterminate"}]}]}]}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Initialize", " ", "the", " ", "final", " ", "factorial", " ", 
+      RowBox[{"(", 
+       RowBox[{
+       "if", " ", "it", " ", "is", " ", "0", " ", "then", " ", "it", " ", 
+        "will", " ", "be", " ", "1", " ", "regardless"}], " "}]}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"fact", "=", "1"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "If", " ", "n", " ", "is", " ", "less", " ", "than", " ", "0", " ", 
+       RowBox[{"(", 
+        RowBox[{"aka", " ", "negative"}], ")"}], " ", "then", " ", "output", 
+       " ", "that", " ", "there", " ", "is", " ", "an", " ", "error", " ", 
+       "and", " ", "return", " ", "indeterminate"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"n", "<", "0"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", "\"\<Error\>\"", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "Indeterminate", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "If", " ", "n", " ", "is", " ", "greater", " ", "than", " ", "or", " ", 
+       "equal", " ", "to", " ", "1", " ", "then", " ", "simply", " ", "do", 
+       " ", "a", " ", "factorial", " ", "using", " ", "a", " ", "Do", " ", 
+       "loop"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"n", "\[GreaterEqual]", "1"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"fact", "=", 
+          RowBox[{"fact", "*", "i"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", "n"}], "}"}]}], "\[IndentingNewLine]", 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+       "Return", " ", "the", " ", "factorial", " ", "as", " ", "1", " ", "if",
+         " ", "n"}], " ", "=", " ", 
+       RowBox[{
+        RowBox[{"0", " ", "or", " ", 
+         RowBox[{"n", "!"}], " ", "if", " ", "n"}], " ", "\[GreaterEqual]", 
+        " ", "1"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "fact", "]"}], ";"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.683390000119495*^9, 3.683390138081455*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NChooseK", "[", 
+   RowBox[{"n_", ",", "k_"}], "]"}], ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "fact", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"NChooseK", 
+       RowBox[{"(", 
+        RowBox[{"n", ",", "k"}], ")"}]}], ":", " ", 
+      RowBox[{
+      "calculate", " ", "the", " ", "combinations", " ", "of", " ", "n", " ", 
+       "and", " ", "k"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "n", ":", " ", 
+      RowBox[{
+      "the", " ", "first", " ", "number", " ", "that", " ", "is", " ", "used",
+        " ", "for", " ", "the", " ", "combinations", "      ", 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"k", ":", " ", 
+        RowBox[{
+        "the", " ", "second", " ", "number", " ", "that", " ", "is", " ", 
+         "used", " ", "for", " ", "the", " ", "combinations", "      ", 
+         "\[IndentingNewLine]", "   ", "OUTPUT"}], ":", "\[IndentingNewLine]",
+         "\t\t", 
+        RowBox[{
+        "a", " ", "number", " ", "that", " ", "is", " ", "the", " ", 
+         "combination", " ", "of", " ", "n", " ", "and", " ", "k"}]}]}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"If", " ", "n"}], "<", 
+       RowBox[{"k", " ", "then", " ", "you", " ", 
+        RowBox[{"can", "'"}], "t", " ", "get", " ", "the", " ", 
+        "combinations"}]}], ",", " ", 
+      RowBox[{"output", " ", "indeterminate"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"n", "<", "k"}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", "\"\<Error\>\"", "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Return", "[", "Indeterminate", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Return", " ", "the", " ", "combination", " ", "of", " ", "n", " ", 
+       "and", " ", "k"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{
+       RowBox[{"myFactorial", "[", "n", "]"}], "/", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"myFactorial", "[", "k", "]"}], "*", 
+         RowBox[{"myFactorial", "[", 
+          RowBox[{"n", "-", "k"}], "]"}]}], ")"}]}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.683390157149247*^9, 3.683390235004437*^9}, {
+  3.683390266122637*^9, 3.6833902889156637`*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{12, Automatic}, {Automatic, 24}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3808, 84, 420, "Input"],
+Cell[4369, 106, 2664, 63, 301, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

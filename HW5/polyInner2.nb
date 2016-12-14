@@ -1,0 +1,389 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     15921,        380]
+NotebookOptionsPosition[     15620,        365]
+NotebookOutlinePosition[     15980,        381]
+CellTagsIndexPosition[     15937,        378]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polyInner2", "[", 
+   RowBox[{"a_", ",", "b_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "xList", ",", "yList", ",", "theta", ",", "innerSum", ",", "k", ",", 
+      "xk1", ",", "yk1", ",", "dk", ",", "P", ",", "xk", ",", "yk"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"polyInner2", 
+       RowBox[{"(", 
+        RowBox[{"a", ",", "b", ",", "n"}], ")"}]}], ":"}], "  ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+      RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "a", ":", " ", 
+       RowBox[{
+       "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+        " ", "of", " ", "an", " ", "ellipse", " ", 
+        RowBox[{"E", ".", "\[IndentingNewLine]", "\t\t", 
+         RowBox[{"b", ":", " ", 
+          RowBox[{
+          "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+           " ", "of", " ", "an", " ", "ellipse", " ", 
+           RowBox[{"E", ".", "\[IndentingNewLine]", "\t", "n"}]}], ":", " ", 
+          RowBox[{
+          "n", " ", "is", " ", "a", " ", "positive", " ", "integer", " ", 
+           "bigger", " ", "than", " ", "2.", "\[IndentingNewLine]", 
+           RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+            RowBox[{
+            "returns", " ", "the", " ", "approximated", " ", "root", " ", 
+             "of", " ", "the", " ", "function", " ", "closest", " ", "to", 
+             " ", "the", " ", "initial", " ", "estimate"}]}]}]}]}]}]}], ",", 
+      " ", 
+      RowBox[{"specifically", " ", "using", " ", 
+       RowBox[{"Pi", "/", "2"}], " ", "rather", " ", "than", " ", "2", "Pi"}],
+       ",", " ", 
+      RowBox[{
+      "then", " ", "multiplying", " ", "by", " ", "4", " ", "later"}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "Initialize", " ", "a", " ", "running", " ", "sum", " ", "variable", 
+       " ", "to", " ", "zero"}], ",", " ", 
+      RowBox[{"Other", " ", "initializations"}], ",", " ", 
+      RowBox[{"using", " ", 
+       RowBox[{"Pi", "/", "2"}], " ", "instead", " ", "of", " ", "2", 
+       "Pi"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"theta", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"Pi", "/", "2"}], ")"}], "/", "n"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"innerSum", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"k", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xk", "=", 
+      RowBox[{"a", "*", 
+       RowBox[{"Cos", "[", 
+        RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"yk", "=", 
+      RowBox[{"b", "*", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xList", "=", 
+      RowBox[{"{", "xk", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"yList", "=", 
+      RowBox[{"{", "yk", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "run", " ", "do", " ", "loop", " ", "and", " ", "save", " ", "to", " ", 
+       "lists"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"Compute", " ", "xy"}], "-", 
+       RowBox[{"coordinates", " ", "of", " ", "vertex", " ", "k"}]}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"xk1", "=", 
+         RowBox[{"a", "*", 
+          RowBox[{"Cos", "[", 
+           RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"yk1", "=", 
+         RowBox[{"b", "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"dk", "=", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"xk", "-", "xk1"}], ")"}], "^", "2"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"yk", "-", "yk1"}], ")"}], "^", "2"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"innerSum", "=", 
+         RowBox[{"innerSum", "+", "dk"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"xk", "=", "xk1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"yk", "=", "yk1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"xList", ",", "xk"}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"yList", ",", "yk"}], "]"}], ";"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"innerSum", "*", "4"}], ",", "xList", ",", "yList"}], "}"}], 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.684024023313541*^9, 3.6840240330901413`*^9}, {
+  3.684024136274742*^9, 3.6840244883851213`*^9}, {3.684024541379004*^9, 
+  3.6840249467486*^9}, {3.684024981003721*^9, 3.68402498129257*^9}, {
+  3.6840251145045424`*^9, 3.684025138090815*^9}, {3.684026044363986*^9, 
+  3.6840261652772293`*^9}, {3.6841662546966667`*^9, 3.684166254786455*^9}, {
+  3.684166288773818*^9, 3.684166289043466*^9}, {3.6841663527545023`*^9, 
+  3.684166370540745*^9}, {3.684166403989481*^9, 3.684166404082329*^9}, {
+  3.68416656187883*^9, 3.684166586132277*^9}, {3.684166662535993*^9, 
+  3.6841666743880377`*^9}, {3.684166829972259*^9, 3.6841668748910217`*^9}, {
+  3.6847716232583857`*^9, 3.684771625014514*^9}, {3.684771754680956*^9, 
+  3.684771755222492*^9}, {3.684772198886326*^9, 3.684772207639722*^9}, {
+  3.684772457873007*^9, 3.6847725014705887`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ellipsePerim1", "[", 
+   RowBox[{
+   "polyInner1_", ",", "a_", ",", "b_", ",", "tol_", ",", "plotsOn_"}], "]"}],
+   ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "P", ",", "P2", ",", "relErr", ",", "listErr", ",", "k", ",", "innerSum",
+       ",", "xList", ",", "yList", ",", "xyList"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"ellipsePerim1", 
+       RowBox[{"(", 
+        RowBox[{
+        "polyInner1", ",", "a", ",", "b", ",", "tol", ",", "plotsOn"}], 
+        ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+     "INPUT", ":", "\[IndentingNewLine]", "\t\t", "polyInner", ":", " ", 
+      RowBox[{
+      "the", " ", "initial", " ", "polyInner", " ", "function", " ", "that", 
+       " ", "is", " ", "passed", " ", "to", " ", "this", " ", "function", 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"a", ":", " ", 
+        RowBox[{
+        "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+         " ", "of", " ", "an", " ", "ellipse", " ", 
+         RowBox[{"E", ".", "\[IndentingNewLine]", "\t\t", "b"}]}], ":", " ", 
+        RowBox[{
+        "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+         " ", "of", " ", "an", " ", "ellipse", " ", 
+         RowBox[{"E", ".", "\[IndentingNewLine]", "\t", 
+          RowBox[{"tol", ":", " ", 
+           RowBox[{
+           "the", " ", "tolerance", " ", "level", " ", "for", " ", "the", " ",
+             "while", " ", "loop", "\[IndentingNewLine]", "plotsOn"}], ":", 
+           " ", 
+           RowBox[{
+           "plots", " ", "the", " ", "graph", " ", "if", " ", "set", " ", 
+            "to", " ", "\"\<on\>\"", "\[IndentingNewLine]", 
+            RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", 
+             RowBox[{
+             "returns", " ", "the", " ", "ellipse", " ", "perimeter", " ", 
+              "estimate", " ", "given", " ", "the", " ", 
+              "tolerance"}]}]}]}]}]}]}]}]}], "\[IndentingNewLine]", "\t\t", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"Initialize", " ", "k"}], ",", " ", "P", ",", " ", "P2", ",", 
+      " ", 
+      RowBox[{"and", " ", "test"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "the", " ", "large", " ", "fraction", " ", "was", " ", "split", " ", 
+       "into", " ", "separate", " ", "parts"}], ",", " ", 
+      RowBox[{"P", " ", "and", " ", "P2"}], ",", " ", 
+      RowBox[{
+      "where", " ", "P", " ", "will", " ", "eventually", " ", "be", " ", 
+       "returned"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"k", "=", "2"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"P", "=", 
+      RowBox[{
+       RowBox[{"polyInner1", "[", 
+        RowBox[{"a", ",", "b", ",", 
+         RowBox[{"k", "+", "1"}]}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"P2", "=", 
+      RowBox[{
+       RowBox[{"polyInner1", "[", 
+        RowBox[{"a", ",", "b", ",", "k"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"relErr", "=", 
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"P", "-", "P2"}], "]"}], "/", "P"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"listErr", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+       "loop", " ", "until", " ", "the", " ", "tolerance", " ", "level", " ", 
+        "is", " ", "met", " ", "or", " ", "k"}], " ", ">", " ", "1000"}], " ",
+       "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"relErr", "\[GreaterEqual]", "tol"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"k", ">", "1000"}], ",", 
+          RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"k", "++"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"P", "=", 
+         RowBox[{
+          RowBox[{"polyInner1", "[", 
+           RowBox[{"a", ",", "b", ",", 
+            RowBox[{"k", "+", "1"}]}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"P2", "=", 
+         RowBox[{
+          RowBox[{"polyInner1", "[", 
+           RowBox[{"a", ",", "b", ",", "k"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"relErr", "=", 
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"P", "-", "P2"}], "]"}], "/", "P"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"listErr", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"k", "+", "1"}], ",", "relErr"}], "}"}]}], "]"}], ";"}]}],
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "copy", " ", "down", " ", "all", " ", "the", " ", "x", " ", "and", " ", 
+       "y", " ", "points", " ", "for", " ", "the", " ", "plot"}], " ", "*)"}],
+      "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"innerSum", ",", "xList", ",", "yList"}], "}"}], "=", 
+      RowBox[{"polyInner1", "[", 
+       RowBox[{"a", ",", "b", ",", 
+        RowBox[{"k", "+", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xyList", "=", 
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"Riffle", "[", 
+         RowBox[{"xList", ",", "yList"}], "]"}], ",", "2"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "if", " ", "plots", " ", "is", " ", "\"\<on\>\"", " ", "then", " ", 
+       "plot", " ", "the", " ", "xy", " ", "vertices", " ", "and", " ", "the",
+        " ", "relative", " ", "error", " ", "graph"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"plotsOn", "==", "\"\<on\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"\"\<xyVerts-\>\"", "<>", 
+           RowBox[{"ToString", "[", "polyInner1", "]"}], "<>", 
+           "\"\<.pdf\>\""}], ",", "\[IndentingNewLine]", 
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"xyList", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"\"\<x\>\"", ",", "\"\<y\>\""}], "}"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotLabel", "\[Rule]", 
+               RowBox[{
+               "\"\<ellipsePerim computed vertices for PolyInner2 \\n a=\>\"",
+                 "<>", 
+                RowBox[{"ToString", "[", "a", "]"}], "<>", "\"\< b=\>\"", "<>", 
+                RowBox[{"ToString", "[", "b", "]"}], "<>", 
+                "\"\<, and tol=\>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"FortranForm", "[", 
+                  RowBox[{"N", "[", "tol", "]"}], "]"}], "]"}]}]}]}], "}"}]}],
+            "]"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"\"\<RelativeError-\>\"", "<>", 
+           RowBox[{"ToString", "[", "polyInner1", "]"}], "<>", 
+           "\"\<.pdf\>\""}], ",", "\[IndentingNewLine]", 
+          RowBox[{"ListLinePlot", "[", 
+           RowBox[{"listErr", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                "\"\<Number of vertices\>\"", ",", "\"\<Relative Error\>\""}],
+                 "}"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"PlotLabel", "\[Rule]", " ", 
+               RowBox[{
+               "\"\<ellipsePerim Relative Error for PolyInner2 \\n a=\>\"", "<>", 
+                RowBox[{"ToString", "[", "a", "]"}], "<>", "\"\< b=\>\"", "<>", 
+                RowBox[{"ToString", "[", "b", "]"}], "<>", 
+                "\"\<, and tol=\>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"FortranForm", "[", 
+                  RowBox[{"N", "[", "tol", "]"}], "]"}], "]"}]}]}]}], "}"}]}],
+            "]"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "return", " ", "the", " ", "ellipse", " ", "perimeter", " ", "estimate",
+        " ", "given", " ", "the", " ", "tolerance"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"N", "[", "P", "]"}], "}"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.684771574476728*^9, 3.684771576833137*^9}, {
+  3.684771939283515*^9, 3.684771955625285*^9}, {3.684772031534095*^9, 
+  3.684772088482917*^9}, {3.6847721229064503`*^9, 3.684772152587425*^9}, {
+  3.684772251372192*^9, 3.684772324552163*^9}, {3.684772387740456*^9, 
+  3.684772428705751*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 5882, 131, 556, "Input"],
+Cell[6443, 153, 9173, 210, 811, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

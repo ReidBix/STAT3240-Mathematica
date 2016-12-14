@@ -1,0 +1,180 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5785,        170]
+NotebookOptionsPosition[      5528,        156]
+NotebookOutlinePosition[      5886,        172]
+CellTagsIndexPosition[      5843,        169]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"function", "[", "area", "]"}], "=", 
+  RowBox[{"overlapArea", 
+   RowBox[{"(", 
+    RowBox[{"x", ",", "y", ",", "r"}], ")"}]}]}], "\n", 
+ RowBox[{"%", " ", "\"\<overlapArea(xt,yt,rl)\>\"", " ", "is", " ", "a", " ", 
+  "function", " ", "that", " ", "computes", " ", "the", " ", "intersection", 
+  " ", "of"}], "\n", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "a", " ", "disk", " ", "of", " ", "radius", " ", "rl", " ", 
+   "centered", " ", "at", " ", 
+   RowBox[{"(", 
+    RowBox[{"x", ",", "y"}], ")"}], " ", "with", " ", "the", " ", "750"}], 
+  "-", "by", "-", 
+  RowBox[{"750", " ", "region", " ", "that"}]}], "\n", 
+ RowBox[{
+  RowBox[{"%", " ", "contains", " ", "the", " ", "stand", " ", "of", " ", 
+   RowBox[{"trees", ".", "%"}], " ", 
+   RowBox[{"Inputs", ":", 
+    RowBox[{"%", " ", "x"}]}]}], "=", 
+  RowBox[{
+  "x", " ", "coordinate", " ", "of", " ", "plot", " ", "center"}]}], "\n", 
+ RowBox[{
+  RowBox[{"%", " ", "y"}], "=", 
+  RowBox[{
+  "y", " ", "coordinate", " ", "of", " ", "plot", " ", "center"}]}], "\n", 
+ RowBox[{
+  RowBox[{"%", " ", "r"}], "=", 
+  RowBox[{"radius", " ", "of", " ", "plot"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"%", " ", 
+    RowBox[{"Ouputs", ":", 
+     RowBox[{"%", " ", "area"}]}]}], "=", 
+   RowBox[{
+   "area", " ", "of", " ", "overlap", " ", "between", " ", "plot", " ", "and",
+     " ", "tree", " ", "stand"}]}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "Initialize", " ", "relevant", " ", "variables"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "Use", " ", "an", " ", "if"}], "-", 
+  RowBox[{
+  "elseif", " ", "conditional", " ", "to", " ", "check", " ", "for", " ", 
+   "the", " ", "the", " ", "following"}]}], "\n", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "conditions", " ", "for", " ", "plot", " ", "overlap", " ", "in", 
+   " ", "sequence", " ", "and", " ", "perform", " ", "the", " ", 
+   "appropriate", " ", "calculation"}], "\[IndentingNewLine]", 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "completely", " ", "interior", " ", "to", " ", 
+   "stand"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "contains", " ", "lower", " ", "left", " ", 
+   "corner"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "contains", " ", "upper", " ", "left", " ", 
+   "corner"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "contains", " ", "upper", " ", "right", " ", 
+   "corner"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "contains", " ", "lower", " ", "right", " ", 
+   "corner"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "Now", " ", "checking", " ", "if", " ", "plot", " ", "inside", 
+   " ", "corner", " ", "but", " ", "overlaps", " ", "two", " ", 
+   "boundaries"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "inside", " ", "lower", " ", "left", " ", "corner"}],
+   "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "inside", " ", "upper", " ", "left", " ", "corner"}],
+   "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "inside", " ", "upper", " ", "right", " ", 
+   "corner"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "inside", " ", "lower", " ", "right", " ", 
+   "corner"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "Now", " ", "checking", " ", "if", " ", "plot", " ", "inside", 
+   " ", "or", " ", "outside", " ", "a", " ", "boundary"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "left", " ", "of", " ", "left", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "right", " ", "of", " ", "left", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "left", " ", "of", " ", "right", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+  "%", " ", "plot", " ", "right", " ", "of", " ", "right", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "plot", " ", "below", " ", "bottom", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "plot", " ", "above", " ", "bottom", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "plot", " ", "below", " ", "top", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"%", " ", "plot", " ", "above", " ", "top", " ", "side"}], 
+  "\n"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+   "%", " ", "If", " ", "no", " ", "condition", " ", "above", " ", "met"}], 
+   ",", 
+   RowBox[{"plot", " ", "does", " ", "not", " ", "overlap", " ", "stand"}]}], 
+  "\[IndentingNewLine]", "\n"}], "\[IndentingNewLine]", "end"}], "Input",
+ CellChangeTimes->{{3.6884030063285637`*^9, 3.688403006363002*^9}}]
+},
+WindowSize->{808, 693},
+WindowMargins->{{140, Automatic}, {-4, Automatic}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4966, 134, 964, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

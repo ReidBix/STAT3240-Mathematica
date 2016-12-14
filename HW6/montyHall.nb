@@ -1,0 +1,552 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     23388,        543]
+NotebookOptionsPosition[     22924,        524]
+NotebookOutlinePosition[     23284,        540]
+CellTagsIndexPosition[     23241,        537]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"always", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"always", 
+       RowBox[{"(", "n", ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "n", ":", " ", 
+      RowBox[{
+      "n", " ", "is", " ", "the", " ", "number", " ", "of", " ", "decision", 
+       " ", "samples", " ", "to", " ", "generate", "\[IndentingNewLine]", 
+       RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+        RowBox[{
+        "outputs", " ", "n", " ", "number", " ", "of", " ", "decision", " ", 
+         "samples", " ", "with", " ", "a", " ", "logical", " ", "value", " ", 
+         "of", " ", "True"}]}]}]}], "\[IndentingNewLine]", "\t\t", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Create", " ", "a", " ", "constant", " ", "array", " ", "of", " ", 
+      "True", " ", "values"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"ConstantArray", "[", 
+     RowBox[{"True", ",", "n"}], "]"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.68520602283489*^9, 3.685206049587083*^9}, {
+  3.685206177619154*^9, 3.685206177859309*^9}, {3.685206287493415*^9, 
+  3.6852062879813023`*^9}, {3.6852063201723747`*^9, 3.685206332311624*^9}, {
+  3.6853756634796*^9, 3.685375771026977*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"never", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"never", 
+       RowBox[{"(", "n", ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "n", ":", " ", 
+      RowBox[{
+      "n", " ", "is", " ", "the", " ", "number", " ", "of", " ", "decision", 
+       " ", "samples", " ", "to", " ", "generate", "\[IndentingNewLine]", 
+       RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+        RowBox[{
+        "outputs", " ", "n", " ", "number", " ", "of", " ", "decision", " ", 
+         "samples", " ", "with", " ", "a", " ", "logical", " ", "value", " ", 
+         "of", " ", "True"}]}]}]}], "\[IndentingNewLine]", "\t\t", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+     "Create", " ", "a", " ", "constant", " ", "array", " ", "of", " ", 
+      "False", " ", "values"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"ConstantArray", "[", 
+     RowBox[{"False", ",", "n"}], "]"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.685206055164963*^9, 3.685206055603887*^9}, 
+   3.6852061815390663`*^9, {3.685206338193712*^9, 3.6852063402378597`*^9}, {
+   3.685375749605743*^9, 3.685375778028998*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"flip", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"flip", ",", "rands"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"flip", 
+       RowBox[{"(", "n", ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "n", ":", " ", 
+      RowBox[{
+      "n", " ", "is", " ", "the", " ", "number", " ", "of", " ", "decision", 
+       " ", "samples", " ", "to", " ", "generate", "\[IndentingNewLine]", 
+       RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+        RowBox[{
+        "outputs", " ", "n", " ", "number", " ", "of", " ", "decision", " ", 
+         "samples", " ", "with", " ", "a", " ", "logical", " ", "value", " ", 
+         "of", " ", "True", " ", "or", " ", "False", " ", "based", " ", "off",
+          " ", "of", " ", 
+         RowBox[{"a", " ", "'"}], "coin", " ", 
+         RowBox[{"flip", "'"}]}]}]}]}], "\[IndentingNewLine]", "\t\t", "*)"}],
+     "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "Create", " ", "an", " ", "array", " ", "of", " ", "random", " ", 
+       "variables", " ", "between", " ", "0", " ", "and", " ", "1"}], ",", 
+      " ", 
+      RowBox[{
+       RowBox[{
+       "then", " ", "turn", " ", "those", " ", "into", " ", "True", " ", 
+        "and", " ", "False", " ", "if"}], " ", "\[LessEqual]", " ", 
+       RowBox[{"to", " ", "0.5"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"rands", "=", 
+      RowBox[{"RandomReal", "[", 
+       RowBox[{"1", ",", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"flip", "=", 
+      RowBox[{"Function", "[", 
+       RowBox[{"x", ",", 
+        RowBox[{"x", "\[GreaterEqual]", "0.5"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{"flip", ",", "rands"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6852060593769617`*^9, 3.685206060010098*^9}, 
+   3.685206182512052*^9, {3.6852067168744583`*^9, 3.6852067225722637`*^9}, {
+   3.685206809988484*^9, 3.685206812130398*^9}, {3.685206866899541*^9, 
+   3.6852068695377703`*^9}, {3.685206915542564*^9, 3.685206926808597*^9}, {
+   3.685206963858467*^9, 3.685206965916041*^9}, {3.6852070642472067`*^9, 
+   3.685207215990958*^9}, {3.685207280537517*^9, 3.6852073905512457`*^9}, {
+   3.685207422176117*^9, 3.6852074384023314`*^9}, {3.685375784583477*^9, 
+   3.685375823938541*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"whyNot", "[", "n_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"vars", ",", "flip"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"whyNot", 
+       RowBox[{"(", "n", ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "n", ":", " ", 
+      RowBox[{
+      "n", " ", "is", " ", "the", " ", "number", " ", "of", " ", "decision", 
+       " ", "samples", " ", "to", " ", "generate", "\[IndentingNewLine]", 
+       RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+        RowBox[{
+        "outputs", " ", "n", " ", "number", " ", "of", " ", "decision", " ", 
+         "samples", " ", "with", " ", "a", " ", "logical", " ", "value", " ", 
+         "of", " ", "True", " ", "or", " ", "False", " ", "based", " ", "off",
+          " ", "of", " ", "Normal", " ", "Distribution", " ", "with", " ", 
+         "mean", " ", "of", " ", "1"}]}]}]}], "\[IndentingNewLine]", "\t\t", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "Create", " ", "an", " ", "array", " ", "of", " ", "random", " ", 
+       "variables", " ", "between", " ", "a", " ", "Normal", " ", 
+       "Distribution"}], ",", " ", 
+      RowBox[{
+       RowBox[{
+       "then", " ", "turn", " ", "those", " ", "into", " ", "True", " ", 
+        "and", " ", "False", " ", "if"}], " ", "\[LessEqual]", " ", 
+       RowBox[{"to", " ", "0.5"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"vars", "=", 
+      RowBox[{"RandomVariate", "[", 
+       RowBox[{
+        RowBox[{"NormalDistribution", "[", 
+         RowBox[{"1", ",", "1"}], "]"}], ",", "n"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"flip", "=", 
+      RowBox[{"Function", "[", 
+       RowBox[{"x", ",", 
+        RowBox[{"x", "\[GreaterEqual]", "0.5"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Map", "[", 
+      RowBox[{"flip", ",", "vars"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.685206064404036*^9, 3.6852060664057903`*^9}, 
+   3.685206183449563*^9, {3.6852074883283863`*^9, 3.6852075694382563`*^9}, {
+   3.685207618895795*^9, 3.685207629385475*^9}, {3.685375403198049*^9, 
+   3.6853754066935043`*^9}, {3.685375469858686*^9, 3.685375500522134*^9}, {
+   3.685375831240011*^9, 3.685375870987905*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"chooseDoor", "[", 
+   RowBox[{"doorPick_", ",", "switchDoor_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"door", ",", "win"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"always", 
+       RowBox[{"(", 
+        RowBox[{"ntrials", ",", " ", "switchDecision", ",", " ", "plotsOn"}], 
+        ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+     "INPUT", ":", "\[IndentingNewLine]", "\t\t", "doorPick", ":", " ", 
+      RowBox[{
+      "which", " ", "door", " ", "the", " ", "contestant", " ", "picked", 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"switchDoor", ":", " ", 
+        RowBox[{
+        "whether", " ", "the", " ", "contestant", " ", "chooses", " ", "to", 
+         " ", "switch", "\[IndentingNewLine]", "OUTPUT"}], ":", 
+        "\[IndentingNewLine]", "\t", 
+        RowBox[{
+        "outputs", " ", "whether", " ", "the", " ", "contestant", " ", "won", 
+         " ", "or", " ", "not"}]}]}]}], "\[IndentingNewLine]", "\t\t", "*)"}],
+     "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Initialize", " ", "the", " ", "winning", " ", "door"}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"door", "=", 
+      RowBox[{"RandomInteger", "[", 
+       RowBox[{"{", 
+        RowBox[{"1", ",", "3"}], "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Conditional", " ", "statements", " ", "to", " ", "check", " ", "if", 
+       " ", "doorPick", " ", "is", " ", "the", " ", "correct", " ", "door", 
+       " ", "and", " ", "whether", " ", "the", " ", "contestant", " ", 
+       "chooses", " ", "to", " ", "switch"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"door", "\[Equal]", "doorPick"}], "&&", 
+        RowBox[{"!", 
+         RowBox[{"switchDoor", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"win", "=", "1"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"door", "\[NotEqual]", "doorPick"}], "&&", 
+        RowBox[{"switchDoor", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"win", "=", "1"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"door", "\[NotEqual]", "doorPick"}], "&&", 
+        RowBox[{"!", 
+         RowBox[{"switchDoor", "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"win", "=", "0"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"door", "==", "doorPick"}], "&&", 
+        RowBox[{"switchDoor", "[", 
+         RowBox[{"[", "1", "]"}], "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"win", "=", "0"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";",
+      "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "whether", " ", "the", " ", "contestent", " ", "wins", " ", "or", " ", 
+       "loses"}], " ", "*)"}], "\[IndentingNewLine]", "win"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{3.685379699986845*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"montyHall", "[", 
+   RowBox[{"ntrials_", ",", "switchDecision_", ",", "plotsOn_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "sumWon", ",", "switchName", ",", "nSample", ",", "i", ",", "guess", ",",
+       "result", ",", "ntrialVec", ",", "ntrialWins", ",", "switchDoor", ",", 
+      "xyList"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"montyHall", 
+       RowBox[{"(", 
+        RowBox[{"ntrials", ",", " ", "switchDecision", ",", " ", "plotsOn"}], 
+        ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+      RowBox[{
+      "INPUT", ":", "\[IndentingNewLine]", "\t\t", "ntrials", ":", " ", 
+       RowBox[{
+       "total", " ", "number", " ", "of", " ", "games", " ", "to", " ", "run",
+         "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"switchDecision", ":", " ", 
+         RowBox[{
+         "function", " ", "used", " ", "to", " ", "decide", " ", "whether", 
+          " ", "to", " ", "switch", " ", "doors", " ", "after", " ", "the", 
+          " ", "initial", " ", "door", " ", "pick", "\[IndentingNewLine]", 
+          "\t\t", "plotsOn"}], ":", " ", 
+         RowBox[{
+         "character", " ", "string", " ", "to", " ", "determine", " ", 
+          "whether", " ", "to", " ", "produce", " ", "and", " ", "save", " ", 
+          "a", " ", "plot", " ", "of", " ", "the", " ", "empirically", " ", 
+          "computed", " ", "probabilities", " ", "of", " ", "winning", 
+          "\[IndentingNewLine]", 
+          RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+           RowBox[{"outputs", " ", "ntrialWins"}]}]}]}]}]}], ",", " ", 
+      RowBox[{
+      "a", " ", "vector", " ", "of", " ", "the", " ", "computed", " ", 
+       "probabilities", " ", "of", " ", "winning"}], ",", " ", 
+      RowBox[{"and", " ", "ntrialVec"}], ",", " ", 
+      RowBox[{
+      "a", " ", "vector", " ", "of", " ", "the", " ", "associated", " ", 
+       "trial", " ", "numbers"}]}], "\[IndentingNewLine]", "\t\t", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "The", " ", "montyHall", " ", "simulates", " ", "the", " ", "Monty", 
+       " ", "Hall", " ", "problem", " ", "for", " ", "picking", " ", "one", 
+       " ", "of", " ", "doors", " ", "a", " ", "prize", " ", "behind", " ", 
+       "one"}], ",", 
+      RowBox[{
+      "and", " ", "given", " ", "chance", " ", "to", " ", "switch", " ", 
+       "after", " ", "the", " ", "initial", " ", 
+       RowBox[{"choise", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Initialize", " ", "counter", " ", "for", " ", "number", " ", "of", " ", 
+      "games", " ", "won"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"sumWon", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Get", " ", "name", " ", "of", " ", "decision", " ", "function", " ", 
+       "passed", " ", "in"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"switchName", "=", 
+      RowBox[{"ToString", "[", "switchDecision", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Figure", " ", "out", " ", "nSample", " ", "to", " ", "generates", " ", 
+       "no", " ", "more", " ", "than", " ", "50", " ", "points", " ", "to", 
+       " ", "plot"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+       "calculate", " ", "integer", " ", "n", " ", "such", " ", "that", " ", 
+        RowBox[{"ntrials", "/", "n"}]}], "\[LessEqual]", "50"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"nSample", "=", 
+      RowBox[{"Floor", "[", 
+       RowBox[{"ntrials", "/", "50"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "vector", " ", "containing", " ", "numbers", " ", "of", " ", "trials", 
+       " ", "at", " ", "which", " ", "to", " ", "compute", " ", "empirical", 
+       " ", "probability", " ", "of", " ", "winning"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"ntrialVec", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Preallocate", " ", "vector", " ", "to", " ", "hold", " ", 
+       "probability", " ", "estimates", " ", "computed", " ", "when", " ", 
+       "number", " ", "of", " ", "trials", " ", "is", " ", "a", " ", 
+       "multiple", " ", "of", " ", "nSample"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"ntrialWins", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Initialize", " ", "a", " ", "counter", " ", "to", " ", "increment", 
+       " ", "the", " ", "vector", " ", "storing", " ", "the", " ", 
+       "probability", " ", "estimates"}], " ", "*)"}], "\[IndentingNewLine]", 
+     
+     RowBox[{"(*", " ", 
+      RowBox[{"Start", " ", "for", " ", "loop", " ", "over", " ", "ntrials"}],
+       " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "Contestant", " ", "randomly", " ", "makes", " ", "initial", " ", 
+        "door", " ", "pick"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"guess", "=", 
+         RowBox[{"RandomInteger", "[", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", "3"}], "}"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "Get", " ", "output", " ", "switchDecision", " ", "and", " ", 
+          "assign", " ", "to", " ", "switchDoor"}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"switchDoor", "=", 
+         RowBox[{"switchDecision", "[", "1", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "Call", " ", "chooseDoor", " ", "to", " ", "find", " ", "out", " ", 
+          "if", " ", "you", " ", "won"}], " ", "*)"}], "\[IndentingNewLine]", 
+        
+        RowBox[{"result", "=", 
+         RowBox[{"chooseDoor", "[", 
+          RowBox[{"guess", ",", "switchDoor"}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"sumWon", "=", 
+         RowBox[{"sumWon", "+", "result"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{
+          "Check", " ", "if", " ", "number", " ", "of", " ", "trials", " ", 
+           "is", " ", "multiple", " ", "of", " ", "nSample", " ", "and", " ", 
+           "if", " ", "so"}], ",", 
+          RowBox[{
+          "compute", " ", "empirical", " ", "probability", " ", "at", " ", 
+           "that", " ", "point", " ", "and", " ", "store", " ", "in", " ", 
+           "scenario", " ", "specific", " ", "vector"}]}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Mod", "[", 
+            RowBox[{"i", ",", "nSample"}], "]"}], "\[Equal]", "0"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"ntrialVec", ",", "i"}], "]"}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"AppendTo", "[", 
+            RowBox[{"ntrialWins", ",", 
+             RowBox[{"sumWon", "/", "i"}]}], "]"}], ";"}]}], 
+         "\[IndentingNewLine]", "]"}], ";"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "ntrials"}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Create", " ", "graph", " ", "using", " ", "ntrialWin", " ", "and", " ",
+        "ntrialVec", " ", "vectors"}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"xyList", " ", "=", " ", 
+      RowBox[{"Transpose", "[", 
+       RowBox[{"{", 
+        RowBox[{"ntrialVec", ",", "ntrialWins"}], "}"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"plotsOn", "==", "\"\<on\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{
+          "\"\<montyHall_\>\"", "<>", "switchName", "<>", "\"\<.pdf\>\""}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"xyList", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                "\"\<Number of Trials\>\"", ",", 
+                 "\"\<Probability of Winning\>\""}], "}"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotLabel", "\[Rule]", 
+               RowBox[{
+               "\"\<Monty Hall Simulation for Decision Function = \>\"", "<>",
+                 "switchName"}]}]}], "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+         "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Return", " ", "ntrialWins", " ", "and", " ", "ntrialVec"}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{"ntrialWins", ",", "ntrialVec"}], "}"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.685375577159719*^9, 3.68537563138762*^9}, {
+   3.6853760062644672`*^9, 3.685376172640869*^9}, {3.685376250983618*^9, 
+   3.685376464796959*^9}, {3.68537650557017*^9, 3.685376540082253*^9}, {
+   3.685376589770617*^9, 3.6853766637244387`*^9}, {3.685376696838977*^9, 
+   3.6853768195268*^9}, {3.685376886399705*^9, 3.6853768869701967`*^9}, {
+   3.6853771411454973`*^9, 3.685377174883666*^9}, {3.685379316469953*^9, 
+   3.6853793244218063`*^9}, 3.68537951349102*^9, {3.6853798465498753`*^9, 
+   3.685380033558505*^9}, {3.685380095414186*^9, 3.685380105634948*^9}, {
+   3.685807393555065*^9, 3.685807476178246*^9}, {3.685807545474967*^9, 
+   3.6858076324782343`*^9}, {3.685807666713166*^9, 3.685807676780854*^9}, {
+   3.685807715310886*^9, 3.685807747589797*^9}, {3.685807821871562*^9, 
+   3.685807833226844*^9}, {3.685807874045989*^9, 3.6858079575889587`*^9}, {
+   3.6858080252929983`*^9, 3.685808031897543*^9}, {3.685808126715164*^9, 
+   3.6858081376675863`*^9}, {3.685808168367735*^9, 3.685808189331411*^9}, {
+   3.6858082777676773`*^9, 3.6858083264094343`*^9}, {3.685808365583242*^9, 
+   3.685808484766122*^9}, {3.685808576658482*^9, 3.6858086194512987`*^9}, {
+   3.6858086571238327`*^9, 3.6858086903144417`*^9}, {3.685808721902158*^9, 
+   3.68580872591372*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1496, 32, 199, "Input"],
+Cell[2057, 54, 1423, 31, 199, "Input"],
+Cell[3483, 87, 2575, 56, 233, "Input"],
+Cell[6061, 145, 2487, 55, 233, "Input"],
+Cell[8551, 202, 3540, 87, 471, "Input"],
+Cell[12094, 291, 10826, 231, 913, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

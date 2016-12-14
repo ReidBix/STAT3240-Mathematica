@@ -1,0 +1,145 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5650,        136]
+NotebookOptionsPosition[      5312,        120]
+NotebookOutlinePosition[      5672,        136]
+CellTagsIndexPosition[      5629,        133]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"normColumn", "[", "data_", "]"}], ":=", 
+  RowBox[{"Transpose", "[", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"data", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "1"}], "]"}], "]"}], ",", 
+     RowBox[{"data", "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "2"}], "]"}], "]"}], ",", 
+     RowBox[{"Map", "[", 
+      RowBox[{"Norm", ",", "data"}], "]"}]}], "}"}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+   RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "data", ":", " ", 
+    RowBox[{
+    "the", " ", "given", " ", "two", " ", "column", " ", "vector", " ", "to", 
+     " ", "run", " ", "the", " ", "norm", " ", "on", "\[IndentingNewLine]", 
+     RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+      RowBox[{
+      "returns", " ", "a", " ", "three", " ", "column", " ", "matrix", " ", 
+       "where", " ", "the", " ", "third", " ", "column", " ", "is", " ", 
+       "the", " ", "norm", " ", "of", " ", "the", " ", "first", " ", "two", 
+       " ", "columns"}]}]}]}], "\[IndentingNewLine]", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.687189869848927*^9, 3.68718988066673*^9}, {
+  3.6871899602145367`*^9, 3.6871899875729847`*^9}, {3.6871902771298513`*^9, 
+  3.687190398339918*^9}, {3.6871904469297523`*^9, 3.687190452096096*^9}, {
+  3.687190545760787*^9, 3.68719058280517*^9}, {3.687190653227171*^9, 
+  3.6871906951277447`*^9}, {3.687190827171471*^9, 3.687190896178956*^9}, {
+  3.6871909862012777`*^9, 3.687191067339106*^9}, {3.687191103815268*^9, 
+  3.687191132591834*^9}, {3.68719122252815*^9, 3.687191236425426*^9}, {
+  3.687191282785445*^9, 3.687191330397189*^9}, {3.6871913768353558`*^9, 
+  3.687191523971732*^9}, {3.6871916000349083`*^9, 3.6871916314043818`*^9}, {
+  3.6871916894156723`*^9, 3.687191757542745*^9}, {3.68719189423372*^9, 
+  3.6871918944388037`*^9}, {3.687191952657596*^9, 3.687191958864558*^9}, {
+  3.687191989060358*^9, 3.687192026398911*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"discardOutliers", "[", 
+    RowBox[{"list_", ",", "c_"}], "]"}], ":=", 
+   RowBox[{"Cases", "[", 
+    RowBox[{"list", ",", 
+     RowBox[{"x_", " ", "/;", 
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"x", "-", 
+         RowBox[{"Mean", "[", "list", "]"}]}], "]"}], "\[LessEqual]", 
+       RowBox[{"c", "*", 
+        RowBox[{"StandardDeviation", "[", "list", "]"}]}]}]}]}], "]"}]}], 
+  " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+   RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "list", ":", " ", 
+    RowBox[{
+    "the", " ", "given", " ", "list", " ", "of", " ", "numbers", " ", "to", 
+     " ", "remove", " ", "outliers", " ", "from", "\[IndentingNewLine]", "\t", 
+     RowBox[{"c", ":", " ", 
+      RowBox[{
+      "the", " ", "multiple", " ", "of", " ", "the", " ", "standard", " ", 
+       "deviation", " ", "that", " ", "you", " ", "are", " ", "willing", " ", 
+       "to", " ", "tolerate", "\[IndentingNewLine]", "OUTPUT"}], ":", 
+      "\[IndentingNewLine]", "\t", 
+      RowBox[{
+      "returns", " ", "the", " ", "list", " ", "with", " ", "any", " ", "of", 
+       " ", "the", " ", "outliers", " ", "removed"}]}]}]}], 
+   "\[IndentingNewLine]", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.687192066856771*^9, 3.6871922191508503`*^9}, {
+   3.6871922503347607`*^9, 3.687192289519766*^9}, {3.687192358762822*^9, 
+   3.687192403940782*^9}, {3.6871924992333384`*^9, 3.6871925864165688`*^9}, {
+   3.687192617802246*^9, 3.687192731602768*^9}, {3.687192810096929*^9, 
+   3.6871929127403803`*^9}, {3.687192958403368*^9, 3.6871929608078213`*^9}, 
+   3.6871931266823606`*^9, {3.687193163155533*^9, 3.6871931655085983`*^9}, 
+   3.687193211664798*^9, {3.687193519629306*^9, 3.6871935347397127`*^9}, {
+   3.68719357181918*^9, 3.687193683217155*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"UniqueCharacters", "[", "str_", "]"}], ":=", 
+  RowBox[{"DeleteDuplicates", "[", 
+   RowBox[{"Characters", "[", "str", "]"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+   RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "str", ":", " ", 
+    RowBox[{
+    "the", " ", "string", " ", "to", " ", "get", " ", "unique", " ", 
+     "characters", " ", "from", "\[IndentingNewLine]", 
+     RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+      RowBox[{
+      "returns", " ", "the", " ", "unique", " ", "characters", " ", "in", " ",
+        "a", " ", "string"}]}]}]}], "\[IndentingNewLine]", "*)"}]}]}], "Input",\
+
+ CellChangeTimes->{{3.687193294422961*^9, 3.68719331139147*^9}, {
+  3.687193360689274*^9, 3.68719342050776*^9}, {3.687193636213202*^9, 
+  3.6871936363373747`*^9}, {3.687193686499271*^9, 3.687193705169574*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1982, 38, 131, "Input"],
+Cell[2543, 60, 1855, 38, 148, "Input"],
+Cell[4401, 100, 907, 18, 131, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

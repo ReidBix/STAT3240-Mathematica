@@ -1,0 +1,233 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      7094,        224]
+NotebookOptionsPosition[      6581,        201]
+NotebookOutlinePosition[      6935,        217]
+CellTagsIndexPosition[      6892,        214]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Script", " ", "Eg2_", "2", " ", "Pi", " ", "Via", " ", "Polygons"}], 
+   "*)"}], 
+  RowBox[{"(*", 
+   RowBox[{
+    RowBox[{"Input", " ", "the", " ", "iteration", " ", "parameters"}], 
+    "..."}], "*)"}], 
+  RowBox[{
+   RowBox[{
+    RowBox[{"delta", "=", 
+     RowBox[{"Input", "[", "\"\<Enter the error tolerance:\>\"", "]"}]}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"nMax", "=", 
+     RowBox[{"Input", "[", "\"\<Enter the iteration bound:\>\"", "]"}]}], 
+    ";"}], "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"The", " ", "triangle", " ", "case"}], "..."}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"n", "=", "3"}], ";"}], 
+   RowBox[{"(*", 
+    RowBox[{"Number", " ", "of", " ", "Polygon", " ", "Edges"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"An", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"n", "/", "2"}], ")"}], "*", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"2", "*", 
+        RowBox[{"Pi", "/", "n"}]}], "]"}]}]}], ";"}], 
+   RowBox[{"(*", 
+    RowBox[{"Inscribed", " ", "Area"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Bn", "=", 
+     RowBox[{"n", "*", 
+      RowBox[{"Tan", "[", 
+       RowBox[{"Pi", "/", "n"}], "]"}]}]}], ";"}], 
+   RowBox[{"(*", 
+    RowBox[{"Circumscribed", " ", "Area"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ErrorBound", "=", 
+     RowBox[{"Bn", "-", "An"}]}], ";"}], 
+   RowBox[{"(*", 
+    RowBox[{"The", " ", "error", " ", "bound"}], "*)"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+     "Iterate", " ", "while", " ", "error", " ", "too", " ", "big", " ", 
+      "and", " ", "n", " ", "sufficiently", " ", "small"}], "..."}], "*)"}], 
+   RowBox[{"While", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ErrorBound", ">", "delta"}], "&&", 
+      RowBox[{"n", "<", "nMax"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"n", "=", 
+       RowBox[{"n", "+", "1"}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"An", "=", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"n", "/", "2"}], ")"}], "*", 
+        RowBox[{"Sin", "[", 
+         RowBox[{"2", "*", 
+          RowBox[{"Pi", "/", "n"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"Bn", "=", 
+       RowBox[{"n", "*", 
+        RowBox[{"Tan", "[", 
+         RowBox[{"Pi", "/", "n"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+      RowBox[{"ErrorBound", "=", 
+       RowBox[{"Bn", "-", "An"}]}], ";"}]}], " ", "]"}], 
+   "\[IndentingNewLine]", "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"Display", " ", "the", " ", "final", " ", "approximation"}], 
+     "..."}], "*)"}], "\n", 
+   RowBox[{
+    RowBox[{"nStar", "=", "n"}], ";"}], "\n", 
+   RowBox[{
+    RowBox[{"rhoStar", "=", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"An", "+", "Bn"}], ")"}], "/", "2"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\< delta = \>\"", ",", 
+     RowBox[{"ScientificForm", "[", 
+      RowBox[{"N", "[", "delta", "]"}], "]"}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\< nStar = \>\"", ",", 
+     RowBox[{"NumberForm", "[", "nStar", "]"}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\< nMax  = \>\"", ",", 
+     RowBox[{"NumberForm", "[", "nMax", "]"}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\< rhoStar = \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"rhoStar", ",", "10"}], "]"}]}], "]"}], "\n", 
+   RowBox[{"Print", "[", 
+    RowBox[{"\"\< Pi      = \>\"", ",", 
+     RowBox[{"N", "[", 
+      RowBox[{"Pi", ",", "10"}], "]"}]}], "]"}], "\n"}]}]], "Input",
+ CellChangeTimes->{{3.588331437238862*^9, 3.588331579513693*^9}, {
+   3.588331764192731*^9, 3.588331765567891*^9}, {3.5883318099781837`*^9, 
+   3.588331851908252*^9}, 3.588331913100062*^9, {3.5883319700354757`*^9, 
+   3.588332049512124*^9}, {3.588332101537109*^9, 3.588332113391355*^9}, {
+   3.5883321940365543`*^9, 3.588332201268877*^9}, {3.588332248302568*^9, 
+   3.5883322824000053`*^9}, 3.5883323271235867`*^9, {3.588332404721294*^9, 
+   3.588332417893929*^9}, {3.588333098525525*^9, 3.5883331063140173`*^9}, {
+   3.588333149657267*^9, 3.5883331795255823`*^9}},
+ FontSize->16],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" delta = \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox[
+     RowBox[{"\<\"1.\"\>", "\[Times]", 
+      SuperscriptBox["10", "\<\"-6\"\>"]}],
+     1.*^-6,
+     AutoDelete->True],
+    ScientificForm]}],
+  SequenceForm[" delta = ", 
+   ScientificForm[1.*^-6]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.6194716315095882`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" nStar = \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox["\<\"5569\"\>",
+     5569,
+     Editable->False],
+    NumberForm]}],
+  SequenceForm[" nStar = ", 
+   NumberForm[5569]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.619471631511265*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" nMax  = \"\>", "\[InvisibleSpace]", 
+   TagBox[
+    InterpretationBox["\<\"1000000\"\>",
+     1000000,
+     Editable->False],
+    NumberForm]}],
+  SequenceForm[" nMax  = ", 
+   NumberForm[1000000]],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.619471631513995*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" rhoStar = \"\>", "\[InvisibleSpace]", 
+   "3.14159248696338941661660883557753999733`10."}],
+  SequenceForm[" rhoStar = ", 3.14159248696338941661660883557753999733`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.619471631515518*^9}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"\<\" Pi      = \"\>", "\[InvisibleSpace]", 
+   "3.1415926535897932384626433832795028842`10."}],
+  SequenceForm[" Pi      = ", 3.1415926535897932384626433832795028842`10.],
+  Editable->False]], "Print",
+ CellChangeTimes->{3.619471631516861*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{740, 714},
+WindowMargins->{{28, Automatic}, {36, Automatic}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (June 27, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 4333, 116, 554, "Input"],
+Cell[CellGroupData[{
+Cell[4937, 142, 395, 13, 23, "Print"],
+Cell[5335, 157, 311, 11, 21, "Print"],
+Cell[5649, 170, 320, 11, 21, "Print"],
+Cell[5972, 183, 290, 6, 21, "Print"],
+Cell[6265, 191, 288, 6, 21, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,197 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7623,        188]
+NotebookOptionsPosition[      7367,        174]
+NotebookOutlinePosition[      7724,        190]
+CellTagsIndexPosition[      7681,        187]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MyCubeRoot", "[", 
+   RowBox[{"A_", ",", "tol_"}], "]"}], ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"L", ",", "W", ",", "H", ",", "s", ",", "n"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"MyCubeRoot", 
+       RowBox[{"(", 
+        RowBox[{"A", ",", "tol"}], ")"}]}], ":", " ", 
+      RowBox[{
+      "calculate", " ", "the", " ", "factorial", " ", "of", " ", "the", " ", 
+       "given", " ", "n"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "A", ":", " ", 
+      RowBox[{
+       RowBox[{"a", " ", "non"}], "-", 
+       RowBox[{
+       "negative", " ", "real", " ", "number", " ", "that", " ", "is", " ", 
+        "used", " ", "to", " ", "calculate", " ", "the", " ", "cube", " ", 
+        "root", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"tol", ":", " ", 
+         RowBox[{
+         "tolerance", " ", "from", " ", "the", " ", "actual", " ", "cube", 
+          " ", "root", " ", "value", "\[IndentingNewLine]", "OUTPUT"}], ":", 
+         "\[IndentingNewLine]", "\t\t", 
+         RowBox[{
+         "the", " ", "approximation", " ", "of", " ", "the", " ", "cube", " ",
+           "root", " ", "of", " ", "A"}]}]}]}]}], "\[IndentingNewLine]", 
+     "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"A", "\[Equal]", "0"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"s", "=", "0"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "save", " ", "sign", " ", "and", " ", "set", " ", "side", " ", "to", 
+       " ", "positive"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"If", " ", "A", " ", "is", " ", "not", " ", "0"}], ",", " ", 
+       RowBox[{"go", " ", "through", " ", "the", " ", "process"}]}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"If", " ", "A", " ", "is", " ", "1", " ", "or"}], " ", "-", 
+        "1"}], ",", " ", 
+       RowBox[{"return", " ", "the", " ", "same", " ", "value"}]}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Abs", "[", "A", "]"}], "\[Equal]", "1"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Return", "[", "A", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"A", "\[NotEqual]", "0"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{"Initialize", " ", "the", " ", "3", " ", "sides"}], ",", " ",
+          "L", ",", " ", 
+         RowBox[{"W", " ", "=", " ", "A"}], ",", " ", 
+         RowBox[{"H", " ", "starts", " ", "off", " ", "at", " ", "1"}]}], " ",
+         "*)"}], "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"L", "=", "A"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"W", "=", "1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"H", "=", "1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{"Start", " ", "off", " ", "at", " ", "n"}], "=", 
+          RowBox[{
+          "1", " ", "so", " ", "that", " ", "the", " ", "while", " ", "loop", 
+           " ", 
+           RowBox[{"won", "'"}], "t", " ", "go", " ", "on", " ", 
+           "forever"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"n", "=", "1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+         "Go", " ", "into", " ", "the", " ", "while", " ", "loop", " ", 
+          "until", " ", "the", " ", "difference", " ", "between", " ", "L", 
+          " ", "and", " ", "H", " ", "or", " ", "L", " ", "and", " ", "W", 
+          " ", "are", " ", "less", " ", "than", " ", "the", " ", 
+          "tolerance"}], " ", "*)"}], "\[IndentingNewLine]", 
+        RowBox[{"While", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Abs", "[", 
+            RowBox[{"L", "-", 
+             RowBox[{"CubeRoot", "[", "A", "]"}]}], "]"}], ">", " ", "tol"}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"(*", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"If", " ", "n"}], " ", ">", " ", "100"}], ",", " ", 
+            RowBox[{"break", " ", "from", " ", "the", " ", "loop"}]}], " ", 
+           "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"n", ">", "100"}], ",", "\[IndentingNewLine]", 
+             RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "L", " ", "and", " ", "W", " ", "are", " ", "the", " ", "average",
+              " ", "of", " ", "the", " ", "3", " ", "sides"}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"L", "=", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"L", "+", "W", "+", "H"}], ")"}], "/", "3"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"W", "=", "L"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "H", " ", "is", " ", "the", " ", "value", " ", "A", " ", 
+             "divided", " ", "by", " ", "the", " ", "square", " ", "of", " ", 
+             "the", " ", "side"}], " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"H", "=", 
+            RowBox[{"A", "/", 
+             RowBox[{"(", 
+              RowBox[{"L", "^", "2"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+           
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "The", " ", "new", " ", "approximation", " ", "is", " ", "either",
+              " ", "L", " ", "or", " ", "W"}], " ", "*)"}], 
+           "\[IndentingNewLine]", 
+           RowBox[{"s", "=", "L"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "Increase", " ", "n", " ", "to", " ", "prevent", " ", "forever", 
+             " ", "loop"}], " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"n", "++"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+        ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", 
+      RowBox[{"N", "[", "s", "]"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJxTTMoPSmViYGAQAWIQrbX1WEdT4WvHYx0/e0D0Gfd5k8B0nd8UEF0Rd2su
+iH7Gsn4hiN6zuWcpiPY6J7McRGuKea0G0db5/zeCaLFDm/eA6EmKd/eD6ALF
+OSdA9A6bk6dAtId4xk0QrWa94w2IfqA06QOIvjGv9guIXlEd/xNEdwakgenb
+r834moH0vlMf+EH047f6oiC6uY1LAUSf4mJQBdF9Iiu8QLTLW+kgEO10/2Iw
+WP0fxyQQbRFpkAKiU8Ri54FoHQ+VBSCa4V3RShA98cE8MK3Afm4diC5zj98A
+osXehZ25BqQ51s4/D6I94thvgujFzE/BNAAJKKnN
+  "]]
+},
+WindowSize->{808, 690},
+WindowMargins->{{12, Automatic}, {Automatic, 24}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 6805, 152, 760, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

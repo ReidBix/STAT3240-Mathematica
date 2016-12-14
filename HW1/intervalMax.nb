@@ -1,0 +1,177 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7584,        168]
+NotebookOptionsPosition[      7326,        154]
+NotebookOutlinePosition[      7685,        170]
+CellTagsIndexPosition[      7642,        167]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"intervalMax", "[", 
+    RowBox[{"L_", ",", "R_"}], "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"intervalMax", 
+        RowBox[{"(", 
+         RowBox[{"L", ",", "R"}], ")"}]}], ":", " ", 
+       RowBox[{
+       "code", " ", "to", " ", "determine", " ", "the", " ", "maximum", " ", 
+        "of", " ", "cos", 
+        RowBox[{"(", "x", ")"}], " ", "where", " ", "x", " ", "is", " ", "in",
+         " ", "the", " ", 
+        RowBox[{"interval", " ", "[", 
+         RowBox[{"L", ",", "R"}], "]"}]}]}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+      RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "L", ":", " ", 
+       RowBox[{
+       "left", " ", "endpoint", " ", "of", " ", "the", " ", "interval", 
+        "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"R", ":", " ", 
+         RowBox[{
+         "right", " ", "endpoint", " ", "of", " ", "the", " ", "interval", 
+          "\[IndentingNewLine]", "\t ", "\[IndentingNewLine]", "OUTPUT"}], 
+         ":", "\[IndentingNewLine]", "\t    ", 
+         RowBox[{
+         "maximum", " ", "of", " ", "the", " ", "interval", " ", "L", " ", 
+          "and", " ", "R"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{"If", " ", "the", " ", "Ceiling", " ", "of", " ", 
+        RowBox[{"L", "/", "2"}], "*", "Pi", " ", "is", " ", "less", " ", 
+        "than", " ", "or", " ", "equal", " ", "to", " ", "the", " ", "Floor", 
+        " ", "of", " ", 
+        RowBox[{"R", "/", "2"}], "*", "Pi", " ", "then", " ", "there", " ", 
+        "is", " ", "a", " ", "multiple", " ", "of", " ", "2", "*", "Pi", " ", 
+        "in", " ", "the", " ", "interval"}], ",", " ", 
+       RowBox[{"therefore", " ", "the", " ", "max", " ", "is", " ", "1"}]}], 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"Ceiling", "[", 
+          RowBox[{"L", "/", 
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}]}], "]"}], " ", "\[LessEqual]", 
+         " ", 
+         RowBox[{"Floor", "[", 
+          RowBox[{"R", "/", 
+           RowBox[{"(", 
+            RowBox[{"2", "*", "Pi"}], ")"}]}], "]"}]}], ")"}], ",", "1", ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+         "Else", " ", "if", " ", "the", " ", "Cosine", " ", "of", " ", "L", 
+          " ", "is", " ", "greater", " ", "than", " ", "the", " ", "Cosine", 
+          " ", "of", " ", "R"}], ",", " ", 
+         RowBox[{"return", " ", "Cosine", " ", "of", " ", "L"}]}], " ", 
+        "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Cos", "[", "L", "]"}], " ", ">", " ", 
+           RowBox[{"Cos", "[", "R", "]"}]}], ")"}], ",", " ", 
+         RowBox[{"Cos", "[", "L", "]"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+           RowBox[{
+           "Else", " ", "if", " ", "the", " ", "Cosine", " ", "of", " ", "R", 
+            " ", "is", " ", "greater", " ", "than", " ", "the", " ", "Cosine",
+             " ", "of", " ", "L"}], ",", " ", 
+           RowBox[{"return", " ", "Cosine", " ", "of", " ", "L"}]}], " ", 
+          "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"If", "[", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"Cos", "[", "R", "]"}], " ", ">", " ", 
+             RowBox[{"Cos", "[", "L", "]"}]}], ")"}], ",", " ", 
+           RowBox[{"Cos", "[", "R", "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+             RowBox[{
+             "Else", " ", "Cosine", " ", "of", " ", "L", " ", "is", " ", 
+              "equal", " ", "ot", " ", "Cosine", " ", "of", " ", "R"}], ",", 
+             " ", 
+             RowBox[{"return", " ", "either"}]}], " ", "*)"}], 
+           "\[IndentingNewLine]", " ", 
+           RowBox[{"Cos", "[", "R", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+    "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.617151873947285*^9, 3.617151877866888*^9}, {
+   3.617152181616044*^9, 3.6171522204498563`*^9}, {3.6171522583081293`*^9, 
+   3.6171524187544284`*^9}, {3.6171524507045307`*^9, 3.617152623724536*^9}, {
+   3.6171526706765842`*^9, 3.617152677447277*^9}, {3.6171527749369383`*^9, 
+   3.617152787388175*^9}, {3.6171529401131153`*^9, 3.6171529423945026`*^9}, {
+   3.6171530099853*^9, 3.617153035082641*^9}, {3.617153313320632*^9, 
+   3.6171533153289647`*^9}, {3.6171537663510857`*^9, 
+   3.6171537758386974`*^9}, {3.617155081305016*^9, 3.617155259731183*^9}, {
+   3.617155315586038*^9, 3.617155356973603*^9}, {3.61715539103366*^9, 
+   3.6171554998562527`*^9}, {3.617155537623478*^9, 3.617155578207893*^9}, {
+   3.6171556937599773`*^9, 3.617155726729704*^9}, {3.6171561493503804`*^9, 
+   3.617156154657007*^9}, {3.6188345267077827`*^9, 3.6188346016811438`*^9}, {
+   3.618834888380392*^9, 3.618834903218607*^9}, {3.618835024363597*^9, 
+   3.618835025440496*^9}, {3.618835558850883*^9, 3.618835561376992*^9}, {
+   3.6188358677348957`*^9, 3.618836024425585*^9}, {3.6188360801548233`*^9, 
+   3.61883614565843*^9}, {3.618836568089581*^9, 3.618836709465403*^9}, {
+   3.6188367479979477`*^9, 3.618836880307877*^9}, 3.6188369490900927`*^9, 
+   3.618837037660568*^9, {3.618837213889263*^9, 3.618837240783165*^9}, 
+   3.6188372880929203`*^9, {3.61883737196968*^9, 3.6188374347855453`*^9}, {
+   3.6817483833992853`*^9, 3.681748441336522*^9}, {3.681748472889073*^9, 
+   3.681748477686314*^9}, {3.68174854413181*^9, 3.681748549938175*^9}, {
+   3.6817485953225527`*^9, 3.681748623850355*^9}, {3.681748711030225*^9, 
+   3.681748763206786*^9}, {3.6817488176913443`*^9, 3.681748886577548*^9}, {
+   3.681748972395224*^9, 3.681749011780012*^9}, {3.681749054445077*^9, 
+   3.681749070265555*^9}, {3.6817491349735622`*^9, 3.681749138852105*^9}, {
+   3.6817492055613737`*^9, 3.68174923398936*^9}, {3.681749304604805*^9, 
+   3.681749361150736*^9}, {3.681749396185143*^9, 3.681749399780718*^9}, {
+   3.681749437245037*^9, 3.681749500047229*^9}, {3.681749928381983*^9, 
+   3.6817500199854727`*^9}, {3.68175005660562*^9, 3.681750085200732*^9}, {
+   3.681750130363399*^9, 3.681750132687327*^9}, 3.681750200818293*^9, {
+   3.681750311049754*^9, 3.681750371479444*^9}, {3.6817504755520287`*^9, 
+   3.6817506626043797`*^9}, {3.6817507561291943`*^9, 3.681750780138549*^9}, {
+   3.6817508167643547`*^9, 3.681750826287046*^9}, 3.68175088932685*^9}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{15, Automatic}, {Automatic, 23}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 6764, 132, 386, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

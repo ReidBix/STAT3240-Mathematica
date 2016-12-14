@@ -1,0 +1,226 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9875,        217]
+NotebookOptionsPosition[      9619,        203]
+NotebookOutlinePosition[      9976,        219]
+CellTagsIndexPosition[      9933,        216]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polygonArea", "[", "delta_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "An1", ",", "An", ",", "Bn1", ",", "Bn", ",", "An1err", ",", "Bn1err", 
+      ",", "nMax", ",", "n"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"polygonArea", 
+       RowBox[{"(", "delta", ")"}]}], ":", " ", 
+      RowBox[{
+      "code", " ", "to", " ", "compute", " ", "Pi", " ", "Via", " ", 
+       "Polygons", " ", "with", " ", "a", " ", "while", " ", "loop"}]}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+      RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "delta", ":", " ", 
+       RowBox[{
+       "this", " ", "is", " ", "the", " ", "value", " ", "for", " ", "the", 
+        " ", "comparator", " ", "for", " ", "the", " ", "while", " ", "loop", 
+        " ", "for", " ", "checking", " ", "if", " ", "the", " ", "An1error", 
+        " ", "or", " ", "Bn1error", " ", "is", " ", "less", " ", "than", " ", 
+        "it", "\[IndentingNewLine]", "\t", 
+        RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t   ", 
+         RowBox[{
+         "4", " ", "outputs", " ", "for", " ", "2", " ", "different", " ", 
+          "Pi", " ", "estimations", " ", "with", " ", "both", " ", "of", " ", 
+          "their", " ", "errors"}]}]}]}], ",", " ", 
+      RowBox[{
+       RowBox[{
+       "assuming", " ", "that", " ", "the", " ", "while", " ", "loop", " ", 
+        "either", " ", "went", "\[IndentingNewLine]", "\t\t\t", "and", " ", 
+        "finished", " ", "until", " ", "An1err", " ", "and", " ", "Bn1err", 
+        " ", "were"}], " ", ">", " ", 
+       RowBox[{
+       "delta", " ", "OR", " ", "if", " ", "the", " ", "number", " ", "of", 
+        " ", "iterations", " ", "was", " ", "greater", " ", "than", " ", 
+        "nMax"}]}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"First", " ", "initialize", " ", "variables", " ", "An1"}], ",",
+       " ", "An", ",", " ", "Bn1", ",", " ", "Bn", ",", " ", "An1err", ",", 
+      " ", "Bn1err", ",", " ", 
+      RowBox[{"and", " ", "nMax"}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"An1", "=", "0"}], ";", 
+     RowBox[{"An", "=", "0"}], ";", 
+     RowBox[{"Bn1", "=", "0"}], ";", 
+     RowBox[{"Bn", "=", "0"}], ";", 
+     RowBox[{"An1err", "=", "0"}], ";", 
+     RowBox[{"Bn1err", "=", "0"}], ";", 
+     RowBox[{"nMax", "=", 
+      RowBox[{"10", "^", "6"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{"The", " ", "triangle", " ", "case", " ", 
+       RowBox[{"(", 
+        RowBox[{
+        "aka", " ", "start", " ", "off", " ", "the", " ", "polygon", " ", 
+         "calculation", " ", "for", " ", "Pi"}], ")"}]}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"n", "=", "3"}], ";", 
+     RowBox[{"(*", 
+      RowBox[{"Number", " ", "of", " ", "Polygon", " ", "Edges", " ", 
+       RowBox[{"(", "3", ")"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"An", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"n", "/", "2"}], ")"}], "*", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"2", "*", 
+         RowBox[{"Pi", "/", "n"}]}], "]"}]}]}], ";", 
+     RowBox[{"(*", 
+      RowBox[{"Inscribed", " ", "Area", " ", "calculation"}], "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"Bn", "=", 
+      RowBox[{"n", "*", 
+       RowBox[{"Tan", "[", 
+        RowBox[{"Pi", "/", "n"}], "]"}]}]}], ";", 
+     RowBox[{"(*", 
+      RowBox[{"Circumscribed", " ", "Area", " ", "calculation"}], " ", "*)"}],
+      "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"initialize", " ", "the", " ", "error"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"An1err", "=", 
+      RowBox[{"An", "-", "0"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Bn1err", "=", 
+      RowBox[{"Bn", "-", "0"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", 
+      RowBox[{
+       RowBox[{
+       "Iterate", " ", "while", " ", "BOTH", " ", "error", " ", "too", " ", 
+        "big", " ", "and", " ", "n", " ", "sufficiently", " ", "small"}], 
+       "..."}], "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"An1err", ">", "delta"}], "||", 
+          RowBox[{"Bn1err", ">", "delta"}]}], ")"}], "&&", 
+        RowBox[{"n", "<", "nMax"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"n", "++"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"An1", "=", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"n", "/", "2"}], ")"}], "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"2", "*", 
+            RowBox[{"Pi", "/", "n"}]}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Bn1", "=", 
+         RowBox[{"n", "*", 
+          RowBox[{"Tan", "[", 
+           RowBox[{"Pi", "/", "n"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"An1err", "=", 
+         RowBox[{"Abs", "[", 
+          RowBox[{"An1", "-", "An"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Bn1err", "=", 
+         RowBox[{"Abs", "[", 
+          RowBox[{"Bn1", "-", "Bn"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"An", "=", "An1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Bn", "=", "Bn1"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"Return", " ", "An1"}], ",", " ", "Bn1", ",", " ", "An1err", 
+       ",", " ", "Bn1err"}], " ", "*)"}], "\[IndentingNewLine]", " ", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{"An1", ",", " ", "Bn1", ",", " ", 
+        RowBox[{"Abs", "[", 
+         RowBox[{"An", "-", "Pi"}], "]"}], ",", " ", 
+        RowBox[{"Abs", "[", 
+         RowBox[{"Bn", "-", "Pi"}], "]"}]}], "}"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.617151873947285*^9, 3.617151877866888*^9}, {
+   3.617152181616044*^9, 3.6171522204498563`*^9}, {3.6171522583081293`*^9, 
+   3.6171524187544284`*^9}, {3.6171524507045307`*^9, 3.617152623724536*^9}, {
+   3.6171526706765842`*^9, 3.617152677447277*^9}, {3.6171527749369383`*^9, 
+   3.617152787388175*^9}, {3.6171529401131153`*^9, 3.6171529423945026`*^9}, {
+   3.6171530099853*^9, 3.617153035082641*^9}, {3.617153313320632*^9, 
+   3.6171533153289647`*^9}, {3.6171537663510857`*^9, 
+   3.6171537758386974`*^9}, {3.617155081305016*^9, 3.617155259731183*^9}, {
+   3.617155315586038*^9, 3.617155356973603*^9}, {3.61715539103366*^9, 
+   3.6171554998562527`*^9}, {3.617155537623478*^9, 3.617155578207893*^9}, {
+   3.6171556937599773`*^9, 3.617155726729704*^9}, {3.6171561493503804`*^9, 
+   3.617156154657007*^9}, {3.6188345267077827`*^9, 3.6188346016811438`*^9}, {
+   3.618834888380392*^9, 3.618834903218607*^9}, {3.618835024363597*^9, 
+   3.618835025440496*^9}, {3.618835558850883*^9, 3.618835561376992*^9}, {
+   3.6188358677348957`*^9, 3.618836024425585*^9}, {3.6188360801548233`*^9, 
+   3.61883614565843*^9}, {3.618836568089581*^9, 3.618836709465403*^9}, {
+   3.6188367479979477`*^9, 3.618836880307877*^9}, 3.6188369490900927`*^9, 
+   3.618837037660568*^9, {3.618837213889263*^9, 3.618837240783165*^9}, 
+   3.6188372880929203`*^9, {3.61883737196968*^9, 3.6188374347855453`*^9}, {
+   3.618837521954274*^9, 3.61883764921165*^9}, {3.6188377140265427`*^9, 
+   3.61883772303329*^9}, {3.619433957184783*^9, 3.619434032247981*^9}, {
+   3.619434416609132*^9, 3.619434458565826*^9}, {3.6194348565168457`*^9, 
+   3.619435035302958*^9}, {3.619435103450333*^9, 3.619435106329314*^9}, {
+   3.619435258339926*^9, 3.6194352593065863`*^9}, 3.619439467930273*^9, {
+   3.6194397266996527`*^9, 3.61943977384413*^9}, {3.682180713739129*^9, 
+   3.682180738474657*^9}, {3.6821817629930773`*^9, 3.682181786440879*^9}, {
+   3.682181920429235*^9, 3.682182010379158*^9}, {3.68218205154979*^9, 
+   3.68218214911518*^9}, {3.682182187120639*^9, 3.682182189811604*^9}, {
+   3.682182223231189*^9, 3.6821822875725727`*^9}, {3.68218240644608*^9, 
+   3.682182444501034*^9}, {3.682182489828032*^9, 3.682182493815008*^9}, {
+   3.68218252458871*^9, 3.682182545783936*^9}, {3.682182651323155*^9, 
+   3.682182875475686*^9}, {3.682182953789509*^9, 3.6821829752334213`*^9}, {
+   3.682183063135199*^9, 3.682183066445661*^9}, {3.682183118191131*^9, 
+   3.682183122627145*^9}, {3.6821831722207327`*^9, 3.682183193208672*^9}, 
+   3.682183245643022*^9, {3.68218329631324*^9, 3.682183399336067*^9}, {
+   3.6821834764020367`*^9, 3.682183533801345*^9}, {3.6823513874566*^9, 
+   3.6823514036431007`*^9}, {3.682351558070026*^9, 3.682351593430879*^9}, {
+   3.6823516310126343`*^9, 3.68235182811418*^9}, {3.6827880911824827`*^9, 
+   3.682788095198337*^9}, {3.6827882190459347`*^9, 3.682788266496978*^9}, {
+   3.682800753952344*^9, 3.682800769051874*^9}, {3.6828008304335127`*^9, 
+   3.682800836734973*^9}, {3.682800913926406*^9, 3.682800923746908*^9}, {
+   3.6828009802142687`*^9, 3.682800982490924*^9}, {3.6828010354851913`*^9, 
+   3.682801036038528*^9}}]
+},
+WindowSize->{808, 690},
+WindowMargins->{{70, Automatic}, {36, Automatic}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 9057, 181, 573, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

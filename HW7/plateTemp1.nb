@@ -1,0 +1,274 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11391,        265]
+NotebookOptionsPosition[     11131,        251]
+NotebookOutlinePosition[     11491,        267]
+CellTagsIndexPosition[     11448,        264]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"plateTemp1", "[", 
+   RowBox[{"n_", ",", "diffuseFunc_", ",", "hs_", ",", "plotsOn_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "tVals", ",", "kMax", ",", "cols", ",", "X", ",", "Y", ",", "xy", ",", 
+      "locations"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "n", ":", " ", 
+      RowBox[{
+      "number", " ", "for", " ", "n", " ", "x", " ", "n", " ", "array", 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"diffuseFunc", ":", " ", 
+        RowBox[{
+        "given", " ", "function", " ", "for", " ", "diffuse", 
+         "\[IndentingNewLine]", "\t", "hs"}], ":", " ", 
+        RowBox[{
+        "3", " ", "column", " ", "array", " ", "for", " ", "the", " ", 
+         "locations", " ", "of", " ", "heat", " ", "sources", 
+         "\[IndentingNewLine]", "\t", 
+         RowBox[{"plotsOn", ":", " ", 
+          RowBox[{
+          "decides", " ", "whether", " ", "or", " ", "not", " ", "the", " ", 
+           "plot", " ", "is", " ", "plotted", "\[IndentingNewLine]", 
+           "OUTPUT"}], ":", "\[IndentingNewLine]", "\t\t", 
+          RowBox[{
+          "Outputs", " ", "the", " ", "tVals", " ", "based", " ", "off", " ", 
+           "of", " ", "the", " ", "given", " ", "functions"}]}]}]}]}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"takes", " ", "input", " ", "diffuseFunc"}], ",", " ", 
+      RowBox[{
+       RowBox[{
+       "generates", " ", "linear", " ", "combination", " ", "of", " ", "this",
+         " ", "function", " ", "using", " ", "the", " ", "rows", " ", "of", 
+        " ", "the", " ", "3"}], "-", 
+       RowBox[{"column", " ", "input", " ", "array", " ", "hs"}]}]}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "number", " ", "of", " ", "rows", " ", "of", " ", "hs", " ", 
+       "correspond", " ", "to", " ", 
+       RowBox[{"separate", " ", "'"}], "heat", " ", 
+       RowBox[{"source", "'"}], " ", "locations", " ", "where", " ", "first", 
+       " ", 
+       RowBox[{"column", " ", "'"}], 
+       RowBox[{"a", "'"}], " ", "are", " ", "the", " ", "amplitudes", " ", 
+       "and", " ", "the", " ", "second", " ", "two", " ", 
+       RowBox[{"columns", " ", "'"}], 
+       RowBox[{"u", "'"}], " ", "correspond", " ", "to", " ", "the", " ", 
+       "x"}], "-", 
+      RowBox[{
+      "y", " ", "locations", " ", "of", " ", "the", " ", "heat", " ", 
+       "sources"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "Given", " ", "the", " ", "matrix", " ", "hs", " ", "of", " ", "heat", 
+       " ", "source", " ", "locations"}], ",", " ", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+        "compute", " ", "temperatures", " ", "on", " ", "an", " ", "n"}], "-",
+         "by", "-", 
+        RowBox[{
+        "n", " ", "grid", " ", "spanning", " ", "the", " ", "region"}], " ", 
+        "-", "3"}], "<", "x", "<", 
+       RowBox[{
+        RowBox[{"3", " ", "and"}], " ", "-", "3"}], "<", "y", "<", 
+       RowBox[{"3", " ", "using", " ", "the", " ", 
+        RowBox[{"formula", ":"}]}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "kMax", " ", "is", " ", "the", " ", "number", " ", "of", " ", "rows", 
+      " ", "in", " ", "the", " ", "input", " ", "matrix", " ", "hs"}], " ", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"kMax", ",", "cols"}], "}"}], "=", 
+      RowBox[{"Dimensions", "[", "hs", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xy", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{"x", ",", 
+        RowBox[{"{", 
+         RowBox[{"x", ",", 
+          RowBox[{"-", "3"}], ",", "3", ",", 
+          RowBox[{"6", "/", 
+           RowBox[{"(", 
+            RowBox[{"n", "-", "1"}], ")"}]}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"X", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"xy", ",", "n"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Y", "=", 
+      RowBox[{"Transpose", "[", "X", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"tVals", "=", 
+      RowBox[{"Sum", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{
+          RowBox[{"hs", "[", 
+           RowBox[{"[", "k", "]"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}], 
+         RowBox[{"diffuseFunc", "[", 
+          RowBox[{"X", ",", "Y", ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"hs", "[", 
+               RowBox[{"[", "k", "]"}], "]"}], "[", 
+              RowBox[{"[", "2", "]"}], "]"}], ",", 
+             RowBox[{
+              RowBox[{"hs", "[", 
+               RowBox[{"[", "k", "]"}], "]"}], "[", 
+              RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "kMax"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"locations", "=", 
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"Riffle", "[", 
+         RowBox[{
+          RowBox[{"hs", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "2"}], "]"}], "]"}], ",", 
+          RowBox[{"hs", "[", 
+           RowBox[{"[", 
+            RowBox[{"All", ",", "3"}], "]"}], "]"}]}], "]"}], ",", "2"}], 
+       "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"plotsOn", "==", "\"\<on\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"\"\<plateTemp1_\>\"", "<>", 
+           RowBox[{"ToString", "[", "kMax", "]"}], "<>", "\"\<.pdf\>\""}], 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"Show", "[", 
+           RowBox[{
+            RowBox[{"ContourPlot", "[", 
+             RowBox[{
+              RowBox[{"Sum", "[", 
+               RowBox[{
+                RowBox[{
+                 RowBox[{
+                  RowBox[{"hs", "[", 
+                   RowBox[{"[", "k", "]"}], "]"}], "[", 
+                  RowBox[{"[", "1", "]"}], "]"}], 
+                 RowBox[{"diffuseFunc", "[", 
+                  RowBox[{"x", ",", "y", ",", 
+                   RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{
+                    RowBox[{"hs", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "2", "]"}], "]"}], ",", 
+                    RowBox[{
+                    RowBox[{"hs", "[", 
+                    RowBox[{"[", "k", "]"}], "]"}], "[", 
+                    RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], "]"}]}], ",", 
+                RowBox[{"{", 
+                 RowBox[{"k", ",", "kMax"}], "}"}]}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"x", ",", 
+                RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"y", ",", 
+                RowBox[{"-", "3"}], ",", "3"}], "}"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"Contours", "\[Rule]", "17"}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"FrameLabel", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{"\"\<x\>\"", ",", "\"\<y\>\""}], "}"}]}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"PlotLabel", "\[Rule]", " ", 
+                 RowBox[{"\"\<Temperature Distribution for \>\"", "<>", 
+                  RowBox[{"ToString", "[", "kMax", "]"}], "<>", 
+                  "\"\< heat source locations \\n Using the \>\"", "<>", 
+                  RowBox[{"ToString", "[", "diffuseFunc", "]"}], "<>", 
+                  "\"\< Diffusion Equation\>\""}]}]}], "}"}]}], "]"}], ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"ListPlot", "[", 
+             RowBox[{"locations", ",", "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{"PlotLegends", "\[Rule]", 
+                RowBox[{"{", "\"\<Heat Source Locations\>\"", "}"}]}], 
+               "}"}]}], "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}], 
+        ";"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"N", "[", "tVals", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.686521139956148*^9, 3.686521168161982*^9}, {
+   3.686521216201371*^9, 3.686521495517295*^9}, {3.686521535591056*^9, 
+   3.6865215401987677`*^9}, {3.6865215732518463`*^9, 
+   3.6865215886340637`*^9}, {3.68652177009909*^9, 3.686521783252981*^9}, {
+   3.686521840860175*^9, 3.6865218698039217`*^9}, {3.686521928620661*^9, 
+   3.6865220241460114`*^9}, {3.686522065935017*^9, 3.68652206702274*^9}, {
+   3.6865221120536003`*^9, 3.686522150232985*^9}, {3.686522181697755*^9, 
+   3.686522263298635*^9}, {3.686522471280699*^9, 3.68652248951941*^9}, {
+   3.686522554210672*^9, 3.686522609891642*^9}, {3.686522789723322*^9, 
+   3.686522794135022*^9}, {3.6865231879473877`*^9, 3.686523199192251*^9}, {
+   3.686523612813869*^9, 3.686523628044818*^9}, {3.686523658860701*^9, 
+   3.686523726861949*^9}, {3.686523772134993*^9, 3.686523809653016*^9}, {
+   3.6865239214113293`*^9, 3.686523936909622*^9}, {3.686523968089346*^9, 
+   3.686524014034141*^9}, {3.6865240711157217`*^9, 3.686524082398497*^9}, {
+   3.686524143775611*^9, 3.686524155816049*^9}, {3.686524202216009*^9, 
+   3.68652420490471*^9}, {3.686524381967044*^9, 3.686524464494108*^9}, {
+   3.686524571679875*^9, 3.686524633268457*^9}, {3.686524690600287*^9, 
+   3.686524710009727*^9}, {3.686524780186282*^9, 3.686524781051012*^9}, {
+   3.686524857130588*^9, 3.686524873994351*^9}, {3.686524918427363*^9, 
+   3.68652492350074*^9}, {3.686524978431046*^9, 3.686525005714723*^9}, {
+   3.686525045715701*^9, 3.686525045897805*^9}, {3.686525103770186*^9, 
+   3.686525103852385*^9}, {3.686525135975749*^9, 3.686525136081856*^9}, {
+   3.68652517251721*^9, 3.68652517435739*^9}, {3.686525297968937*^9, 
+   3.686525403750504*^9}, {3.686525520824923*^9, 3.6865256272566137`*^9}, {
+   3.686525663406417*^9, 3.6865257699603577`*^9}, {3.686525804769804*^9, 
+   3.686525828791194*^9}, {3.686525931238472*^9, 3.686525958397667*^9}, {
+   3.686525990806068*^9, 3.6865259929213953`*^9}, 3.686526269832165*^9, {
+   3.686526360272173*^9, 3.686526391777919*^9}, {3.6865264558875723`*^9, 
+   3.68652645606542*^9}, {3.6865265183626842`*^9, 3.686526559873314*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 10569, 229, 573, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

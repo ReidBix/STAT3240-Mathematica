@@ -1,0 +1,248 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8715,        239]
+NotebookOptionsPosition[      8458,        225]
+NotebookOutlinePosition[      8816,        241]
+CellTagsIndexPosition[      8773,        238]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"'", 
+    RowBox[{"Simple", "'"}], " ", "code", " ", "to", " ", "print", " ", "out",
+     " ", "table", " ", "for", " ", "errors", " ", "of", " ", 
+    "approximations", " ", "of", " ", "Pi", " ", "for", " ", "an", " ", "and",
+     " ", "bn"}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Initialize", " ", "variables"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"an", "=", "0"}], ";", 
+    RowBox[{"bn", "=", "0"}], ";", 
+    RowBox[{"k1", "=", "0"}], ";", 
+    RowBox[{"k2", "=", "0"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"print", " ", "out", " ", "an", " ", "table", " ", "headers"}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"Row", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<n\>\"", ",", " ", "\"\<An\>\"", ",", " ", "\"\<AnError\>\""}], 
+        "}"}], ",", " ", "\"\<              \>\""}], "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<-----------------------------\>\"", "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+     "First", " ", "while", " ", "loop", " ", "to", " ", "calculate", " ", 
+      "first", " ", "type", " ", "of", " ", "Pi", " ", "estimation", " ", 
+      "based", " ", "off", " ", "of", " ", "tol"}], ",", " ", 
+     RowBox[{"printing", " ", "at", " ", "every", " ", "iteration"}]}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"While", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"an", "-", "Pi"}], "]"}], ">", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "15"}]}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"k1", ">", "20"}], ",", 
+         RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"an", "=", 
+        RowBox[{"(", 
+         RowBox[{"an", "+", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"6", "/", 
+             RowBox[{"Sqrt", "[", "3", "]"}]}], ")"}], 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"-", "1"}], ")"}], "^", "k1"}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"3", "^", "k1"}], ")"}], "*", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"2", "k1"}], "+", "1"}], ")"}]}], ")"}]}]}]}], 
+         ")"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"Row", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k1", ",", 
+            RowBox[{"N", "[", 
+             RowBox[{"an", ",", "6"}], "]"}], ",", 
+            RowBox[{"N", "[", 
+             RowBox[{
+              RowBox[{"ScientificForm", "[", 
+               RowBox[{"Abs", "[", 
+                RowBox[{"an", "-", "Pi"}], "]"}], "]"}], ",", "6"}], "]"}]}], 
+           "}"}], ",", "\"\<       \>\""}], "]"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"k1", "++"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"print", " ", "out", " ", "an", " ", "table", " ", "ender"}], " ",
+     "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<-----------------------------\>\"", "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"next", " ", "table"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"print", " ", "out", " ", "bn", " ", "table", " ", "headers"}], 
+    " ", "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", 
+     RowBox[{"Row", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<n\>\"", ",", " ", "\"\<Bn\>\"", ",", " ", "\"\<BnError\>\""}], 
+        "}"}], ",", " ", "\"\<              \>\""}], "]"}], "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<-----------------------------\>\"", "]"}], 
+    ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+     RowBox[{
+     "Second", " ", "while", " ", "loop", " ", "to", " ", "calculate", " ", 
+      "second", " ", "type", " ", "of", " ", "Pi", " ", "estimation", " ", 
+      "based", " ", "off", " ", "of", " ", "tol"}], ",", " ", 
+     RowBox[{"printing", " ", "at", " ", "every", " ", "iteration"}]}], " ", 
+    "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"While", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"bn", "-", "Pi"}], "]"}], ">", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "15"}]}]}], ",", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"k2", ">", "20"}], ",", 
+         RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"bn", "=", 
+        RowBox[{"bn", "+", 
+         RowBox[{"16", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"-", "1"}], ")"}], "^", "k2"}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"5", "^", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}], "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}]}]}], "-", 
+         RowBox[{"4", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"-", "1"}], ")"}], "^", "k2"}], ")"}], "/", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"239", "^", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}], "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}]}]}]}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"Print", "[", 
+        RowBox[{"Row", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"k2", ",", 
+            RowBox[{"N", "[", 
+             RowBox[{"bn", ",", "6"}], "]"}], ",", 
+            RowBox[{"N", "[", 
+             RowBox[{
+              RowBox[{"ScientificForm", "[", 
+               RowBox[{"Abs", "[", 
+                RowBox[{"bn", "-", "Pi"}], "]"}], "]"}], ",", "6"}], "]"}]}], 
+           "}"}], ",", "\"\<       \>\""}], "]"}], "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"k2", "++"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{"print", " ", "out", " ", "bn", " ", "table", " ", "ender"}], " ",
+     "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Print", "[", "\"\<-----------------------------\>\"", "]"}], 
+    ";"}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.6819182251169157`*^9, 3.6819183879878063`*^9}, {
+   3.681918430713451*^9, 3.681918497002315*^9}, {3.681918548125259*^9, 
+   3.681918599313437*^9}, {3.6819186392004223`*^9, 3.681918661860168*^9}, {
+   3.6819186948345222`*^9, 3.6819187313070517`*^9}, {3.681918773811077*^9, 
+   3.681918978869233*^9}, {3.68191901105206*^9, 3.6819190174707117`*^9}, {
+   3.6819190486634703`*^9, 3.68191923322069*^9}, 3.681919485067566*^9, {
+   3.6819196644234743`*^9, 3.681919744887411*^9}, {3.6821808021228123`*^9, 
+   3.682181179900329*^9}, {3.682181273883052*^9, 3.682181336159954*^9}, {
+   3.6821814036872177`*^9, 3.682181438581285*^9}, {3.6821815196383753`*^9, 
+   3.682181648815774*^9}}]
+},
+WindowSize->{808, 690},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 7896, 203, 590, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

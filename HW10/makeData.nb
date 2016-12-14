@@ -1,0 +1,129 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      4295,        120]
+NotebookOptionsPosition[      4037,        106]
+NotebookOutlinePosition[      4397,        122]
+CellTagsIndexPosition[      4354,        119]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"makeData", "[", 
+   RowBox[{"param_", ",", "nPoints_", ",", "noiseFactor_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "a", ",", "b", ",", "thetaDegrees", ",", "thetaN", ",", "xy", ",", 
+      "add"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+      RowBox[{
+      "INPUT", ":", "\[IndentingNewLine]", "\t\t", "param", ":", " ", 
+       RowBox[{"list", " ", "of", " ", "a"}]}], ",", " ", "b", ",", " ", 
+      RowBox[{"and", " ", "thetaDegrees", "\[IndentingNewLine]", "\t", 
+       RowBox[{"nPoints", ":", " ", 
+        RowBox[{
+        "an", " ", "integer", " ", "value", " ", "for", " ", "the", " ", 
+         "number", " ", "of", " ", "samples", " ", "for", " ", "x", " ", 
+         "and", " ", "y", "\[IndentingNewLine]", "\t", "noiseFactor"}], ":", 
+        " ", 
+        RowBox[{
+        "a", " ", "scalar", " ", "value", " ", "which", " ", "scales", " ", 
+         "the", " ", "uniform", " ", "distribution", " ", "of", " ", "noise", 
+         "\[IndentingNewLine]", 
+         RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+          RowBox[{
+          "returns", " ", "the", " ", "noisy", " ", "version", " ", "of", " ",
+            "the", " ", "input", " ", "list"}]}]}]}]}]}], 
+     "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"a", ",", "b", ",", "thetaDegrees"}], "}"}], "=", "param"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"thetaN", "=", 
+      RowBox[{"thetaDegrees", "*", 
+       RowBox[{"Pi", "/", "180"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xy", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"a", "*", 
+            RowBox[{"Cos", "[", "t", "]"}], "*", 
+            RowBox[{"Cos", "[", "thetaN", "]"}]}], "-", 
+           RowBox[{"b", "*", 
+            RowBox[{"Sin", "[", "t", "]"}], "*", 
+            RowBox[{"Sin", "[", "thetaN", "]"}]}]}], ",", 
+          RowBox[{
+           RowBox[{"b", "*", 
+            RowBox[{"Sin", "[", "t", "]"}], "*", 
+            RowBox[{"Cos", "[", "thetaN", "]"}]}], "+", 
+           RowBox[{"a", "*", 
+            RowBox[{"Cos", "[", "t", "]"}], "*", 
+            RowBox[{"Sin", "[", "thetaN", "]"}]}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"t", ",", "0", ",", 
+          RowBox[{"2", "Pi"}], ",", 
+          RowBox[{"2", 
+           RowBox[{"Pi", "/", 
+            RowBox[{"(", 
+             RowBox[{"nPoints", "-", "1"}], ")"}]}]}]}], "}"}]}], "]"}]}], 
+     ";", 
+     RowBox[{"add", "=", 
+      RowBox[{"noiseFactor", "*", 
+       RowBox[{"RandomVariate", "[", 
+        RowBox[{
+         RowBox[{"UniformDistribution", "[", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"-", "0.5"}], ",", "0.5"}], "}"}], "]"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"nPoints", ",", "2"}], "}"}]}], "]"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"xy", "+", "add"}], "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.687626897087111*^9, 3.687626921643381*^9}, {
+  3.687626952742518*^9, 3.687627051452421*^9}, {3.687627083653091*^9, 
+  3.687627108871472*^9}, {3.687627146743101*^9, 3.687627213893674*^9}, {
+  3.687627252551642*^9, 3.6876272564027023`*^9}, {3.687627316747407*^9, 
+  3.68762745335949*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{116, Automatic}, {Automatic, 44}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 3475, 84, 267, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,267 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     11947,        259]
+NotebookOptionsPosition[     11688,        245]
+NotebookOutlinePosition[     12046,        261]
+CellTagsIndexPosition[     12003,        258]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"sinDerivativeList", "[", 
+     RowBox[{"x_", ",", "plotsOn_"}], "]"}], ":=", " ", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+       "hbest", ",", "ebest", ",", "hAll", ",", "eAll", ",", "h", ",", "e", 
+        ",", "xy", ",", "eval"}], "}"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{"sinDerivativeList", 
+         RowBox[{"(", 
+          RowBox[{"x", ",", " ", "plotsOn"}], ")"}]}], ":", " ", 
+        RowBox[{
+        "Evaluate", " ", "error", " ", "over", " ", "logarithmic", " ", 
+         "scaling", " ", "in", " ", "values", " ", "of", " ", "h", " ", 
+         "USING", " ", "LIST", " ", 
+         RowBox[{"FUNCTIONS", ".", " ", "The"}], " ", "input", " ", "x", " ", 
+         "is", " ", "assumed", " ", "to", " ", "be", " ", "in", " ", 
+         "radians"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+       RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "x", ":", " ", 
+        RowBox[{
+        "input", " ", "value", " ", "to", " ", "calculate", " ", "error", " ",
+          "over", " ", "logarithmic", " ", "scaling", " ", 
+         RowBox[{"(", 
+          RowBox[{"assumed", " ", "to", " ", "be", " ", "radians"}], ")"}], 
+         "\[IndentingNewLine]", "       ", 
+         RowBox[{"plotsOn", ":", " ", 
+          RowBox[{
+          "determines", " ", "whether", " ", "to", " ", "plot", " ", "and", 
+           " ", "save", " ", "the", " ", "plot", " ", "of", " ", "the", " ", 
+           "error", " ", "if", " ", "set", " ", "to", " ", "\"\<on\>\"", 
+           "\[IndentingNewLine]", "OUTPUT"}], ":", "\[IndentingNewLine]", 
+          "\t", 
+          RowBox[{
+          "outputs", " ", "a", " ", "table", " ", "of", " ", "x", " ", "and", 
+           " ", "y", " ", "arrays", " ", "for", " ", "the", " ", "plot", " ", 
+           "of", " ", "the", " ", "error", " ", "and", " ", "values", " ", 
+           "of", " ", "h"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+       "initialize", " ", "all", " ", "values", " ", "of", " ", "h", " ", 
+        "into", " ", "a", " ", "list"}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"hAll", "=", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"N", "[", 
+           RowBox[{"(", 
+            RowBox[{"1", "/", 
+             RowBox[{"10", "^", 
+              RowBox[{"(", "k", ")"}]}]}], ")"}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"k", ",", "1", ",", "16", ",", "1"}], "}"}]}], "]"}]}], 
+       ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "initialize", " ", "xy", " ", "list", " ", "and", " ", "ebest", " ", 
+         "and", " ", "hbest"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"eAll", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"xy", "=", 
+        RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"ebest", "=", "100000"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"hbest", "=", "0"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+         RowBox[{
+         "Run", " ", "a", " ", "do", " ", "loop", " ", "to", " ", "calculate",
+           " ", "the", " ", "error"}], ",", " ", 
+         RowBox[{"append", " ", "to", " ", "the", " ", "2", " ", "lists"}]}], 
+        " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"Do", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"h", "=", 
+           RowBox[{"hAll", "[", 
+            RowBox[{"[", "i", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+          RowBox[{"e", "=", 
+           RowBox[{"Abs", "[", 
+            RowBox[{"N", "[", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"(", 
+                  RowBox[{
+                   RowBox[{"Sin", "[", 
+                    RowBox[{"x", "+", "h"}], "]"}], "-", 
+                   RowBox[{"Sin", "[", "x", "]"}]}], ")"}], ")"}], "/", "h"}],
+                "-", 
+               RowBox[{"Cos", "[", "x", "]"}]}], ")"}], "]"}], "]"}]}], ";", 
+          "\[IndentingNewLine]", 
+          RowBox[{"AppendTo", "[", 
+           RowBox[{"eAll", ",", "e"}], "]"}], ";"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1", ",", 
+           RowBox[{"Length", "[", "hAll", "]"}]}], "}"}]}], 
+        "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "find", " ", "the", " ", "minimum", " ", "value", " ", "of", " ", 
+         "errors"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"ebest", "=", 
+        RowBox[{"Min", "[", "eAll", "]"}]}], ";", "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{"get", " ", "the", " ", 
+         RowBox[{"ordering", "/", "location"}], " ", "of", " ", "that", " ", 
+         "error", " ", "for", " ", "h"}], " ", "*)"}], "\[IndentingNewLine]", 
+       
+       RowBox[{"hbest", "=", 
+        RowBox[{"hAll", "[", 
+         RowBox[{"[", 
+          RowBox[{
+           RowBox[{"Ordering", "[", 
+            RowBox[{"eAll", ",", "1"}], "]"}], "[", 
+           RowBox[{"[", "1", "]"}], "]"}], "]"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "put", " ", "the", " ", "two", " ", "lists", " ", "together", " ", 
+         "with", " ", "riffle", " ", "and", " ", "partition"}], " ", "*)"}], 
+       "\[IndentingNewLine]", 
+       RowBox[{"xy", "=", 
+        RowBox[{"Partition", "[", 
+         RowBox[{
+          RowBox[{"Riffle", "[", 
+           RowBox[{"hAll", ",", "eAll"}], "]"}], ",", "2"}], "]"}]}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "Plot", " ", "the", " ", "graph", " ", "if", " ", "plotsOn", " ", 
+         "is", " ", "\"\<on\>\""}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{"plotsOn", "==", "\"\<on\>\""}], ",", "\[IndentingNewLine]", 
+         
+         RowBox[{"Export", "[", 
+          RowBox[{"\"\<derivativeErrorV.pdf\>\"", ",", 
+           RowBox[{"ListLogLogPlot", "[", 
+            RowBox[{"xy", ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"AxesLabel", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<h\>\"", ",", 
+                    RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}], ",", 
+                  RowBox[{"Style", "[", 
+                   RowBox[{"\"\<Error\>\"", ",", 
+                    RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}]}], "}"}]}],
+                ",", "\[IndentingNewLine]", 
+               RowBox[{"PlotLabel", "\[Rule]", 
+                RowBox[{"Style", "[", 
+                 RowBox[{
+                  RowBox[{"StringJoin", "[", 
+                   RowBox[{
+                   "\"\<Error in Sin Derivative Approximation for x=\>\"", 
+                    ",", 
+                    RowBox[{"ToString", "[", 
+                    RowBox[{"N", "[", 
+                    RowBox[{"x", ",", "4"}], "]"}], "]"}], ",", 
+                    "\"\< radians using List\>\""}], "]"}], ",", 
+                  RowBox[{"FontSize", "\[Rule]", "12"}]}], "]"}]}]}], "}"}]}],
+             "]"}]}], "]"}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", 
+       RowBox[{"(*", " ", 
+        RowBox[{
+        "return", " ", "the", " ", "best", " ", "h", " ", "and", " ", "best", 
+         " ", "error"}], " ", "*)"}], "\[IndentingNewLine]", 
+       RowBox[{"N", "[", 
+        RowBox[{"{", 
+         RowBox[{"hbest", ",", "ebest"}], "}"}], "]"}]}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]"}]}]], "Input",
+ CellChangeTimes->{{3.590244608750668*^9, 3.590244671477878*^9}, {
+   3.590245006798338*^9, 3.590245063572649*^9}, {3.5902451026041803`*^9, 
+   3.590245127002234*^9}, {3.590245190323637*^9, 3.590245238440872*^9}, {
+   3.590245274419139*^9, 3.590245324482115*^9}, {3.590245373684651*^9, 
+   3.590245374515077*^9}, {3.590245483719645*^9, 3.590245606961727*^9}, {
+   3.590246083614152*^9, 3.59024612003855*^9}, {3.5902461758789997`*^9, 
+   3.590246272433222*^9}, {3.590246304714432*^9, 3.590246311506687*^9}, {
+   3.590246580465376*^9, 3.5902465854373837`*^9}, {3.5902466557293*^9, 
+   3.590246663056427*^9}, {3.590246775795761*^9, 3.5902468344503727`*^9}, {
+   3.590246897545548*^9, 3.590246924854501*^9}, {3.59024732349684*^9, 
+   3.590247421707168*^9}, {3.5902475112932177`*^9, 3.590247566295841*^9}, 
+   3.590247644199451*^9, {3.590247742184742*^9, 3.590247750922215*^9}, {
+   3.5902478099891376`*^9, 3.590247811370914*^9}, {3.5902504306899776`*^9, 
+   3.590250434031576*^9}, {3.5902508364237213`*^9, 3.590250848334627*^9}, {
+   3.590250881955618*^9, 3.590250947880279*^9}, {3.590252761857115*^9, 
+   3.5902527625654593`*^9}, {3.590252809058907*^9, 3.5902528301893587`*^9}, {
+   3.590270193510092*^9, 3.590270220461088*^9}, {3.59027034549255*^9, 
+   3.5902704020495377`*^9}, {3.5902705764907827`*^9, 3.590270776001626*^9}, {
+   3.620472106090919*^9, 3.620472143234251*^9}, {3.62047220135734*^9, 
+   3.620472202388095*^9}, {3.620472232739211*^9, 3.6204722431342363`*^9}, {
+   3.620472277494429*^9, 3.620472297181569*^9}, {3.620474086421048*^9, 
+   3.620474115904069*^9}, 3.620474306421074*^9, {3.620474337173629*^9, 
+   3.620474465367496*^9}, {3.620474561127598*^9, 3.6204745637810087`*^9}, {
+   3.620476572764485*^9, 3.6204765891325502`*^9}, {3.620476744722541*^9, 
+   3.620476778946196*^9}, {3.620477173380528*^9, 3.620477410975278*^9}, {
+   3.620477530451693*^9, 3.620477586502296*^9}, {3.6204776958230333`*^9, 
+   3.620477700685193*^9}, {3.620482861465703*^9, 3.620482870102624*^9}, {
+   3.620483061209038*^9, 3.6204831386054363`*^9}, {3.6204832229114437`*^9, 
+   3.620483252640985*^9}, {3.6204832831853237`*^9, 3.62048328672726*^9}, 
+   3.6205960644506474`*^9, {3.6205961023076677`*^9, 3.620596128022622*^9}, {
+   3.620597814953124*^9, 3.620597946606106*^9}, {3.6205989379561357`*^9, 
+   3.620598975055332*^9}, {3.6205990178626547`*^9, 3.620599025253289*^9}, 
+   3.620599120594047*^9, {3.62065391669283*^9, 3.620654051444688*^9}, {
+   3.620654101048373*^9, 3.620654121182261*^9}, {3.6206543448616037`*^9, 
+   3.6206544032094297`*^9}, {3.6206544742055264`*^9, 
+   3.6206544858433523`*^9}, {3.682952245864094*^9, 3.682952261812109*^9}, 
+   3.682952325872881*^9, {3.6833675265933123`*^9, 3.683367565938388*^9}, {
+   3.683367629846274*^9, 3.6833677145882998`*^9}, {3.683367757656142*^9, 
+   3.683367786831308*^9}, {3.683367831205983*^9, 3.683367847585059*^9}, {
+   3.683369348719933*^9, 3.6833693514513693`*^9}, {3.6833694034971447`*^9, 
+   3.683369641857009*^9}, {3.6833696722493763`*^9, 3.683369725456164*^9}, {
+   3.6833708665022297`*^9, 3.683370866801446*^9}, {3.6833709048987083`*^9, 
+   3.683370936387004*^9}, {3.683370999310905*^9, 3.683371053321752*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{Automatic, 11}, {Automatic, 0}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 11127, 223, 675, "Input"]
+}
+]
+*)
+

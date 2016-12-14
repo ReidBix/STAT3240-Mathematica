@@ -1,0 +1,107 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      3298,         97]
+NotebookOptionsPosition[      3046,         83]
+NotebookOutlinePosition[      3400,         99]
+CellTagsIndexPosition[      3357,         96]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"MySqrt", "[", "A_", "]"}], " ", ":=", " ", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"s", ",", " ", "L", ",", " ", "W"}], "}"}], ",", "\n", "  ", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"A", " ", "is", " ", "a", " ", "non"}], "-", 
+      RowBox[{
+      "negative", " ", "real", " ", "number", " ", "and", " ", "s", " ", "is",
+        " ", "an", " ", "approximation", " ", "\n", "  ", "to", " ", "its", 
+       " ", "square", " ", "root"}]}], "*)"}], "\n", "  ", 
+    RowBox[{"If", "[", 
+     RowBox[{
+      RowBox[{"A", " ", "==", " ", "0"}], ",", "\n", "   ", 
+      RowBox[{
+       RowBox[{"s", " ", "=", " ", "0"}], ";"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+        RowBox[{
+        "Nothing", " ", "to", " ", "do", " ", "in", " ", "this", " ", 
+         "case"}], "..."}], "*)"}], "\n", "   ", 
+      RowBox[{
+       RowBox[{"L", " ", "=", " ", "A"}], ";", " ", "\n", "   ", 
+       RowBox[{"W", " ", "=", " ", "1.0"}], ";", 
+       RowBox[{"(*", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+          "The", " ", "initial", " ", "rectangle", " ", "is", " ", "A"}], "-",
+           "by", "-", "1"}], "..."}], "*)"}], " ", "\n", "   ", 
+       RowBox[{"(*", 
+        RowBox[{
+        "Iterate", " ", "until", " ", "the", " ", "difference", " ", 
+         "between", " ", "L", " ", "and", " ", "W", " ", "is", " ", "\n", 
+         "   ", "less", " ", "than", " ", "L", "*", 
+         RowBox[{"10", "^", "15"}]}], " ", "*)"}], "\n", "   ", 
+       RowBox[{"While", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"L", " ", "-", " ", "W"}], "]"}], " ", ">", " ", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{"10", "^", 
+             RowBox[{"-", "15"}]}], ")"}], "*", "\n", "      ", "L"}]}], ",", 
+         
+         RowBox[{"(*", 
+          RowBox[{
+          "The", " ", "new", " ", "L", " ", "is", " ", "the", " ", "average", 
+           " ", "of", " ", "the", " ", "current", " ", "L", " ", "and", " ", 
+           "W"}], "*)"}], "\n", "    ", "\n", "    ", 
+         RowBox[{
+          RowBox[{"L", " ", "=", " ", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"L", " ", "+", " ", "W"}], ")"}], "/", "2"}]}], ";", " ", 
+          RowBox[{"W", " ", "=", " ", 
+           RowBox[{"A", "/", "L"}]}], ";"}]}], "]"}], ";", "\n", "   ", 
+       RowBox[{"s", " ", "=", " ", "L"}]}]}], "]"}]}], "]"}]}]], "Input"]
+},
+WindowSize->{808, 714},
+WindowMargins->{{Automatic, 18}, {Automatic, 41}},
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2484, 61, 250, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

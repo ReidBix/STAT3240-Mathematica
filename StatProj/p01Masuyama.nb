@@ -1,0 +1,624 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     27662,        615]
+NotebookOptionsPosition[     27359,        600]
+NotebookOutlinePosition[     27718,        616]
+CellTagsIndexPosition[     27675,        613]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p01Masuyama", "[", 
+   RowBox[{"ntrials_", ",", "csvfile_", ",", "r_", ",", "plotsOn_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "estBias", ",", "estRmse", ",", "ntrialVec", ",", "file", ",", "spp", 
+      ",", "dbh", ",", "ba", ",", "volume", ",", "x", ",", "y", ",", 
+      "centerX", ",", "centerY", ",", "a", ",", "aStar", ",", "t", ",", 
+      "ranTreeProb", ",", "totBasAreaCur", ",", "totBasAreaArray", ",", 
+      "perBiasCur", ",", "perRmseCur", ",", "curX", ",", "curY", ",", 
+      "curDist", ",", "nSample", ",", "biasPlot", ",", "rmsePlot"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+      RowBox[{
+      "INPUT", ":", "\[IndentingNewLine]", "\t\t", "ntrials", ":", " ", 
+       RowBox[{
+       "number", " ", "of", " ", "random", " ", "plots", " ", "to", " ", 
+        "generate", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"csvfile", ":", " ", 
+         RowBox[{
+         "name", " ", "of", " ", "file", " ", "containing", " ", "tree", " ", 
+          "data", "\[IndentingNewLine]", "\t", "r"}], ":", " ", 
+         RowBox[{
+         "radius", " ", "of", " ", "the", " ", "plots", " ", "to", " ", 
+          "generate", " ", "\[IndentingNewLine]", "\t", 
+          RowBox[{"plotsOn", ":", " ", 
+           RowBox[{
+           "a", " ", "characters", " ", "string", " ", "whether", " ", "to", 
+            " ", "generate", " ", "plots", " ", "or", " ", "not", 
+            "\[IndentingNewLine]", "OUTPUT"}], ":", "\[IndentingNewLine]", 
+           "\t", 
+           RowBox[{"returns", " ", "estBias", " ", 
+            RowBox[{"(", 
+             RowBox[{"estimated", " ", "percentage", " ", "bias"}], 
+             ")"}]}]}]}]}]}]}], ",", " ", 
+      RowBox[{"estRmse", " ", 
+       RowBox[{"(", 
+        RowBox[{
+        "estimated", " ", "percentage", " ", "rmse", " ", "computed", " ", 
+         "at", " ", "intervals", " ", "of", " ", "ntrials", " ", 
+         "simulations"}], ")"}]}], ",", " ", 
+      RowBox[{"and", " ", "ntrialVec", " ", 
+       RowBox[{"(", 
+        RowBox[{
+        "defined", " ", "vector", " ", "corresponding", " ", "elements", " ", 
+         "for", " ", "the", " ", "intervals", " ", "for", " ", "estRmse"}], 
+        ")"}]}]}], "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"SetDirectory", "[", 
+      RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"file", "=", 
+      RowBox[{"Import", "[", "csvfile", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"spp", " ", "=", " ", 
+       RowBox[{"species", " ", "code"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"spp", "=", 
+      RowBox[{"file", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "1"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"dbh", " ", "=", " ", 
+        RowBox[{"diameter", " ", "at", " ", "breast", " ", "height"}]}], ",", 
+       " ", 
+       RowBox[{
+       "the", " ", "trunk", " ", "diameter", " ", "is", " ", "1.6", " ", 
+        "meters", " ", "from", " ", "the", " ", "ground"}]}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"dbh", "=", 
+      RowBox[{"file", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "2"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"basal", " ", "area", " ", "of", " ", "tree"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"ba", "=", 
+      RowBox[{"file", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "3"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"volume", " ", "of", " ", "wood"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"volume", "=", 
+      RowBox[{"file", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "4"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"x", "-", 
+       RowBox[{"coordinate", " ", "of", " ", "tree", " ", "location"}]}], " ",
+       "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"x", "=", 
+      RowBox[{"file", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "5"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"y", "-", 
+       RowBox[{"coordinate", " ", "of", " ", "tree", " ", "location"}]}], " ",
+       "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"y", "=", 
+      RowBox[{"file", "[", 
+       RowBox[{"[", 
+        RowBox[{"All", ",", "6"}], "]"}], "]"}]}], ";", "\[IndentingNewLine]",
+      "\[IndentingNewLine]", 
+     RowBox[{"a", "=", 
+      RowBox[{"Pi", "*", 
+       RowBox[{"r", "^", "2"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"aStar", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"750", "+", 
+         RowBox[{"2", "r"}]}], ")"}], "^", "2"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"t", "=", "311.906"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"nSample", "=", 
+      RowBox[{"Floor", "[", 
+       RowBox[{"ntrials", "/", "50"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"totBasAreaArray", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", "ntrials"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"estBias", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", "50"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"estRmse", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", "50"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"ntrialVec", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", "50"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "probability", " ", "that", " ", "tree", " ", "z_i", " ", "is", " ", 
+       "selected", " ", "in", " ", "a", " ", "random", " ", "sample", " ", 
+       "is", " ", 
+       RowBox[{"a", "/", "A"}], "*", " ", "for", " ", "every", " ", "tree", 
+       " ", "in", " ", "the", " ", "stand"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"ranTreeProb", "=", 
+      RowBox[{"aStar", "/", "a"}]}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+       "select", " ", "random", " ", "circular", " ", "plot", " ", "of", " ", 
+        "radius", " ", "r"}], ">", "0"}], " ", "*)"}], "\[IndentingNewLine]", 
+     
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "center", " ", "for", " ", "plot", " ", "at", " ", "randomly", " ", 
+       "selected", " ", "point", " ", "that", " ", "is", " ", "either", " ", 
+       "in", " ", "the", " ", "stand", " ", "or", " ", "within", " ", "a", 
+       " ", "distance", " ", "of", " ", "r", " ", "from", " ", "the", " ", 
+       "stand"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"assumed", " ", "from", " ", 
+        RowBox[{"region", " ", "[", 
+         RowBox[{
+          RowBox[{"-", "r"}], ",", 
+          RowBox[{"750", "+", "r"}]}], "]"}]}], "=", 
+       RowBox[{
+        RowBox[{"x", " ", 
+         RowBox[{"and", " ", "[", 
+          RowBox[{
+           RowBox[{"-", "r"}], ",", 
+           RowBox[{"750", "+", "r"}]}], "]"}]}], "=", 
+        RowBox[{"y", " ", "such", " ", "that", " ", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "y"}], "}"}], " ", "selected", " ", 
+         "uniformly"}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"centerX", ",", "centerY"}], "}"}], "=", 
+         RowBox[{"RandomVariate", "[", 
+          RowBox[{
+           RowBox[{"UniformDistribution", "[", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"-", "r"}], ",", 
+              RowBox[{"750", "+", "r"}]}], "}"}], "]"}], ",", "2"}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"totBasAreaCur", "=", "0"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"Divisible", "[", 
+           RowBox[{"j", ",", "1000"}], "]"}], ",", 
+          RowBox[{"Print", "[", "j", "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Do", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"curDist", "=", 
+            RowBox[{"EuclideanDistance", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"centerX", ",", "centerY"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"x", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}], ",", 
+                RowBox[{"y", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}], "}"}]}], "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{"curDist", "\[LessEqual]", "r"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"(*", " ", 
+              RowBox[{"total", " ", "basal", " ", "area", " ", 
+               RowBox[{"t", "^", " ", "is"}], " ", "equal", " ", "to", " ", 
+               RowBox[{"(", 
+                RowBox[{"A", "*", 
+                 RowBox[{"/", "a"}]}], ")"}], "Sum", 
+               RowBox[{"(", "y_i", ")"}], " ", "across", " ", "sample", " ", 
+               "S", " ", "from", " ", "plot", " ", "where", " ", "y_i", " ", 
+               "is", " ", "equal", " ", "to", " ", "ba", " ", "from", " ", 
+               "the", " ", "csvfile"}], " ", "*)"}], "\[IndentingNewLine]", 
+             RowBox[{
+              RowBox[{"totBasAreaCur", "=", 
+               RowBox[{"totBasAreaCur", "+", 
+                RowBox[{"ba", "[", 
+                 RowBox[{"[", "i", "]"}], "]"}]}]}], ";"}]}], 
+            "\[IndentingNewLine]", "]"}], ";"}], "\[IndentingNewLine]", ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "2", ",", 
+            RowBox[{"Length", "[", 
+             RowBox[{"file", "[", 
+              RowBox[{"[", 
+               RowBox[{"All", ",", "1"}], "]"}], "]"}], "]"}]}], "}"}]}], 
+         "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"totBasAreaCur", "=", 
+         RowBox[{"totBasAreaCur", "*", "ranTreeProb"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"totBasAreaArray", "[", 
+          RowBox[{"[", "j", "]"}], "]"}], "=", "totBasAreaCur"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"j", "\[NotEqual]", "1"}], "&&", 
+           RowBox[{"Divisible", "[", 
+            RowBox[{"j", ",", "nSample"}], "]"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{"percentage", " ", "bias", " ", "is", " ", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"100", "*", "Average", 
+                RowBox[{"(", 
+                 RowBox[{"t", "^"}], ")"}]}], "-", "t"}], ")"}], "/", "t"}], 
+            " ", "where", " ", "t", " ", "is", " ", "equal", " ", "311.906"}],
+            "*)"}], "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"perBiasCur", "=", 
+            RowBox[{"100", "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"Mean", "[", 
+                  RowBox[{"totBasAreaArray", "[", 
+                   RowBox[{"[", 
+                    RowBox[{"1", ";;", "j"}], "]"}], "]"}], "]"}], "-", "t"}],
+                 ")"}], "/", "t"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"estBias", "[", 
+             RowBox[{"[", 
+              RowBox[{"j", "/", "nSample"}], "]"}], "]"}], "=", 
+            "perBiasCur"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"(*", " ", 
+            RowBox[{
+            "percentage", " ", "root", " ", "mean", " ", "square", " ", 
+             "error", " ", "is", " ", "100", "*", 
+             RowBox[{"(", 
+              RowBox[{"Sqrt", 
+               RowBox[{
+                RowBox[{"(", 
+                 RowBox[{"Variance", 
+                  RowBox[{"(", 
+                   RowBox[{"t", "^"}], ")"}]}], ")"}], "/", "t"}]}], ")"}]}], 
+            " ", "*)"}], "\[IndentingNewLine]", 
+           RowBox[{"perRmseCur", "=", 
+            RowBox[{"100", "*", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"Sqrt", "[", 
+                RowBox[{"Variance", "[", 
+                 RowBox[{"totBasAreaArray", "[", 
+                  RowBox[{"[", 
+                   RowBox[{"1", ";;", "j"}], "]"}], "]"}], "]"}], "]"}], "/", 
+               "t"}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"estRmse", "[", 
+             RowBox[{"[", 
+              RowBox[{"j", "/", "nSample"}], "]"}], "]"}], "=", 
+            "perRmseCur"}], ";", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"ntrialVec", "[", 
+             RowBox[{"[", 
+              RowBox[{"j", "/", "nSample"}], "]"}], "]"}], "=", "j"}], 
+           ";"}]}], "\[IndentingNewLine]", "]"}], ";"}], 
+       "\[IndentingNewLine]", ",", 
+       RowBox[{"{", 
+        RowBox[{"j", ",", "1", ",", "ntrials"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"biasPlot", "=", 
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"Riffle", "[", 
+         RowBox[{"ntrialVec", ",", "estBias"}], "]"}], ",", "2"}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"rmsePlot", "=", 
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"Riffle", "[", 
+         RowBox[{"ntrialVec", ",", "estRmse"}], "]"}], ",", "2"}], "]"}]}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"plotsOn", "\[Equal]", "\"\<on\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Export", "[", 
+         RowBox[{"\"\<estBias_p01_plot.pdf\>\"", ",", "\[IndentingNewLine]", 
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"biasPlot", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotLabel", "\[Rule]", 
+               RowBox[{
+               "\"\<Percentage Bias of TBA Estimate Using Masuyamas Method\\n \
+ntrials = \>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"FortranForm", "[", "ntrials", "]"}], "]"}], "<>", 
+                "\"\<, r = \>\"", "<>", 
+                RowBox[{"ToString", "[", "r", "]"}]}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"FrameLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                  "\"\<Percentage Bias of Estimate\>\"", ",", "\"\<\>\""}], 
+                  "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"\"\<Number of Trials\>\"", ",", "\"\<\>\""}], 
+                  "}"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], 
+             "\[IndentingNewLine]", "}"}]}], "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Export", "[", 
+         RowBox[{
+         "\"\<rmseBias_p01_plot.pdf\>\"", ",", "\[IndentingNewLine]", 
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"rmsePlot", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"Joined", "\[Rule]", "True"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotLabel", "\[Rule]", 
+               RowBox[{
+               "\"\<Percentage RMSE of TBA Estimate Using Masuyamas Method\\n \
+ntrials = \>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"FortranForm", "[", "ntrials", "]"}], "]"}], "<>", 
+                "\"\<, r = \>\"", "<>", 
+                RowBox[{"ToString", "[", "r", "]"}]}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"FrameLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"{", 
+                  RowBox[{
+                  "\"\<Percentage RMSE of Estimate\>\"", ",", "\"\<\>\""}], 
+                  "}"}], ",", 
+                 RowBox[{"{", 
+                  RowBox[{"\"\<Number of Trials\>\"", ",", "\"\<\>\""}], 
+                  "}"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"GridLines", "\[Rule]", "Automatic"}]}], 
+             "\[IndentingNewLine]", "}"}]}], "]"}]}], "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{"estBias", ",", "estRmse", ",", "ntrialVec"}], "}"}], 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.688403091682723*^9, 3.688403119401732*^9}, {
+   3.6884031513413973`*^9, 3.688403219061565*^9}, {3.688403255042485*^9, 
+   3.688403407938805*^9}, {3.688403487304397*^9, 3.688403492128104*^9}, {
+   3.6884035376570177`*^9, 3.688403550132465*^9}, {3.688403699669857*^9, 
+   3.688403732470414*^9}, {3.688403780725634*^9, 3.6884038591801147`*^9}, {
+   3.688403890911396*^9, 3.6884039166042557`*^9}, {3.688404020300474*^9, 
+   3.688404217628036*^9}, {3.6884043202776203`*^9, 3.6884043734666977`*^9}, {
+   3.6884044886494083`*^9, 3.6884044954477167`*^9}, {3.688404585306436*^9, 
+   3.688404659024232*^9}, 3.688404722593486*^9, {3.688404808907365*^9, 
+   3.688404843229144*^9}, {3.6884049090107193`*^9, 3.688404915039023*^9}, {
+   3.6884049833319263`*^9, 3.688405011905026*^9}, {3.688405063988062*^9, 
+   3.688405068545855*^9}, {3.688405169217757*^9, 3.6884052267855787`*^9}, {
+   3.688405276215621*^9, 3.6884052841920757`*^9}, {3.6884053348646193`*^9, 
+   3.688405375285419*^9}, {3.688405406237124*^9, 3.6884054946451483`*^9}, {
+   3.688405576325376*^9, 3.688405725289233*^9}, {3.6884058144102592`*^9, 
+   3.6884058279512863`*^9}, {3.688405868146986*^9, 3.68840601471319*^9}, 
+   3.6884060685401363`*^9, {3.688406751210636*^9, 3.688406754788254*^9}, {
+   3.688406835844887*^9, 3.6884069399412537`*^9}, {3.6884069874885883`*^9, 
+   3.688407045623684*^9}, {3.688407099785532*^9, 3.688407103893566*^9}, {
+   3.6884071635649347`*^9, 3.6884072124663887`*^9}, {3.688407259375412*^9, 
+   3.688407269944066*^9}, {3.689439741609478*^9, 3.689439904953595*^9}, {
+   3.689439939443799*^9, 3.689440083014654*^9}, {3.689440168957823*^9, 
+   3.689440192119025*^9}, {3.689440261360458*^9, 3.689440328329317*^9}, {
+   3.6894403593923903`*^9, 3.6894404890925207`*^9}, {3.6894405516015997`*^9, 
+   3.689440634065504*^9}, {3.689440711199586*^9, 3.6894407138012657`*^9}, {
+   3.689440797500004*^9, 3.6894408114408503`*^9}, {3.6894409627893953`*^9, 
+   3.689440963186792*^9}, {3.6894409943276167`*^9, 3.689441030352007*^9}, {
+   3.689441650562504*^9, 3.6894416985180187`*^9}, {3.689441731037796*^9, 
+   3.689441756944612*^9}, {3.6894418770673122`*^9, 3.6894418802485723`*^9}, {
+   3.689441912336122*^9, 3.6894419162393827`*^9}, {3.689442042665803*^9, 
+   3.689442042836628*^9}, {3.689442080587883*^9, 3.689442085059143*^9}, {
+   3.689442124080467*^9, 3.689442160837514*^9}, {3.689442294750885*^9, 
+   3.689442306870285*^9}, {3.689442447959631*^9, 3.689442464910728*^9}, {
+   3.689442775578494*^9, 3.6894427998107977`*^9}, {3.6894430369624567`*^9, 
+   3.6894430377256327`*^9}, {3.689443076104227*^9, 3.6894430865507603`*^9}, {
+   3.68944346632777*^9, 3.689443593075306*^9}, {3.689444210089178*^9, 
+   3.689444228747737*^9}, {3.689612830720723*^9, 3.68961283217013*^9}, {
+   3.689613278767745*^9, 3.689613327986305*^9}, {3.6896133671058283`*^9, 
+   3.6896134332403812`*^9}, {3.689613465019498*^9, 3.689613477997414*^9}, {
+   3.6896135408737917`*^9, 3.689613556570744*^9}, {3.689614003614415*^9, 
+   3.689614014863449*^9}, {3.689614096020249*^9, 3.689614162542494*^9}, {
+   3.689614219081256*^9, 3.689614247618333*^9}, {3.689614315766827*^9, 
+   3.689614319151679*^9}, {3.68961440491835*^9, 3.689614541480875*^9}, {
+   3.68961462013235*^9, 3.689614689242876*^9}, {3.689615161262745*^9, 
+   3.6896151650405207`*^9}, {3.68961519891468*^9, 3.689615205722228*^9}, {
+   3.689615492517631*^9, 3.689615565491296*^9}, {3.6896156378501663`*^9, 
+   3.6896156877501297`*^9}, {3.689977534095179*^9, 3.689977589254119*^9}, {
+   3.68997764804214*^9, 3.689977710042609*^9}, {3.689977827566958*^9, 
+   3.689977828247312*^9}, {3.689977968381176*^9, 3.689977971299089*^9}, {
+   3.689978013953268*^9, 3.689978039032892*^9}, {3.690327922615596*^9, 
+   3.69032792773948*^9}, {3.6903279643650303`*^9, 3.690328042771656*^9}, {
+   3.690328501985518*^9, 3.690328510225151*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"rmseVerR", "[", 
+   RowBox[{"ntrials_", ",", "tbaMethod_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "eBias", ",", "eRmse", ",", "nVec", ",", "rVec", ",", "eVec", ",", 
+      "rPlot", ",", "title"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "ntrials", ":", " ", 
+      RowBox[{
+      "number", " ", "of", " ", "random", " ", "plots", " ", "to", " ", 
+       "generate", "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"tbaMethod", ":", " ", 
+        RowBox[{
+        "name", " ", "of", " ", "method", " ", "being", " ", "used", " ", 
+         "to", " ", "test", "\[IndentingNewLine]", "OUTPUT"}], ":", 
+        "\[IndentingNewLine]", "\t\t", 
+        RowBox[{
+        "returns", " ", "the", " ", "graph", " ", "for", " ", "rmse", " ", 
+         "across", " ", "the", " ", "10", " ", "radii", " ", "for", " ", 
+         "the", " ", "given", " ", "method"}]}]}]}], "\[IndentingNewLine]", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"rVec", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", "10"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"eVec", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{"0", ",", "10"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"eBias", ",", "eRmse", ",", "nVec"}], "}"}], "=", 
+         RowBox[{"tbaMethod", "[", 
+          RowBox[{
+          "ntrials", ",", "\"\<trees.csv\>\"", ",", "r", ",", "\"\<off\>\""}],
+           "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"rVec", "[", 
+          RowBox[{"[", 
+           RowBox[{"r", "/", "5"}], "]"}], "]"}], "=", "r"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"eVec", "[", 
+          RowBox[{"[", 
+           RowBox[{"r", "/", "5"}], "]"}], "]"}], "=", 
+         RowBox[{"eRmse", "[", 
+          RowBox[{"[", 
+           RowBox[{"-", "1"}], "]"}], "]"}]}], ";"}], "\[IndentingNewLine]", 
+       ",", 
+       RowBox[{"{", 
+        RowBox[{"r", ",", "5", ",", "50", ",", "5"}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"rPlot", "=", 
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"Riffle", "[", 
+         RowBox[{"rVec", ",", "eVec"}], "]"}], ",", "2"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"title", "=", 
+      RowBox[{"ToString", "[", "tbaMethod", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"\"\<plotRad_\>\"", "<>", "title", "<>", "\"\<_plot.pdf\>\""}],
+        ",", "\[IndentingNewLine]", 
+       RowBox[{"ListPlot", "[", 
+        RowBox[{"rPlot", ",", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"Joined", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+           
+           RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotLabel", "\[Rule]", 
+            RowBox[{
+            "\"\<Percentage RMSE of TBA Estimate Using \>\"", "<>", "title", 
+             "<>", "\"\< versus Plot Radius\\n ntrials = \>\"", "<>", 
+             RowBox[{"ToString", "[", 
+              RowBox[{"FortranForm", "[", "ntrials", "]"}], "]"}]}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Frame", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"FrameLabel", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+               "\"\<Percentage RMSE of Estimate\>\"", ",", "\"\<\>\""}], 
+               "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"\"\<Plot Radius\>\"", ",", "\"\<\>\""}], "}"}]}], 
+             "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"GridLines", "\[Rule]", "Automatic"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotRange", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"Automatic", ",", 
+              RowBox[{"{", 
+               RowBox[{"40", ",", "180"}], "}"}]}], "}"}]}]}], 
+          "\[IndentingNewLine]", "}"}]}], "]"}]}], "]"}], ";"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6896153022125473`*^9, 3.689615330818635*^9}, {
+   3.689615854777525*^9, 3.68961592635854*^9}, {3.6896160329130917`*^9, 
+   3.689616223005512*^9}, {3.689616276491088*^9, 3.689616399439135*^9}, {
+   3.689616439276763*^9, 3.689616441756555*^9}, {3.689616519150392*^9, 
+   3.689616552475272*^9}, {3.6896169921457157`*^9, 3.68961702860155*^9}, {
+   3.689977306098194*^9, 3.6899773501202517`*^9}, {3.689977850360642*^9, 
+   3.68997793279497*^9}, {3.689978185479828*^9, 3.6899781897903976`*^9}, {
+   3.689978273382841*^9, 3.68997828026355*^9}, {3.6899785237442703`*^9, 
+   3.689978525125548*^9}, 3.6899790395837393`*^9, {3.68997922045849*^9, 
+   3.6899792206214237`*^9}, {3.689979498134206*^9, 3.689979514298723*^9}, {
+   3.6899796285027122`*^9, 3.6899796314303427`*^9}, {3.689979754193398*^9, 
+   3.6899797556880493`*^9}, {3.689979802892297*^9, 3.689979810170065*^9}, {
+   3.689979878245181*^9, 3.689979882046877*^9}, {3.689980056095903*^9, 
+   3.689980073319145*^9}, {3.6899803071564627`*^9, 3.6899803199307528`*^9}, {
+   3.689980480622395*^9, 3.689980480934177*^9}, {3.690328550933836*^9, 
+   3.690328612093175*^9}, {3.690484609695874*^9, 3.690484609900792*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{0, Automatic}, {Automatic, -23}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 21188, 455, 1542, "Input"],
+Cell[21749, 477, 5606, 121, 505, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

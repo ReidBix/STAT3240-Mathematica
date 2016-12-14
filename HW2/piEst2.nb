@@ -1,0 +1,200 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7107,        191]
+NotebookOptionsPosition[      6848,        177]
+NotebookOutlinePosition[      7208,        193]
+CellTagsIndexPosition[      7165,        190]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"piEst2", "[", "tol_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"an", ",", "bn", ",", "k1", ",", "k2"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"piEst2", 
+       RowBox[{"(", "tol", ")"}]}], ":", " ", 
+      RowBox[{
+      "code", " ", "to", " ", "compute", " ", "two", " ", "estimates", " ", 
+       "of", " ", "Pi", " ", "using", " ", "a", " ", "While", " ", "loop"}]}],
+      " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "tol", ":", " ", 
+      RowBox[{
+      "this", " ", "variable", " ", "is", " ", "the", " ", "error", " ", 
+       "that", " ", "you", " ", "want", " ", "the", " ", "pi", " ", 
+       "estimations", " ", "to", " ", "go", " ", "to", " ", 
+       RowBox[{"(", 
+        RowBox[{"i", ".", "e", ".", " ", "tolerance"}], ")"}], 
+       "\[IndentingNewLine]", "\t", 
+       RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t   ", 
+        RowBox[{
+        "2", " ", "outputs", " ", "for", " ", "2", " ", "different", " ", 
+         "Pi", " ", "estimations", " ", "with", " ", "given", " ", "error", 
+         " ", "of", " ", "tol", " ", "OR", " ", "if", " ", "the", " ", 
+         "estimations", " ", "went", " ", "past", " ", "20", " ", 
+         "iterations"}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"First", " ", "initialize", " ", "variables", " ", "an"}], ",", 
+      " ", "bn", ",", " ", "k1", ",", " ", 
+      RowBox[{"and", " ", "k2", " ", "to", " ", "0"}]}], "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"an", "=", "0"}], ";", 
+     RowBox[{"bn", "=", "0"}], ";", 
+     RowBox[{"k1", "=", "0"}], ";", 
+     RowBox[{"k2", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "First", " ", "while", " ", "loop", " ", "to", " ", "calculate", " ", 
+       "first", " ", "type", " ", "of", " ", "Pi", " ", "estimation", " ", 
+       "based", " ", "off", " ", "of", " ", "tol"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"an", "-", "Pi"}], "]"}], ">", "tol"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"k1", ">", "20"}], ",", 
+          RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"an", "=", 
+         RowBox[{"(", 
+          RowBox[{"an", "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"6", "/", 
+              RowBox[{"Sqrt", "[", "3", "]"}]}], ")"}], 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"-", "1"}], ")"}], "^", "k1"}], ")"}], "/", 
+             RowBox[{"(", 
+              RowBox[{
+               RowBox[{"(", 
+                RowBox[{"3", "^", "k1"}], ")"}], "*", 
+               RowBox[{"(", 
+                RowBox[{
+                 RowBox[{"2", "k1"}], "+", "1"}], ")"}]}], ")"}]}]}]}], 
+          ")"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"k1", "++"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Second", " ", "while", " ", "loop", " ", "to", " ", "calculate", " ", 
+       "second", " ", "type", " ", "of", " ", "Pi", " ", "estimation", " ", 
+       "based", " ", "off", " ", "of", " ", "tol"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"bn", "-", "Pi"}], "]"}], ">", "tol"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"k2", ">", "20"}], ",", 
+          RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"bn", "=", 
+         RowBox[{"bn", "+", 
+          RowBox[{"16", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"-", "1"}], ")"}], "^", "k2"}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"5", "^", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}], "*", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}]}]}], "-", 
+          RowBox[{"4", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"-", "1"}], ")"}], "^", "k2"}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"239", "^", 
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}], "*", 
+              RowBox[{"(", 
+               RowBox[{
+                RowBox[{"2", "k2"}], "+", "1"}], ")"}]}], ")"}]}]}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"k2", "++"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Return", " ", "an", " ", "and", " ", "bn"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"an", ",", "bn"}], "}"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwdzmtIUwEABeAp9oBFs9eaYFF08bGmlc41R2kTyhym2yp7uBkbTKItNoKK
+Siqodm2bI0QUm21yJ8ZIo1BkUa1Z+idzLjYXZJEWTNBa5ahVgrd77o/Dxzm/
+zla9WW1I53A4hUxgvrLMsj05J3c8f8pKDQ20w1KD0wWLPlR1w0ri+CC8aa/z
+w8YdqXHY1jsZgQLlwyi7L36chgmj6TPscd/4BUc8b1jbyPIlSPfo00SM7goh
+AWesZ1gFe8Y0sCv2Twsfv8xPK2B8b7i4EUaC5zbD4VzPNhhYN5MLTY1XSmBz
+slgGefcPlMNnKv8h1hPvVFAleWCF4uVHSZjXG+PqfjN/x0o2QJFoVSmMLsVl
+sJ3iKqBdUMhqlk05oDpT1AIt07Wf4PrvDQmYXDO0YndqTv5jmJcJc7ICakga
+B4/Bt6c1l2DN5dnr0K5bZoWPfE9aIO2Nd8CwlHTB4CynD+7S8gcg9WJfAGYL
+3a9ghk73Gv65qpyABP8UDSdD19KljM1H6L0w2h8qg00RiQburErp4S1+TrDI
+PC+PT9SyCpqSI9AX2pJg+3nvArRNhZIwnOX4C7N/chfh3Xo7DS+QutXFjKPO
+zjwYc7hEsIBvkkD+2RirzfO1Ah6Urt0PV1aPKqB4k9AIq1UNFljHI2ywNePw
+HUh9G++A/vnOLkiYxPfgwpeTFHS2+gJQ4a2sv82oD9do4X9brIEa
+  "]]
+},
+WindowSize->{808, 690},
+WindowMargins->{{319, Automatic}, {Automatic, -880}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 6286, 155, 471, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

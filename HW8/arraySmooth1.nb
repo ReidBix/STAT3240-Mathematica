@@ -1,0 +1,223 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8652,        214]
+NotebookOptionsPosition[      8354,        199]
+NotebookOutlinePosition[      8714,        215]
+CellTagsIndexPosition[      8671,        212]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"peaks", "[", "N_", "]"}], ":=", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"3", "*", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"1", "-", "x"}], ")"}], "^", "2"}], "*", 
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{"(", 
+          RowBox[{"x", "^", "2"}], ")"}]}], "-", 
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{"y", "+", "1"}], ")"}], "^", "2"}]}], "]"}]}], "-", 
+     RowBox[{"10", "*", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"x", "/", "5"}], "-", 
+        RowBox[{"x", "^", "3"}], "-", 
+        RowBox[{"y", "^", "5"}]}], ")"}], "*", 
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{"x", "^", "2"}]}], "-", 
+        RowBox[{"y", "^", "2"}]}], "]"}]}], "-", 
+     RowBox[{
+      RowBox[{"1", "/", "3"}], "*", 
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"-", 
+         RowBox[{
+          RowBox[{"(", 
+           RowBox[{"x", "+", "1"}], ")"}], "^", "2"}]}], "-", 
+        RowBox[{"y", "^", "2"}]}], "]"}]}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"x", ",", 
+      RowBox[{"-", "3"}], ",", "3", ",", 
+      RowBox[{"6", "/", "N"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"y", ",", 
+      RowBox[{"-", "3"}], ",", "3", ",", 
+      RowBox[{"6", "/", "N"}]}], "}"}]}], "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"arraySmooth1", "[", 
+   RowBox[{"arrayIn_", ",", "n_", ",", "plotsOn_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "rows", ",", "cols", ",", "filter", ",", "arrayOut", ",", "arrayEmbed"}],
+      "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "arrayIn", ":", " ", 
+      RowBox[{
+      "the", " ", "given", " ", "matrix", " ", "that", " ", "you", " ", 
+       "want", " ", "to", " ", "smooth", "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"n", ":", " ", 
+        RowBox[{
+        "how", " ", "much", " ", "you", " ", "want", " ", "to", " ", "filter",
+          " ", "by", "\[IndentingNewLine]", "\t", "plotsOn"}], ":", " ", 
+        RowBox[{
+        "determines", " ", "whether", " ", "or", " ", "not", " ", "to", " ", 
+         "plot", "\[IndentingNewLine]", 
+         RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+          RowBox[{
+          "outputs", " ", "a", " ", "filtered", " ", "matrix", " ", "the", 
+           " ", "same", " ", "size", " ", "as", " ", "arrayIn"}]}]}]}]}]}], 
+     "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"Get", " ", "array", " ", "dimensions"}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"rows", ",", " ", "cols"}], "}"}], " ", "=", " ", 
+      RowBox[{"Dimensions", "[", "arrayIn", "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+       "Create", " ", "smoothing", " ", "filter", " ", "of", " ", "dimenion", 
+        " ", "2", "*", "n"}], "+", "1"}], " ", "*)"}], "\[IndentingNewLine]", 
+     
+     RowBox[{"filter", "=", 
+      RowBox[{"ConstantArray", "[", 
+       RowBox[{
+        RowBox[{"1", "/", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"2", "*", "n"}], "+", "1"}], ")"}], "^", "2"}], ")"}]}], 
+        ",", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"2", "*", "n"}], "+", "1"}], ",", 
+          RowBox[{
+           RowBox[{"2", "*", "n"}], "+", "1"}]}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Embed", " ", "arrayIn", " ", "in", " ", "larger", " ", "arrayEmbed", 
+       " ", "to", " ", "account", " ", "for", " ", "filter", " ", "overlap", 
+       " ", "and", " ", "initialize", " ", "boundary", " ", "regions"}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"arrayEmbed", "=", 
+      RowBox[{"ArrayPad", "[", 
+       RowBox[{"arrayIn", ",", "n", ",", "\"\<Reflected\>\""}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Preallocate", " ", "output", " ", "array"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"arrayOut", "=", 
+      RowBox[{"ListConvolve", "[", 
+       RowBox[{"filter", ",", "arrayEmbed"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "conditional", " ", "for", " ", "saving", " ", "surface", " ", "plot"}],
+       " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"plotsOn", "==", "\"\<on\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Export", "[", 
+         RowBox[{"\"\<smoothedArray.pdf\>\"", ",", "\[IndentingNewLine]", 
+          RowBox[{"Show", "[", 
+           RowBox[{"ListPlot3D", "[", 
+            RowBox[{"arrayOut", ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{"PlotLabel", "\[Rule]", 
+               RowBox[{
+               "\"\<Surface Plot of arrayIn Smoothed with a Moving Average \
+Filter \\n of Width n=\>\"", "<>", 
+                RowBox[{"ToString", "[", "n", "]"}]}]}], "}"}]}], "]"}], 
+           "]"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"N", "[", "arrayOut", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6865852520728416`*^9, 3.686585287688554*^9}, {
+   3.686585321465654*^9, 3.686585426006722*^9}, {3.686585458411995*^9, 
+   3.6865854850308867`*^9}, {3.686585516991248*^9, 3.686585545437244*^9}, {
+   3.686585699893964*^9, 3.686585766719015*^9}, {3.6865857973282547`*^9, 
+   3.6865857994855347`*^9}, {3.686585910377619*^9, 3.686585941366864*^9}, {
+   3.686586089739477*^9, 3.686586095163406*^9}, {3.686586182599641*^9, 
+   3.686586280876369*^9}, {3.6865863255840187`*^9, 3.686586364241737*^9}, {
+   3.686586401142619*^9, 3.6865864023955383`*^9}, {3.6865865528010597`*^9, 
+   3.6865865882451572`*^9}, {3.686587353208384*^9, 3.686587410949429*^9}, {
+   3.686587462786026*^9, 3.686587465202998*^9}, {3.686587570716956*^9, 
+   3.68658763274032*^9}, {3.6865876888335133`*^9, 3.686587725836041*^9}, {
+   3.686587830970595*^9, 3.686587890970155*^9}, {3.686587940741254*^9, 
+   3.686588006961657*^9}, {3.686588097639091*^9, 3.686588111497353*^9}, {
+   3.686588146566964*^9, 3.686588331342207*^9}, {3.686588376046256*^9, 
+   3.68658838245581*^9}, {3.686588424481564*^9, 3.686588469757351*^9}, {
+   3.686588513829894*^9, 3.6865887734611797`*^9}, {3.686588813152226*^9, 
+   3.68658883986803*^9}, {3.686588961514244*^9, 3.686589001986059*^9}, {
+   3.6865890490255632`*^9, 3.6865890547892838`*^9}, {3.686589164127708*^9, 
+   3.686589170270318*^9}, {3.68658921656635*^9, 3.686589224799946*^9}, {
+   3.686589269876397*^9, 3.6865893064876432`*^9}, {3.6865893526866417`*^9, 
+   3.686589447674162*^9}, {3.686589580542482*^9, 3.6865895961899242`*^9}, {
+   3.68658965838587*^9, 3.686589676195195*^9}, {3.686589744378489*^9, 
+   3.6865897489922647`*^9}, 3.686589844370606*^9, {3.687016969445291*^9, 
+   3.687016992858922*^9}, {3.68701718848493*^9, 3.6870171924952593`*^9}, {
+   3.687017462679318*^9, 3.687017509392542*^9}, {3.687017614251745*^9, 
+   3.687017621201182*^9}, {3.6870189282628717`*^9, 3.687018928843289*^9}, {
+   3.6870192564611473`*^9, 3.687019258245154*^9}, {3.687019387069037*^9, 
+   3.6870194080312767`*^9}, {3.6870195028308153`*^9, 
+   3.6870195152574863`*^9}, {3.687019591563221*^9, 3.687019602796227*^9}, {
+   3.6870198011142597`*^9, 3.6870198094385347`*^9}, {3.6870200326964283`*^9, 
+   3.687020054541176*^9}, {3.6870201158290243`*^9, 3.687020119632803*^9}, 
+   3.6870202688848658`*^9}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1376, 45, 28, "Input"],
+Cell[1937, 67, 6413, 130, 488, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

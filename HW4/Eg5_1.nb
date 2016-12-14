@@ -1,0 +1,711 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     20653,        701]
+NotebookOptionsPosition[     19700,        667]
+NotebookOutlinePosition[     20053,        683]
+CellTagsIndexPosition[     20010,        680]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+   "Script", " ", "Eg5_", " ", "1", " ", "Examines", " ", "the", " ", 
+    "relative", " ", "error", " ", "in", " ", "MySqrt"}], "*)"}], "\n", 
+  RowBox[{
+   RowBox[{"Print", "[", "\"\<  a       Relative Error\>\"", "]"}], "\n", 
+   RowBox[{"Print", "[", "\"\<          in MySqrt[a]\>\"", "]"}], "\n", 
+   RowBox[{"Print", "[", "\"\<--------------------------\>\"", "]"}], "\n", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"a", " ", "=", " ", 
+       RowBox[{"10", "^", "i"}]}], ";", "\n", " ", 
+      RowBox[{"y", " ", "=", " ", 
+       RowBox[{"Sqrt", "[", "a", "]"}]}], ";", "\n", " ", 
+      RowBox[{"z", " ", "=", " ", 
+       RowBox[{"MySqrt", "[", "a", "]"}]}], ";", "\n", " ", 
+      RowBox[{"relErr", " ", "=", " ", 
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"y", " ", "-", " ", "z"}], "]"}], "/", "y"}]}], ";", "\n", 
+      " ", 
+      RowBox[{"Print", "[", 
+       RowBox[{
+        RowBox[{"PaddedForm", "[", 
+         RowBox[{
+          RowBox[{"ScientificForm", "[", 
+           RowBox[{"N", "[", "a", "]"}], "]"}], ",", " ", "10"}], "]"}], ",", 
+        " ", "\"\<       \>\"", ",", " ", "\n", "   ", 
+        RowBox[{"ScientificForm", "[", "relErr", "]"}]}], "]"}], ";"}], ",", 
+     "\n", " ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", 
+       RowBox[{"-", "6"}], ",", " ", "6"}], "}"}]}], "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6833021743177433`*^9, 3.683302178411154*^9}, {
+  3.683302250470401*^9, 3.6833022534363623`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"  a       Relative Error\"\>"], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183239902*^9}}],
+
+Cell[BoxData["\<\"          in MySqrt[a]\"\>"], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183246819*^9}}],
+
+Cell[BoxData["\<\"--------------------------\"\>"], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183254133*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"-6\"\>"]}],
+      1.*^-6,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"1.\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"3\"\>"]}],
+       1000.,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"1.\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"-3\"\>"]}],
+        0.001,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"-6\"\>"]}],
+          1.*^-6,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[1.*^-6], 10], "       ", 
+   ScientificForm[1000. Abs[0.001 - 1. $CellContext`MySqrt[1.*^-6]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.6833021832569437`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"-5\"\>"]}],
+      0.00001,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"2\"\>"]}],
+       316.22776601683796`,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"-3\"\>"]}],
+        0.0031622776601683794`,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"-5\"\>"]}],
+          0.00001,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[0.00001], 10], "       ", 
+   ScientificForm[
+   316.22776601683796` 
+    Abs[0.0031622776601683794` - 1. $CellContext`MySqrt[0.00001]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183260069*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"-4\"\>"]}],
+      0.0001,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"1.\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"2\"\>"]}],
+       100.,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"1.\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"-2\"\>"]}],
+        0.01,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"-4\"\>"]}],
+          0.0001,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[0.0001], 10], "       ", 
+   ScientificForm[100. Abs[0.01 - 1. $CellContext`MySqrt[0.0001]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.6833021832632017`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"-3\"\>"]}],
+      0.001,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"1\"\>"]}],
+       31.622776601683796`,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"-2\"\>"]}],
+        0.0316227766016838,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"-3\"\>"]}],
+          0.001,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[0.001], 10], "       ", 
+   ScientificForm[
+   31.622776601683796` 
+    Abs[0.0316227766016838 - 1. $CellContext`MySqrt[0.001]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183266313*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"-2\"\>"]}],
+      0.01,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"1.\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"1\"\>"]}],
+       10.,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"1.\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"-1\"\>"]}],
+        0.1,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"-2\"\>"]}],
+          0.01,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[0.01], 10], "       ", 
+   ScientificForm[10. Abs[0.1 - 1. $CellContext`MySqrt[0.01]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183269376*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"-1\"\>"]}],
+      0.1,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     InterpretationBox["\<\"3.16228\"\>",
+      3.1622776601683795`,
+      AutoDelete->True], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"-1\"\>"]}],
+        0.31622776601683794`,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"-1\"\>"]}],
+          0.1,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[0.1], 10], "       ", 
+   ScientificForm[
+   3.1622776601683795` 
+    Abs[0.31622776601683794` - 1. $CellContext`MySqrt[0.1]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183272401*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox["\<\"1.\"\>",
+      1.,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{"Abs", "[", 
+     RowBox[{
+      InterpretationBox["\<\"1.\"\>",
+       1.,
+       AutoDelete->True], "-", 
+      RowBox[{
+       InterpretationBox["\<\"1.\"\>",
+        1.,
+        AutoDelete->True], " ", 
+       RowBox[{"MySqrt", "[", 
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], "]"}]}]}], "]"}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[1.], 10], "       ", 
+   ScientificForm[
+    Abs[1. - 1. $CellContext`MySqrt[1.]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183275318*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"1\"\>"]}],
+      10.,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"-1\"\>"]}],
+       0.31622776601683794`,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox["\<\"3.16228\"\>",
+        3.1622776601683795`,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"1\"\>"]}],
+          10.,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[10.], 10], "       ", 
+   ScientificForm[
+   0.31622776601683794` 
+    Abs[3.1622776601683795` - 1. $CellContext`MySqrt[10.]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183278225*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"2\"\>"]}],
+      100.,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"1.\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"-1\"\>"]}],
+       0.1,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"1.\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"1\"\>"]}],
+        10.,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"2\"\>"]}],
+          100.,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[100.], 10], "       ", 
+   ScientificForm[0.1 Abs[10. - 1. $CellContext`MySqrt[100.]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183281145*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"3\"\>"]}],
+      1000.,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"-2\"\>"]}],
+       0.0316227766016838,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"1\"\>"]}],
+        31.622776601683796`,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"3\"\>"]}],
+          1000.,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[1000.], 10], "       ", 
+   ScientificForm[
+   0.0316227766016838 
+    Abs[31.622776601683796` - 1. $CellContext`MySqrt[1000.]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183284197*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"4\"\>"]}],
+      10000.,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"1.\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"-2\"\>"]}],
+       0.01,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"1.\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"2\"\>"]}],
+        100.,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"4\"\>"]}],
+          10000.,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[10000.], 10], "       ", 
+   ScientificForm[0.01 Abs[100. - 1. $CellContext`MySqrt[10000.]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183287191*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"5\"\>"]}],
+      100000.,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"-3\"\>"]}],
+       0.0031622776601683794`,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"3.16228\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"2\"\>"]}],
+        316.22776601683796`,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"5\"\>"]}],
+          100000.,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[100000.], 10], "       ", 
+   ScientificForm[
+   0.0031622776601683794` 
+    Abs[316.22776601683796` - 1. $CellContext`MySqrt[100000.]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.683302183290119*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{
+   TagBox[
+    TagBox[
+     InterpretationBox[
+      RowBox[{"\<\"1.\"\>", "\[Times]", 
+       SuperscriptBox["10", "\<\"6\"\>"]}],
+      1.*^6,
+      AutoDelete->True],
+     ScientificForm],
+    PaddedForm[#, 10]& ], "\[InvisibleSpace]", "\<\"       \"\>", 
+   "\[InvisibleSpace]", 
+   TagBox[
+    RowBox[{
+     RowBox[{"(", 
+      InterpretationBox[
+       RowBox[{"\<\"1.\"\>", "\[Times]", 
+        SuperscriptBox["10", "\<\"-3\"\>"]}],
+       0.001,
+       AutoDelete->True], ")"}], " ", 
+     RowBox[{"Abs", "[", 
+      RowBox[{
+       InterpretationBox[
+        RowBox[{"\<\"1.\"\>", "\[Times]", 
+         SuperscriptBox["10", "\<\"3\"\>"]}],
+        1000.,
+        AutoDelete->True], "-", 
+       RowBox[{
+        InterpretationBox["\<\"1.\"\>",
+         1.,
+         AutoDelete->True], " ", 
+        RowBox[{"MySqrt", "[", 
+         InterpretationBox[
+          RowBox[{"\<\"1.\"\>", "\[Times]", 
+           SuperscriptBox["10", "\<\"6\"\>"]}],
+          1.*^6,
+          AutoDelete->True], "]"}]}]}], "]"}]}],
+    ScientificForm]}],
+  SequenceForm[
+   PaddedForm[
+    ScientificForm[1.*^6], 10], "       ", 
+   ScientificForm[0.001 Abs[1000. - 1. $CellContext`MySqrt[1.*^6]]]],
+  Editable->False]], "Print",
+ CellChangeTimes->{{3.6833021580465527`*^9, 3.6833021832930813`*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{808, 714},
+WindowMargins->{{Automatic, 91}, {Automatic, 0}},
+FrontEndVersion->"10.2 for Mac OS X x86 (32-bit, 64-bit Kernel) (July 29, \
+2015)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 1546, 37, 199, "Input"],
+Cell[CellGroupData[{
+Cell[2151, 63, 126, 1, 21, "Print"],
+Cell[2280, 66, 124, 1, 22, "Print"],
+Cell[2407, 69, 128, 1, 21, "Print"],
+Cell[2538, 72, 1337, 44, 26, "Print"],
+Cell[3878, 118, 1420, 46, 26, "Print"],
+Cell[5301, 166, 1333, 44, 26, "Print"],
+Cell[6637, 212, 1404, 46, 26, "Print"],
+Cell[8044, 260, 1319, 44, 26, "Print"],
+Cell[9366, 306, 1297, 43, 26, "Print"],
+Cell[10666, 351, 869, 32, 22, "Print"],
+Cell[11538, 385, 1322, 44, 26, "Print"],
+Cell[12863, 431, 1317, 44, 26, "Print"],
+Cell[14183, 477, 1402, 46, 26, "Print"],
+Cell[15588, 525, 1329, 44, 26, "Print"],
+Cell[16920, 571, 1418, 46, 26, "Print"],
+Cell[18341, 619, 1331, 44, 26, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

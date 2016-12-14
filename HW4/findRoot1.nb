@@ -1,0 +1,274 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     11074,        265]
+NotebookOptionsPosition[     10744,        249]
+NotebookOutlinePosition[     11099,        265]
+CellTagsIndexPosition[     11056,        262]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Predefined", " ", "function", " ", "for", " ", "testing"}], " ", 
+   "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f1", "[", "x_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"3", 
+      RowBox[{"x", "^", "4"}]}], "-", 
+     RowBox[{"5", 
+      RowBox[{"x", "^", "3"}]}], "-", 
+     RowBox[{"12", 
+      RowBox[{"x", "^", "2"}]}]}]}], ";"}]}]], "Input",
+ CellChangeTimes->{{3.683930283803537*^9, 3.6839302861280813`*^9}, {
+   3.683933652770946*^9, 3.6839336812710953`*^9}, 3.6839961869906893`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"Predefined", " ", "derivative", " ", "for", " ", "testing"}], " ",
+    "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"f1Deriv", "[", "x_", "]"}], ":=", 
+    RowBox[{
+     RowBox[{"12", 
+      RowBox[{"x", "^", "3"}]}], "-", 
+     RowBox[{"15", 
+      RowBox[{"x", "^", "2"}]}], "-", 
+     RowBox[{"24", "x"}]}]}], ";"}]}]], "Input",
+ CellChangeTimes->{
+  3.683930293613284*^9, {3.683933666597005*^9, 3.683933677942334*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"findRoot1", "[", 
+   RowBox[{"f_", ",", "fDeriv_", ",", "x0_", ",", "tol_", ",", "plotsOn_"}], 
+   "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"xn1", ",", "xn", ",", "n", ",", "xy", ",", "pts"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"findRoot1", 
+        RowBox[{"(", 
+         RowBox[{"f", ",", "fDeriv", ",", "x0", ",", "tol", ",", "plotsOn"}], 
+         ")"}]}], ":", " ", 
+       RowBox[{
+       "calculate", " ", "the", " ", "root", " ", "of", " ", "the", " ", 
+        "function", " ", "closest", " ", "to", " ", "the", " ", "predicted", 
+        " ", "value", " ", "x0"}]}], ",", " ", 
+      RowBox[{"using", " ", "Newton", " ", "Method"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "f", ":", " ", 
+      RowBox[{
+      "function", " ", "to", " ", "find", " ", "root", " ", "of", 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"fDeriv", ":", " ", 
+        RowBox[{
+        "derivative", " ", "of", " ", "function", " ", "to", " ", "find", " ",
+          "root", " ", "of", "\[IndentingNewLine]", "\t", "x0"}], ":", " ", 
+        RowBox[{
+        "initial", " ", "estimate", " ", "for", " ", "the", " ", "root", 
+         "\[IndentingNewLine]", "\t", 
+         RowBox[{"tol", ":", " ", 
+          RowBox[{
+          "tolerance", " ", "value", " ", "of", " ", "the", " ", "Newton", 
+           " ", "Method", "\[IndentingNewLine]", "\t", "plotsOn"}], ":", " ", 
+          
+          RowBox[{
+          "plots", " ", "the", " ", "graph", " ", "if", " ", "plots", " ", 
+           "is", " ", "\"\<on\>\"", "\[IndentingNewLine]", 
+           RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+            RowBox[{
+            "returns", " ", "the", " ", "approximated", " ", "root", " ", 
+             "of", " ", "the", " ", "function", " ", "closest", " ", "to", 
+             " ", "the", " ", "initial", " ", "estimate"}]}]}]}]}]}]}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"Initialize", " ", "x1"}], ",", " ", "n", ",", " ", 
+      RowBox[{"and", " ", "prepare", " ", "for", " ", "xn2"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"xn", "=", 
+      RowBox[{"x0", "-", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"f", "[", "x0", "]"}], "/", 
+         RowBox[{"fDeriv", "[", "x0", "]"}]}], ")"}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"n", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xn1", "=", "xn"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Loop", " ", "through", " ", "a", " ", "while", " ", "until", " ", 
+       "the", " ", 
+       RowBox[{"f", "[", 
+        RowBox[{"x_n", "+", "1"}], "]"}], " ", "is", " ", "less", " ", "than",
+        " ", "tolerance"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Abs", "[", 
+         RowBox[{"f", "[", "xn1", "]"}], "]"}], "\[GreaterEqual]", "tol"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"n", ">", 
+           RowBox[{"10", "^", "5"}]}], ",", 
+          RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"xn1", "=", 
+         RowBox[{"xn", "-", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"f", "[", "xn", "]"}], "/", 
+            RowBox[{"fDeriv", "[", "xn", "]"}]}], ")"}]}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"xn", "=", "xn1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"n", "++"}], ";"}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Plots", " ", "the", " ", "graph", " ", "of", " ", "the", " ", "line", 
+       " ", "plot", " ", "and", " ", "the", " ", "list", " ", "plot"}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"plotsOn", "==", "\"\<on\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"xy", "=", 
+         RowBox[{"Table", "[", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"x", ",", 
+             RowBox[{"f", "[", "x", "]"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"x", ",", 
+             RowBox[{"-", "2"}], ",", "3.25", ",", ".1"}], "}"}]}], "]"}]}], 
+        ";", "\[IndentingNewLine]", 
+        RowBox[{"pts", "=", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{"{", 
+             RowBox[{"x0", ",", 
+              RowBox[{"f", "[", "x0", "]"}]}], "}"}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{"{", 
+             RowBox[{"xn1", ",", "0"}], "}"}], "}"}]}], "}"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"\"\<findRoot1_\>\"", "<>", 
+           RowBox[{"ToString", "[", "x0", "]"}], "<>", "\"\<.pdf\>\""}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Show", "[", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"ListLinePlot", "[", 
+             RowBox[{"xy", ",", "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"PlotLabel", "\[Rule]", 
+                 RowBox[{
+                 "\"\<Root of Polynomial f(x) Using Newton Method for \
+tol=\>\"", "<>", 
+                  RowBox[{"ToString", "[", 
+                   RowBox[{"FortranForm", "[", 
+                    RowBox[{"N", "[", "tol", "]"}], "]"}], "]"}]}]}], ",", 
+                "\[IndentingNewLine]", 
+                RowBox[{"AxesLabel", "\[Rule]", 
+                 RowBox[{"{", 
+                  RowBox[{"\"\<x\>\"", ",", "\"\<f(x)\>\""}], "}"}]}]}], 
+               "}"}]}], "]"}], ",", "\[IndentingNewLine]", 
+            RowBox[{"ListPlot", "[", 
+             RowBox[{"pts", ",", "\[IndentingNewLine]", 
+              RowBox[{"{", 
+               RowBox[{"PlotLegends", "\[Rule]", 
+                RowBox[{"{", 
+                 RowBox[{"\"\<f(x0)\>\"", ",", "\"\<f(x)=0\>\""}], "}"}]}], 
+               "}"}]}], "]"}]}], "\[IndentingNewLine]", "]"}]}], 
+         "\[IndentingNewLine]", "]"}], ";"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"return", " ", "the", " ", "root"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"N", "[", "xn1", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.683925520223014*^9, 3.683925559894692*^9}, {
+   3.683927944800538*^9, 3.683928012558991*^9}, {3.6839280528256493`*^9, 
+   3.683928173030498*^9}, {3.6839282645510063`*^9, 3.683928274052759*^9}, {
+   3.6839283174432697`*^9, 3.683928317853994*^9}, {3.6839283560977077`*^9, 
+   3.683928399582155*^9}, 3.6839285510164347`*^9, {3.683928612185893*^9, 
+   3.6839286317428493`*^9}, {3.683928910395306*^9, 3.683928925141015*^9}, {
+   3.6839289559165382`*^9, 3.6839290491704483`*^9}, {3.683929085438135*^9, 
+   3.683929174563328*^9}, {3.683929297342009*^9, 3.683929316306244*^9}, {
+   3.6839293745147467`*^9, 3.683929406981786*^9}, {3.683929561691894*^9, 
+   3.6839295920983477`*^9}, {3.683929631110558*^9, 3.683929712709671*^9}, {
+   3.6839297617124166`*^9, 3.683929842415832*^9}, {3.683929894123354*^9, 
+   3.683929926618866*^9}, {3.683930024598566*^9, 3.683930068150565*^9}, {
+   3.6839302500554047`*^9, 3.683930274395591*^9}, {3.6839303378061733`*^9, 
+   3.683930434753615*^9}, {3.683930470960864*^9, 3.68393054195891*^9}, {
+   3.683930609213674*^9, 3.683930665590843*^9}, {3.683930708695368*^9, 
+   3.683930773113276*^9}, {3.683930818122892*^9, 3.6839308705399523`*^9}, {
+   3.683930929630571*^9, 3.683931048261601*^9}, {3.683931096389535*^9, 
+   3.6839311727676363`*^9}, {3.68393120907052*^9, 3.6839312527105103`*^9}, {
+   3.683931286878187*^9, 3.683931696767077*^9}, {3.683931752947804*^9, 
+   3.683931758756839*^9}, {3.683931813996269*^9, 3.6839318875215*^9}, {
+   3.6839319452168303`*^9, 3.683931955545705*^9}, {3.68393199517533*^9, 
+   3.683932016910068*^9}, {3.6839320616507673`*^9, 3.68393209376999*^9}, {
+   3.6839321709823837`*^9, 3.683932171320301*^9}, {3.6839322153551493`*^9, 
+   3.6839322504134274`*^9}, {3.68393238725357*^9, 3.6839324284770603`*^9}, {
+   3.683932468795155*^9, 3.6839325104478273`*^9}, {3.683932578505224*^9, 
+   3.683932578712509*^9}, {3.683932651722571*^9, 3.6839326575738363`*^9}, {
+   3.683932786409121*^9, 3.683932804514448*^9}, {3.683932848324292*^9, 
+   3.683932955763979*^9}, {3.683933001700124*^9, 3.683933031685946*^9}, {
+   3.683933344768812*^9, 3.683933362428739*^9}, {3.6839334024983597`*^9, 
+   3.6839334409534693`*^9}, {3.683933483480694*^9, 3.683933485221065*^9}, {
+   3.683933539379114*^9, 3.68393354651621*^9}, {3.683933716655654*^9, 
+   3.683934013320628*^9}, {3.683995767622122*^9, 3.6839958202653427`*^9}, {
+   3.683995861638624*^9, 3.683995861773617*^9}}]
+},
+WindowSize->{808, 693},
+WindowMargins->{{4, Automatic}, {Automatic, 4}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 573, 16, 80, "Input"],
+Cell[1134, 38, 502, 15, 46, "Input"],
+Cell[1639, 55, 9101, 192, 760, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

@@ -1,0 +1,240 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      9174,        231]
+NotebookOptionsPosition[      8915,        217]
+NotebookOutlinePosition[      9275,        233]
+CellTagsIndexPosition[      9232,        230]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ellipseFit", "[", 
+   RowBox[{"param0_", ",", "xyData_", ",", "method_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "res", ",", "aFinal", ",", "bFinal", ",", "thetaFinal", ",", "minimum", 
+      ",", "time", ",", "name"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+     "INPUT", ":", "\[IndentingNewLine]", "\t\t", "param0", ":", " ", 
+      RowBox[{
+      "the", " ", "parameters", " ", "for", " ", "the", " ", "initial", " ", 
+       "ellipse", " ", "that", " ", "you", " ", "want", " ", "to", " ", "use",
+        "\[IndentingNewLine]", "\t", 
+       RowBox[{"xyData", ":", " ", 
+        RowBox[{
+        "the", " ", "list", " ", "of", " ", "points", " ", "of", " ", "the", 
+         " ", "initial", " ", "ellipse", " ", "to", " ", "use", 
+         "\[IndentingNewLine]", "\t", "method"}], ":", " ", 
+        RowBox[{
+        "method", " ", "used", " ", "to", " ", "fit", " ", "the", " ", 
+         "ellipse", " ", "around", " ", "the", " ", "noisy", " ", "data", 
+         "\[IndentingNewLine]", 
+         RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+          RowBox[{
+          "returns", " ", "a", " ", "fit", " ", "ellipse", " ", "parameters", 
+           " ", "with", " ", "the", " ", "given", " ", "lowest", " ", "error",
+            " ", "with", " ", "those", " ", "parameters"}]}]}]}]}]}], 
+     "\[IndentingNewLine]", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{"method", " ", "=", " ", 
+      RowBox[{
+       RowBox[{
+       "\"\<search\>\"", "\[IndentingNewLine]", "use", " ", "Nelder"}], "-", 
+       RowBox[{"Mead", " ", "algorithm"}]}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"method", "\[Equal]", "\"\<search\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"time", ",", "res"}], "}"}], "=", 
+         RowBox[{"Timing", "[", 
+          RowBox[{"NMinimize", "[", 
+           RowBox[{
+            RowBox[{"ellipseError", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"a", ",", "b", ",", "theta"}], "}"}], ",", "xyData"}], 
+             "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"a", ",", "b", ",", "theta"}], "}"}], ",", 
+            RowBox[{"Method", "\[Rule]", "\"\<NelderMead\>\""}]}], "]"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"name", "=", "\"\<NelderMead\>\""}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"method", " ", "=", " ", 
+       RowBox[{
+        RowBox[{
+        "\"\<gradient\>\"", "\[IndentingNewLine]", "use", " ", "gradient"}], 
+        "-", 
+        RowBox[{"based", " ", "algorithm"}]}]}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"method", " ", "\[Equal]", "\"\<gradient\>\""}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"time", ",", "res"}], "}"}], "=", 
+         RowBox[{"Timing", "[", 
+          RowBox[{"FindMinimum", "[", 
+           RowBox[{
+            RowBox[{"ellipseError", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"a", ",", "b", ",", "theta"}], "}"}], ",", "xyData"}], 
+             "]"}], ",", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"a", ",", 
+                RowBox[{"param0", "[", 
+                 RowBox[{"[", "1", "]"}], "]"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"b", ",", 
+                RowBox[{"param0", "[", 
+                 RowBox[{"[", "2", "]"}], "]"}]}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"theta", ",", 
+                RowBox[{"param0", "[", 
+                 RowBox[{"[", "3", "]"}], "]"}]}], "}"}]}], "}"}]}], "]"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"name", "=", "\"\<Quasi-Newton\>\""}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "minimize", " ", "error", " ", "of", " ", "sum", " ", "of", " ", 
+       "squares", " ", "using", " ", "the", " ", "algorithm", " ", "defined", 
+       " ", "in", " ", "method"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"aFinal", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"res", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "[", 
+        RowBox[{"[", "1", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"bFinal", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"res", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"thetaFinal", "=", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"res", "[", 
+         RowBox[{"[", "2", "]"}], "]"}], "[", 
+        RowBox[{"[", "3", "]"}], "]"}], "[", 
+       RowBox[{"[", "2", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"minimum", "=", 
+      RowBox[{"res", "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Export", "[", 
+      RowBox[{
+       RowBox[{"\"\<ellipseFit_\>\"", "<>", "method", "<>", "\"\<.pdf\>\""}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"ListPlot", "[", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"makeData", "[", 
+            RowBox[{"param0", ",", "100", ",", "0"}], "]"}], ",", 
+           RowBox[{"makeData", "[", 
+            RowBox[{
+             RowBox[{"{", 
+              RowBox[{"aFinal", ",", "bFinal", ",", "thetaFinal"}], "}"}], 
+             ",", "100", ",", "0"}], "]"}], ",", "xyData"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"PlotRange", "\[Rule]", "All"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotMarkers", "\[Rule]", "Automatic"}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotLegends", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{
+             "\"\<Initial Eclipse\>\"", ",", "\"\<Final Eclipse\>\"", ",", 
+              "\"\<Noisy Data\>\""}], "}"}]}], ",", "\[IndentingNewLine]", 
+           RowBox[{"AxesLabel", "\[Rule]", 
+            RowBox[{"{", 
+             RowBox[{"\"\<X Data\>\"", ",", "\"\<Y Data\>\""}], "}"}]}], ",", 
+           "\[IndentingNewLine]", 
+           RowBox[{"PlotLabel", "\[Rule]", 
+            RowBox[{
+            "\"\<Ellipse Fitted to Noisy Data \\n Optimization Method: \>\"", 
+             "<>", 
+             RowBox[{"ToString", "[", "name", "]"}], "<>", 
+             "\"\< \\n Initial Error=\>\"", "<>", 
+             RowBox[{"ToString", "[", 
+              RowBox[{"ellipseError", "[", 
+               RowBox[{"param0", ",", "xyData"}], "]"}], "]"}], "<>", " ", 
+             "\"\<  Final Error=\>\"", "<>", 
+             RowBox[{"ToString", "[", "minimum", "]"}], "<>", 
+             "\"\<\\n Timing in Seconds=\>\"", "<>", 
+             RowBox[{"ToString", "[", "time", "]"}]}]}]}], 
+          "\[IndentingNewLine]", "}"}]}], "]"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{"aFinal", ",", "bFinal", ",", "thetaFinal", ",", "minimum"}], 
+       "}"}], "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwdzl1IUwEABeCxB8NcQ+eicbmocxP3MLMsZIwgp1PBNZEpSttyoI2Zzq6Y
+0TSNOcIIdWmWSJChTS0xHzYGF2kT+jHwoRZYLYogN4N5rTkjaORP99yHw8d5
+ORxpE2Ww8nk8npINFL23vd3sZjSVBdQaDEcjYdh/LycC53844tAbIxLwxg59
+ADvsHj7DaurNSIVLSTINxjc8Yph+dkMCJZZkNuxlnDK48u5pIQwckGpoJh/W
+wAp5bi3XH8ub4fL3Kissuu9rhWrXsStQnC7rhothTx98Ma24Bb1x3gQcpbM8
+MIXWzUBDF/WB+5UIfoT5yZMJqDIWczbdMYm3WOv8EQncDn0m4fqlfDms2tMr
+Yc2clTNkuKCGLUXnz8CvxN8S2FkW08COPKYcHl7T6+CXU1n1cDMwyvmzc9UG
+HVFtC+zqk/XAy0Mr16GL+OSEbneJC25ZMm/D3YthznOzY274i5oZgQTtnICr
+Cu00FOljc9xOTqMXCtpKHwV6GM0AbVqAi0KBDz7Ztz6Htaa8V3DwJf8bPNQ+
+HoXBst+cN22hbTjvO/oHEqdV/6Bot10YZN259kwE94wFJByYepALh6mp47DB
+fkIHtRa7Aa5LzWYoTxtuhq6lyVa4UBy5CpUqxWvY1p/yBgr1fsEyq3FMegQ6
+KvwjsFxdfRf+B7Wmh90=
+  "]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 8353, 195, 658, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

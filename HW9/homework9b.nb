@@ -1,0 +1,146 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      5459,        137]
+NotebookOptionsPosition[      5121,        121]
+NotebookOutlinePosition[      5481,        137]
+CellTagsIndexPosition[      5438,        134]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"makeLowerCase", "[", "list_", "]"}], ":=", 
+  RowBox[{"StringReplace", "[", 
+   RowBox[{"list", ",", 
+    RowBox[{
+     RowBox[{"WordBoundary", "~~", "x_"}], "\[RuleDelayed]", 
+     RowBox[{"ToLowerCase", "[", "x", "]"}]}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+   RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "list", ":", " ", 
+    RowBox[{
+    "list", " ", "of", " ", "strings", " ", "to", " ", "make", " ", "the", 
+     " ", "first", " ", "character", " ", "lower", " ", "case", " ", "for", 
+     "\[IndentingNewLine]", 
+     RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+      RowBox[{
+      "returns", " ", "a", " ", "the", " ", "same", " ", "list", " ", "of", 
+       " ", "strings", " ", "where", " ", "all", " ", "of", " ", "the", " ", 
+       "first", " ", "characters", " ", "were", " ", "made", " ", 
+       "lowercase"}]}]}]}], "\[IndentingNewLine]", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.687193781615467*^9, 3.6871938352077627`*^9}, {
+  3.687193910593236*^9, 3.687194161203204*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"runLength", "[", "str_", "]"}], ":=", 
+  RowBox[{"\"\<\>\"", "<>", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"ToString", "[", 
+        RowBox[{"First", "[", "#", "]"}], "]"}], "<>", 
+       RowBox[{"ToString", "[", 
+        RowBox[{"Length", "[", "#", "]"}], "]"}]}], "&"}], "/@", 
+     RowBox[{"Split", "[", 
+      RowBox[{"Characters", "[", "str", "]"}], "]"}]}], 
+    ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+   RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "str", ":", " ", 
+    RowBox[{
+    "string", " ", "to", " ", "get", " ", "run", " ", "length", " ", "checks",
+      " ", "to", " ", "print", " ", "out", " ", "each", " ", "string", 
+     "\[IndentingNewLine]", 
+     RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+      RowBox[{
+      "returns", " ", "a", " ", "string", " ", "which", " ", "represents", 
+       " ", "the", " ", "run", " ", "length", " ", "of", " ", "each", " ", 
+       "of", " ", "the", " ", "characters", " ", "in", " ", "order"}]}]}]}], 
+   "\[IndentingNewLine]", "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.687194171332212*^9, 3.6871942018642197`*^9}, {
+   3.687194512790019*^9, 3.687194556713567*^9}, 3.687194597225688*^9, {
+   3.68719463626882*^9, 3.687194680723872*^9}, 3.6876253446515703`*^9, {
+   3.687625393011511*^9, 3.687625469873646*^9}, {3.687625561005455*^9, 
+   3.687625575217072*^9}, {3.6876256163650618`*^9, 3.6876256190053167`*^9}, {
+   3.68762569279813*^9, 3.6876257150862017`*^9}, {3.687625830402609*^9, 
+   3.687625861047675*^9}, {3.687625891587823*^9, 3.687625974684166*^9}, {
+   3.687626067980955*^9, 3.6876260681908417`*^9}, {3.6876265625370092`*^9, 
+   3.687626564190859*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"RandomString", "[", 
+    RowBox[{"str_", ",", "len_", ",", "weights_"}], "]"}], ":=", 
+   RowBox[{"\"\<\>\"", "<>", 
+    RowBox[{"RandomChoice", "[", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"weights", "[", 
+        RowBox[{"[", "2", "]"}], "]"}], "\[Rule]", " ", "str"}], ",", "len"}],
+      "]"}]}]}], "\[IndentingNewLine]", 
+  RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+   RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "str", ":", " ", 
+    RowBox[{
+    "list", " ", "of", " ", "string", " ", "characters", " ", "to", " ", 
+     "repeat", " ", "with", " ", "given", " ", "weights", 
+     "\[IndentingNewLine]", "\t\t", 
+     RowBox[{"len", ":", " ", 
+      RowBox[{
+      "length", " ", "of", " ", "random", " ", "string", " ", "to", " ", 
+       "generate", "\[IndentingNewLine]", "\t", "weights"}], ":", " ", 
+      RowBox[{
+      "weights", " ", "of", " ", "each", " ", "characters", " ", "in", " ", 
+       "the", " ", "string", " ", "list", "\[IndentingNewLine]", 
+       RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+        RowBox[{
+        "returns", " ", "a", " ", "random", " ", "string", " ", "of", " ", 
+         "length", " ", 
+         RowBox[{"(", "len", ")"}], " ", "made", " ", "up", " ", "of", " ", 
+         "elements", " ", "from", " ", 
+         RowBox[{"(", "str", ")"}], " ", "with", " ", "weight", " ", 
+         RowBox[{"(", "weights", ")"}]}]}]}]}]}]}], "\[IndentingNewLine]", 
+   "*)"}], "\[IndentingNewLine]"}]], "Input",
+ CellChangeTimes->{{3.687626075012247*^9, 3.687626076595007*^9}, {
+  3.687626195056251*^9, 3.687626270345277*^9}, {3.687626318105176*^9, 
+  3.6876264786813297`*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1108, 23, 131, "Input"],
+Cell[1669, 45, 1761, 36, 131, "Input"],
+Cell[3433, 83, 1684, 36, 182, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

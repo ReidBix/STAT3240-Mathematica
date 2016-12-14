@@ -1,0 +1,213 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7726,        204]
+NotebookOptionsPosition[      7387,        188]
+NotebookOutlinePosition[      7747,        204]
+CellTagsIndexPosition[      7704,        201]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tPlate1", "[", 
+   RowBox[{"x_", ",", "y_", ",", "u_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"u1", ",", "u2", ",", "tVals"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "x", ":", " ", 
+      RowBox[{
+      "array", " ", "of", " ", "x", " ", "coordinates", " ", "for", " ", "a", 
+       " ", "grid", " ", "of", " ", "points", "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"y", ":", " ", 
+        RowBox[{
+        "array", " ", "of", " ", "y", " ", "coordinates", " ", "for", " ", 
+         "a", " ", "grid", " ", "of", " ", "points", "\[IndentingNewLine]", 
+         "\t", "u"}], ":", " ", 
+        RowBox[{"two", "-", 
+         RowBox[{
+         "element", " ", "location", " ", "parameter", "\[IndentingNewLine]", 
+          
+          RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t\t", 
+           RowBox[{
+           "Output", " ", "based", " ", "off", " ", "of", " ", "defined", " ",
+             "tPlate1", " ", "function"}]}]}]}]}]}]}], "\[IndentingNewLine]", 
+     "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"u1", ",", "u2"}], "}"}], "=", "u"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"tVals", "=", 
+      RowBox[{"E", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "1.0"}], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"x", "-", "u1"}], ")"}], "^", "2"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"y", "-", "u2"}], ")"}], "^", "2"}]}], ")"}]}], 
+        ")"}]}]}], ";", "\[IndentingNewLine]", "tVals"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.68651894391884*^9, 3.686518968587755*^9}, {
+  3.686519054256036*^9, 3.686519057350731*^9}, {3.686520135853294*^9, 
+  3.686520152175663*^9}, {3.686520340757121*^9, 3.686520399140212*^9}, {
+  3.686520464883956*^9, 3.6865204729866858`*^9}, {3.686520687873798*^9, 
+  3.686520689222761*^9}, {3.6865209062946444`*^9, 3.686520909727088*^9}, {
+  3.6865209799495*^9, 3.686520995589512*^9}, {3.686521033249515*^9, 
+  3.6865211028253393`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tPlate2", "[", 
+   RowBox[{"x_", ",", "y_", ",", "u_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"u1", ",", "u2", ",", "tVals"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"u1", ",", "u2"}], "}"}], "=", "u"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+      RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "x", ":", " ", 
+       RowBox[{
+       "array", " ", "of", " ", "x", " ", "coordinates", " ", "for", " ", "a",
+         " ", "grid", " ", "of", " ", "points", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"y", ":", " ", 
+         RowBox[{
+         "array", " ", "of", " ", "y", " ", "coordinates", " ", "for", " ", 
+          "a", " ", "grid", " ", "of", " ", "points", "\[IndentingNewLine]", 
+          "\t", "u"}], ":", " ", 
+         RowBox[{"two", "-", 
+          RowBox[{
+          "element", " ", "location", " ", "parameter", "\[IndentingNewLine]", 
+           RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t\t", 
+            RowBox[{
+            "Output", " ", "based", " ", "off", " ", "of", " ", "defined", 
+             " ", "tPlate2", " ", "function"}]}]}]}]}]}]}], 
+      "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"tVals", "=", 
+      RowBox[{"E", "^", 
+       RowBox[{"(", 
+        RowBox[{
+         RowBox[{"-", "2.0"}], "*", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"0.2", "*", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"x", "-", "u1"}], ")"}], "^", "2"}]}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"y", "-", "u2"}], ")"}], "^", "2"}]}], ")"}]}], 
+        ")"}]}]}], ";", "\[IndentingNewLine]", "tVals"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.68651894391884*^9, 3.686518977252256*^9}, {
+  3.686520494028276*^9, 3.6865205278136387`*^9}, {3.686520691490368*^9, 
+  3.686520692440909*^9}, {3.6865209226733713`*^9, 3.686520926115695*^9}, {
+  3.6865209612084293`*^9, 3.686520962387885*^9}, {3.686521107112108*^9, 
+  3.686521120451722*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"tPlate3", "[", 
+   RowBox[{"x_", ",", "y_", ",", "u_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"u1", ",", "u2", ",", "tVals", ",", "a"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "x", ":", " ", 
+      RowBox[{
+      "array", " ", "of", " ", "x", " ", "coordinates", " ", "for", " ", "a", 
+       " ", "grid", " ", "of", " ", "points", "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"y", ":", " ", 
+        RowBox[{
+        "array", " ", "of", " ", "y", " ", "coordinates", " ", "for", " ", 
+         "a", " ", "grid", " ", "of", " ", "points", "\[IndentingNewLine]", 
+         "\t", "u"}], ":", " ", 
+        RowBox[{"two", "-", 
+         RowBox[{
+         "element", " ", "location", " ", "parameter", "\[IndentingNewLine]", 
+          
+          RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t\t", 
+           RowBox[{
+           "Output", " ", "based", " ", "off", " ", "of", " ", "defined", " ",
+             "tPlate3", " ", "function"}]}]}]}]}]}]}], "\[IndentingNewLine]", 
+     "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"u1", ",", "u2"}], "}"}], "=", "u"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"a", "=", "1.1"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"tVals", "=", 
+      RowBox[{"a", "*", 
+       RowBox[{"E", "^", 
+        RowBox[{"(", 
+         RowBox[{
+          RowBox[{"-", 
+           RowBox[{"(", 
+            RowBox[{"a", "^", "2"}], ")"}]}], "*", 
+          RowBox[{"(", 
+           RowBox[{
+            RowBox[{"5", "*", 
+             RowBox[{
+              RowBox[{"(", 
+               RowBox[{"x", "-", "u1"}], ")"}], "^", "2"}]}], "+", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"y", "-", "u2"}], ")"}], "^", "2"}]}], ")"}]}], 
+         ")"}]}]}]}], ";", "\[IndentingNewLine]", "tVals"}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.68651894391884*^9, 3.686518980990962*^9}, 
+   3.686520496737296*^9, {3.686520596484131*^9, 3.686520631768545*^9}, {
+   3.686520694306332*^9, 3.686520695080924*^9}, {3.686520927819206*^9, 
+   3.686520931000763*^9}, {3.686521114310424*^9, 3.686521118075203*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 2293, 54, 233, "Input"],
+Cell[2854, 76, 2195, 52, 267, "Input"],
+Cell[5052, 130, 2331, 56, 250, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

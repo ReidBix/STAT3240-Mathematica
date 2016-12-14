@@ -1,0 +1,209 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      7268,        200]
+NotebookOptionsPosition[      6889,        183]
+NotebookOutlinePosition[      7249,        199]
+CellTagsIndexPosition[      7206,        196]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"2", " ", "have", " ", "same", " ", "value"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"pattern1", "[", "dies_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3", ",", "res"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], "=", "dies"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"d1", "\[Equal]", "d2"}], " ", "||", " ", 
+         RowBox[{"d1", "\[Equal]", "d3"}], " ", "||", " ", 
+         RowBox[{"d2", "\[Equal]", "d3"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"res", "=", "1"}], ";"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"res", "=", "0"}]}], "\[IndentingNewLine]", "]"}], ";", 
+      "\[IndentingNewLine]", "res"}]}], "\[IndentingNewLine]", 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.685810991861924*^9, 3.685811028756089*^9}, {
+  3.6858111271166162`*^9, 3.685811133470091*^9}, {3.685811482547089*^9, 
+  3.685811580143242*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "3", "rd", " ", "dice", " ", "roll", " ", "strictly", " ", "between", " ", 
+    "values", " ", "of", " ", "first", " ", "2"}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"pattern2", "[", "dies_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3", ",", "res"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], "=", "dies"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"d3", ">", "d1"}], "&&", 
+           RowBox[{"d3", "<", "d2"}]}], ")"}], "||", 
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"d3", "<", "d1"}], "&&", 
+           RowBox[{"d3", ">", "d2"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"res", " ", "=", "1"}], ";"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"res", "=", "0"}]}], "\[IndentingNewLine]", "]"}], ";", 
+      "\[IndentingNewLine]", "res"}]}], "\[IndentingNewLine]", 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.685811035358408*^9, 3.685811035716571*^9}, {
+  3.6858111357653017`*^9, 3.685811158306028*^9}, {3.685811623344212*^9, 
+  3.685811703738991*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"3", "rd", " ", "dice", " ", "roll"}], " ", "\[GreaterEqual]", 
+    " ", "or", " ", "\[LessEqual]", " ", 
+    RowBox[{"first", " ", "2", " ", "dice", " ", "rolls"}]}], " ", "*)"}], 
+  "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"pattern3", "[", "dies_", "]"}], ":=", 
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"d1", ",", "d2", ",", "d3", ",", "res"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"d1", ",", "d2", ",", "d3"}], "}"}], "=", "dies"}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"d1", "<", 
+       RowBox[{"d2", "\[IndentingNewLine]", 
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"d3", "\[LessEqual]", "d1"}], "&&", 
+             RowBox[{"d3", "\[LessEqual]", "d2"}]}], ")"}], "||", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"d3", "\[GreaterEqual]", "d1"}], "&&", 
+             RowBox[{"d3", "\[GreaterEqual]", "d2"}]}], ")"}]}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"res", " ", "=", "1"}], ";"}], ",", "\[IndentingNewLine]", 
+          
+          RowBox[{"res", "=", "0"}]}], "\[IndentingNewLine]", "]"}]}]}], ";", 
+      "\[IndentingNewLine]", "res"}]}], "\[IndentingNewLine]", 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.685811048280733*^9, 3.6858110483825912`*^9}, {
+  3.6858111608836737`*^9, 3.685811201304113*^9}, {3.685811398296633*^9, 
+  3.685811416185617*^9}, {3.685811466476008*^9, 3.685811467353442*^9}, {
+  3.6858117262730083`*^9, 3.685811801795988*^9}, {3.685910871934712*^9, 
+  3.68591087750289*^9}, {3.6859110770287724`*^9, 3.685911206987851*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"countThem", "[", "diePattern_", "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"patternMatch", ",", "percent", ",", "i", ",", "j", ",", "k"}], 
+     "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"patternMatch", " ", "=", " ", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Do", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"Do", "[", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"patternMatch", " ", "=", " ", 
+               RowBox[{"patternMatch", "+", 
+                RowBox[{"diePattern", "[", 
+                 RowBox[{"{", 
+                  RowBox[{"i", ",", "j", ",", "k"}], "}"}], "]"}]}]}], ";"}], 
+             ",", "\[IndentingNewLine]", 
+             RowBox[{"{", 
+              RowBox[{"k", ",", "1", ",", "6"}], "}"}]}], 
+            "\[IndentingNewLine]", "]"}], ";"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"j", ",", "1", ",", "6"}], "}"}]}], "\[IndentingNewLine]", 
+         "]"}], ";"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", "6"}], "}"}]}], "\[IndentingNewLine]", 
+      "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"percent", "=", 
+      RowBox[{"patternMatch", "/", "216"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{"patternMatch", ",", "percent"}], "}"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input",
+ CellChangeTimes->{{3.6858118742223454`*^9, 3.685811901713623*^9}, {
+  3.685811952329998*^9, 3.685811955184185*^9}, {3.685812112146942*^9, 
+  3.685812331304103*^9}, {3.685910552691783*^9, 3.68591055335291*^9}, {
+  3.685910599700547*^9, 3.685910830310389*^9}, {3.6859109736721563`*^9, 
+  3.685910973862082*^9}}]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{316, Automatic}, {Automatic, 50}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 1186, 30, 165, "Input"],
+Cell[1747, 52, 1387, 37, 165, "Input"],
+Cell[3137, 91, 1807, 44, 216, "Input"],
+Cell[4947, 137, 1938, 44, 267, "Input"]
+}
+]
+*)
+
+(* End of internal cache information *)

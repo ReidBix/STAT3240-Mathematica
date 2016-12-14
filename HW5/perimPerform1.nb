@@ -1,0 +1,1308 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     52479,       1299]
+NotebookOptionsPosition[     50413,       1233]
+NotebookOutlinePosition[     50772,       1249]
+CellTagsIndexPosition[     50729,       1246]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polyInner1", "[", 
+   RowBox[{"a_", ",", "b_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "xList", ",", "yList", ",", "theta", ",", "innerSum", ",", "k", ",", 
+      "xk1", ",", "yk1", ",", "dk", ",", "P", ",", "xk", ",", "yk"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"polyInner1", 
+       RowBox[{"(", 
+        RowBox[{"a", ",", "b", ",", "n"}], ")"}]}], ":"}], "  ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "a", ":", " ", 
+      RowBox[{
+      "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", " ",
+        "of", " ", "an", " ", "ellipse", " ", 
+       RowBox[{"E", ".", "\[IndentingNewLine]", "\t\t", 
+        RowBox[{"b", ":", " ", 
+         RowBox[{
+         "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+          " ", "of", " ", "an", " ", "ellipse", " ", 
+          RowBox[{"E", ".", "\[IndentingNewLine]", "\t", "n"}]}], ":", " ", 
+         RowBox[{
+         "n", " ", "is", " ", "a", " ", "positive", " ", "integer", " ", 
+          "bigger", " ", "than", " ", "2.", "\[IndentingNewLine]", 
+          RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+           RowBox[{
+           "returns", " ", "the", " ", "approximated", " ", "root", " ", "of",
+             " ", "the", " ", "function", " ", "closest", " ", "to", " ", 
+            "the", " ", "initial", " ", "estimate"}]}]}]}]}]}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "Initialize", " ", "a", " ", "running", " ", "sum", " ", "variable", 
+       " ", "to", " ", "zero"}], ",", " ", 
+      RowBox[{"Other", " ", "initializations"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"theta", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"2", "*", "Pi"}], ")"}], "/", "n"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"innerSum", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"k", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xList", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"yList", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xk", "=", 
+      RowBox[{"a", "*", 
+       RowBox[{"Cos", "[", 
+        RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"yk", "=", 
+      RowBox[{"b", "*", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "run", " ", "do", " ", "loop", " ", "and", " ", "save", " ", "to", " ", 
+       "lists"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"Compute", " ", "xy"}], "-", 
+       RowBox[{"coordinates", " ", "of", " ", "vertex", " ", "k"}]}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"xk1", "=", 
+         RowBox[{"a", "*", 
+          RowBox[{"Cos", "[", 
+           RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"yk1", "=", 
+         RowBox[{"b", "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"dk", "=", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"xk", "-", "xk1"}], ")"}], "^", "2"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"yk", "-", "yk1"}], ")"}], "^", "2"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"innerSum", "=", 
+         RowBox[{"innerSum", "+", "dk"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"xk", "=", "xk1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"yk", "=", "yk1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"xList", ",", "xk"}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"yList", ",", "yk"}], "]"}], ";"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{"innerSum", ",", "xList", ",", "yList"}], "}"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polyInner2", "[", 
+   RowBox[{"a_", ",", "b_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "xList", ",", "yList", ",", "theta", ",", "innerSum", ",", "k", ",", 
+      "xk1", ",", "yk1", ",", "dk", ",", "P", ",", "xk", ",", "yk"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"polyInner2", 
+       RowBox[{"(", 
+        RowBox[{"a", ",", "b", ",", "n"}], ")"}]}], ":"}], "  ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+      RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "a", ":", " ", 
+       RowBox[{
+       "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+        " ", "of", " ", "an", " ", "ellipse", " ", 
+        RowBox[{"E", ".", "\[IndentingNewLine]", "\t\t", 
+         RowBox[{"b", ":", " ", 
+          RowBox[{
+          "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+           " ", "of", " ", "an", " ", "ellipse", " ", 
+           RowBox[{"E", ".", "\[IndentingNewLine]", "\t", "n"}]}], ":", " ", 
+          RowBox[{
+          "n", " ", "is", " ", "a", " ", "positive", " ", "integer", " ", 
+           "bigger", " ", "than", " ", "2.", "\[IndentingNewLine]", 
+           RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+            RowBox[{
+            "returns", " ", "the", " ", "approximated", " ", "root", " ", 
+             "of", " ", "the", " ", "function", " ", "closest", " ", "to", 
+             " ", "the", " ", "initial", " ", "estimate"}]}]}]}]}]}]}], ",", 
+      " ", 
+      RowBox[{"specifically", " ", "using", " ", 
+       RowBox[{"Pi", "/", "2"}], " ", "rather", " ", "than", " ", "2", "Pi"}],
+       ",", " ", 
+      RowBox[{
+      "then", " ", "multiplying", " ", "by", " ", "4", " ", "later"}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "Initialize", " ", "a", " ", "running", " ", "sum", " ", "variable", 
+       " ", "to", " ", "zero"}], ",", " ", 
+      RowBox[{"Other", " ", "initializations"}], ",", " ", 
+      RowBox[{"using", " ", 
+       RowBox[{"Pi", "/", "2"}], " ", "instead", " ", "of", " ", "2", 
+       "Pi"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"theta", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"Pi", "/", "2"}], ")"}], "/", "n"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"innerSum", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"k", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xk", "=", 
+      RowBox[{"a", "*", 
+       RowBox[{"Cos", "[", 
+        RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"yk", "=", 
+      RowBox[{"b", "*", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xList", "=", 
+      RowBox[{"{", "xk", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"yList", "=", 
+      RowBox[{"{", "yk", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "run", " ", "do", " ", "loop", " ", "and", " ", "save", " ", "to", " ", 
+       "lists"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"Compute", " ", "xy"}], "-", 
+       RowBox[{"coordinates", " ", "of", " ", "vertex", " ", "k"}]}], " ", 
+      "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"xk1", "=", 
+         RowBox[{"a", "*", 
+          RowBox[{"Cos", "[", 
+           RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"yk1", "=", 
+         RowBox[{"b", "*", 
+          RowBox[{"Sin", "[", 
+           RowBox[{"k", "*", "theta"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"dk", "=", 
+         RowBox[{"Sqrt", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"xk", "-", "xk1"}], ")"}], "^", "2"}], "+", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"yk", "-", "yk1"}], ")"}], "^", "2"}]}], "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"innerSum", "=", 
+         RowBox[{"innerSum", "+", "dk"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"xk", "=", "xk1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"yk", "=", "yk1"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"xList", ",", "xk"}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"yList", ",", "yk"}], "]"}], ";"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"innerSum", "*", "4"}], ",", "xList", ",", "yList"}], "}"}], 
+      "]"}]}]}], "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"polyInner3", "[", 
+   RowBox[{"a_", ",", "b_", ",", "n_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "theta", ",", "totList", ",", "sum", ",", "xList", ",", "yList"}], "}"}],
+     ",", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"polyInner3", 
+       RowBox[{"(", 
+        RowBox[{"a", ",", "b", ",", "n"}], ")"}]}], ":"}], "  ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+      RowBox[{"INPUT", ":", "\[IndentingNewLine]", "\t\t", "a", ":", " ", 
+       RowBox[{
+       "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+        " ", "of", " ", "an", " ", "ellipse", " ", 
+        RowBox[{"E", ".", "\[IndentingNewLine]", "\t\t", 
+         RowBox[{"b", ":", " ", 
+          RowBox[{
+          "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+           " ", "of", " ", "an", " ", "ellipse", " ", 
+           RowBox[{"E", ".", "\[IndentingNewLine]", "\t", "n"}]}], ":", " ", 
+          RowBox[{
+          "n", " ", "is", " ", "a", " ", "positive", " ", "integer", " ", 
+           "bigger", " ", "than", " ", "2.", "\[IndentingNewLine]", 
+           RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", "\t", 
+            RowBox[{
+            "returns", " ", "the", " ", "approximated", " ", "root", " ", 
+             "of", " ", "the", " ", "function", " ", "closest", " ", "to", 
+             " ", "the", " ", "initial", " ", "estimate"}]}]}]}]}]}]}], ",", 
+      " ", 
+      RowBox[{"specifically", " ", "using", " ", 
+       RowBox[{"Pi", "/", "2"}], " ", "rather", " ", "than", " ", "2", "Pi"}],
+       ",", " ", 
+      RowBox[{
+      "then", " ", "multiplying", " ", "by", " ", "4", " ", "later"}]}], 
+     "\[IndentingNewLine]", "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{
+      "Initialize", " ", "a", " ", "running", " ", "sum", " ", "variable", 
+       " ", "to", " ", "zero"}], ",", " ", 
+      RowBox[{"Other", " ", "initializations"}], ",", " ", 
+      RowBox[{"using", " ", "Vector", " ", "operations"}]}], " ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"theta", "=", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"2", "Pi"}], ")"}], "/", "n"}]}], ";", "\[IndentingNewLine]", 
+     
+     RowBox[{"totList", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"a", "*", 
+           RowBox[{"Cos", "[", 
+            RowBox[{"k", "*", "theta"}], "]"}]}], ",", 
+          RowBox[{"b", "*", 
+           RowBox[{"Sin", "[", 
+            RowBox[{"k", "*", "theta"}], "]"}]}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"xList", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"a", "*", 
+         RowBox[{"Cos", "[", 
+          RowBox[{"k", "*", "theta"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"yList", "=", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"b", "*", 
+         RowBox[{"Sin", "[", 
+          RowBox[{"k", "*", "theta"}], "]"}]}], ",", 
+        RowBox[{"{", 
+         RowBox[{"k", ",", "1", ",", "n"}], "}"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"sum", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"sum", "=", 
+         RowBox[{"sum", "+", 
+          RowBox[{"EuclideanDistance", "@@", 
+           RowBox[{"totList", "[", 
+            RowBox[{"[", 
+             RowBox[{"{", 
+              RowBox[{"i", ",", 
+               RowBox[{"i", "+", "1"}]}], "}"}], "]"}], "]"}]}]}]}], ";"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"n", "-", "1"}]}], "}"}]}], "\[IndentingNewLine]", "]"}], 
+     ";", "\[IndentingNewLine]", 
+     RowBox[{"sum", "=", 
+      RowBox[{"sum", "+", 
+       RowBox[{"EuclideanDistance", "@@", 
+        RowBox[{"totList", "[", 
+         RowBox[{"[", 
+          RowBox[{"{", 
+           RowBox[{"1", ",", 
+            RowBox[{"-", "1"}]}], "}"}], "]"}], "]"}]}]}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Partition", "[", 
+      RowBox[{"totList", ",", "2"}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"N", "[", 
+      RowBox[{"{", 
+       RowBox[{"sum", ",", "xList", ",", "yList"}], "}"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ellipsePerim1", "[", 
+   RowBox[{
+   "polyInner1_", ",", "a_", ",", "b_", ",", "tol_", ",", "plotsOn_"}], "]"}],
+   ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "P", ",", "P2", ",", "relErr", ",", "listErr", ",", "k", ",", "innerSum",
+       ",", "xList", ",", "yList", ",", "xyList"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"ellipsePerim1", 
+       RowBox[{"(", 
+        RowBox[{
+        "polyInner1", ",", "a", ",", "b", ",", "tol", ",", "plotsOn"}], 
+        ")"}]}], ":"}], "  ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+     "INPUT", ":", "\[IndentingNewLine]", "\t\t", "polyInner", ":", " ", 
+      RowBox[{
+      "the", " ", "initial", " ", "polyInner", " ", "function", " ", "that", 
+       " ", "is", " ", "passed", " ", "to", " ", "this", " ", "function", 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"a", ":", " ", 
+        RowBox[{
+        "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+         " ", "of", " ", "an", " ", "ellipse", " ", 
+         RowBox[{"E", ".", "\[IndentingNewLine]", "\t\t", "b"}]}], ":", " ", 
+        RowBox[{
+        "a", " ", "and", " ", "b", " ", "are", " ", "the", " ", "semiaxes", 
+         " ", "of", " ", "an", " ", "ellipse", " ", 
+         RowBox[{"E", ".", "\[IndentingNewLine]", "\t", 
+          RowBox[{"tol", ":", " ", 
+           RowBox[{
+           "the", " ", "tolerance", " ", "level", " ", "for", " ", "the", " ",
+             "while", " ", "loop", "\[IndentingNewLine]", "plotsOn"}], ":", 
+           " ", 
+           RowBox[{
+           "plots", " ", "the", " ", "graph", " ", "if", " ", "set", " ", 
+            "to", " ", "\"\<on\>\"", "\[IndentingNewLine]", 
+            RowBox[{"OUTPUT", ":", "\[IndentingNewLine]", 
+             RowBox[{
+             "returns", " ", "the", " ", "ellipse", " ", "perimeter", " ", 
+              "estimate", " ", "given", " ", "the", " ", 
+              "tolerance"}]}]}]}]}]}]}]}]}], "\[IndentingNewLine]", "\t\t", 
+     "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", 
+     RowBox[{
+      RowBox[{"Initialize", " ", "k"}], ",", " ", "P", ",", " ", "P2", ",", 
+      " ", 
+      RowBox[{"and", " ", "test"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{
+      "the", " ", "large", " ", "fraction", " ", "was", " ", "split", " ", 
+       "into", " ", "separate", " ", "parts"}], ",", " ", 
+      RowBox[{"P", " ", "and", " ", "P2"}], ",", " ", 
+      RowBox[{
+      "where", " ", "P", " ", "will", " ", "eventually", " ", "be", " ", 
+       "returned"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"k", "=", "2"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"P", "=", 
+      RowBox[{
+       RowBox[{"polyInner1", "[", 
+        RowBox[{"a", ",", "b", ",", 
+         RowBox[{"k", "+", "1"}]}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"P2", "=", 
+      RowBox[{
+       RowBox[{"polyInner1", "[", 
+        RowBox[{"a", ",", "b", ",", "k"}], "]"}], "[", 
+       RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"relErr", "=", 
+      RowBox[{
+       RowBox[{"Abs", "[", 
+        RowBox[{"P", "-", "P2"}], "]"}], "/", "P"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"listErr", "=", 
+      RowBox[{"{", "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{
+       "loop", " ", "until", " ", "the", " ", "tolerance", " ", "level", " ", 
+        "is", " ", "met", " ", "or", " ", "k"}], " ", ">", " ", "1000"}], " ",
+       "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"While", "[", 
+      RowBox[{
+       RowBox[{"relErr", "\[GreaterEqual]", "tol"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"If", "[", 
+         RowBox[{
+          RowBox[{"k", ">", "1000"}], ",", 
+          RowBox[{"Break", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"k", "++"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"P", "=", 
+         RowBox[{
+          RowBox[{"polyInner1", "[", 
+           RowBox[{"a", ",", "b", ",", 
+            RowBox[{"k", "+", "1"}]}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"P2", "=", 
+         RowBox[{
+          RowBox[{"polyInner1", "[", 
+           RowBox[{"a", ",", "b", ",", "k"}], "]"}], "[", 
+          RowBox[{"[", "1", "]"}], "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"relErr", "=", 
+         RowBox[{
+          RowBox[{"Abs", "[", 
+           RowBox[{"P", "-", "P2"}], "]"}], "/", "P"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"AppendTo", "[", 
+         RowBox[{"listErr", ",", 
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"k", "+", "1"}], ",", "relErr"}], "}"}]}], "]"}], ";"}]}],
+       "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "copy", " ", "down", " ", "all", " ", "the", " ", "x", " ", "and", " ", 
+       "y", " ", "points", " ", "for", " ", "the", " ", "plot"}], " ", "*)"}],
+      "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"innerSum", ",", "xList", ",", "yList"}], "}"}], "=", 
+      RowBox[{"polyInner1", "[", 
+       RowBox[{"a", ",", "b", ",", 
+        RowBox[{"k", "+", "1"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"xyList", "=", 
+      RowBox[{"Partition", "[", 
+       RowBox[{
+        RowBox[{"Riffle", "[", 
+         RowBox[{"xList", ",", "yList"}], "]"}], ",", "2"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "if", " ", "plots", " ", "is", " ", "\"\<on\>\"", " ", "then", " ", 
+       "plot", " ", "the", " ", "xy", " ", "vertices", " ", "and", " ", "the",
+        " ", "relative", " ", "error", " ", "graph"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"plotsOn", "==", "\"\<on\>\""}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"\"\<xyVerts-\>\"", "<>", 
+           RowBox[{"ToString", "[", "polyInner1", "]"}], "<>", 
+           "\"\<.pdf\>\""}], ",", "\[IndentingNewLine]", 
+          RowBox[{"ListPlot", "[", 
+           RowBox[{"xyList", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{"\"\<x\>\"", ",", "\"\<y\>\""}], "}"}]}], ",", 
+              "\[IndentingNewLine]", 
+              RowBox[{"PlotLabel", "\[Rule]", 
+               RowBox[{"\"\<ellipsePerim computed vertices for \>\"", "<>", 
+                RowBox[{"ToString", "[", "polyInner1", "]"}], "<>", 
+                "\"\< \\n a=\>\"", "<>", 
+                RowBox[{"ToString", "[", "a", "]"}], "<>", "\"\< b=\>\"", "<>", 
+                RowBox[{"ToString", "[", "b", "]"}], "<>", 
+                "\"\<, and tol=\>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"FortranForm", "[", 
+                  RowBox[{"N", "[", "tol", "]"}], "]"}], "]"}]}]}]}], "}"}]}],
+            "]"}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Export", "[", 
+         RowBox[{
+          RowBox[{"\"\<RelativeError-\>\"", "<>", 
+           RowBox[{"ToString", "[", "polyInner1", "]"}], "<>", 
+           "\"\<.pdf\>\""}], ",", "\[IndentingNewLine]", 
+          RowBox[{"ListLinePlot", "[", 
+           RowBox[{"listErr", ",", "\[IndentingNewLine]", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"AxesLabel", "\[Rule]", 
+               RowBox[{"{", 
+                RowBox[{
+                "\"\<Number of vertices\>\"", ",", "\"\<Relative Error\>\""}],
+                 "}"}]}], ",", "\[IndentingNewLine]", 
+              RowBox[{"PlotLabel", "\[Rule]", " ", 
+               RowBox[{"\"\<ellipsePerim Relative Error for \>\"", "<>", 
+                RowBox[{"ToString", "[", "polyInner1", "]"}], "<>", 
+                "\"\< \\n a=\>\"", "<>", 
+                RowBox[{"ToString", "[", "a", "]"}], "<>", "\"\< b=\>\"", "<>", 
+                RowBox[{"ToString", "[", "b", "]"}], "<>", 
+                "\"\<, and tol=\>\"", "<>", 
+                RowBox[{"ToString", "[", 
+                 RowBox[{"FortranForm", "[", 
+                  RowBox[{"N", "[", "tol", "]"}], "]"}], "]"}]}]}]}], "}"}]}],
+            "]"}]}], "\[IndentingNewLine]", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "return", " ", "the", " ", "ellipse", " ", "perimeter", " ", "estimate",
+        " ", "given", " ", "the", " ", "tolerance"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"N", "[", "P", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{
+  3.684774434961618*^9, {3.684774471242446*^9, 3.684774476804737*^9}, {
+   3.6847747102897043`*^9, 3.6847747117864933`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"perimPerform1", "[", 
+   RowBox[{"polyInner1_", ",", "param_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"list", ",", "res", ",", "sum"}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+      RowBox[{"perimPerform1", 
+       RowBox[{"(", 
+        RowBox[{"polyInner1", ",", "param"}], ")"}]}], ":"}], "  ", "*)"}], 
+    "\[IndentingNewLine]", 
+    RowBox[{"(*", "\[IndentingNewLine]", "\t", 
+     RowBox[{
+     "INPUT", ":", "\[IndentingNewLine]", "\t\t", "polyInner", ":", " ", 
+      RowBox[{
+      "the", " ", "initial", " ", "polyInner", " ", "function", " ", "that", 
+       " ", "is", " ", "passed", " ", "to", " ", "this", " ", "function", 
+       "\[IndentingNewLine]", "\t\t", 
+       RowBox[{"param", ":", " ", 
+        RowBox[{
+        "the", " ", "given", " ", "a", " ", "and", " ", "b", " ", "for", " ", 
+         "the", " ", "polyInner", "\[IndentingNewLine]", "OUTPUT"}], ":", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+        "returns", " ", "a", " ", "table", " ", "for", " ", "the", " ", 
+         "given", " ", "function", " ", "of", " ", "PolyInner", " ", "given", 
+         " ", "a", " ", "and", " ", "b"}]}]}]}], "\[IndentingNewLine]", 
+     "\t\t", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Print", " ", "the", " ", "header", " ", "with", " ", "the", " ", 
+      "function", " ", "name"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\<Performance of Function \>\"", "<>", 
+       RowBox[{"ToString", "[", "polyInner1", "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{"Row", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+         "\"\<     tolerance\>\"", ",", " ", "\"\<Perimeter Estimate\>\"", 
+          ",", " ", "\"\<Timing\>\""}], "}"}], ",", " ", 
+        "\"\<                        \>\""}], "]"}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+     "Print", "[", 
+      "\"\<-------------------------------------------------------------------\
+\>\"", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Initialize", " ", "the", " ", "table", " ", "from", " ", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "1"}]}], " ", "to", " ", 
+       RowBox[{"10", "^", 
+        RowBox[{"-", "7"}]}], " ", "and", " ", "the", " ", "sum", " ", "for", 
+       " ", "time"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"list", "=", 
+      RowBox[{"N", "[", 
+       RowBox[{"Table", "[", 
+        RowBox[{
+         RowBox[{"10", "^", 
+          RowBox[{"(", 
+           RowBox[{"-", "x"}], ")"}]}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "1", ",", "7"}], "}"}]}], "]"}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"sum", "=", "0"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "run", " ", "for", " ", "loop", " ", "over", " ", "the", " ", "list", 
+       " ", "of", " ", "values", " ", "to", " ", "get", " ", "the", " ", 
+       "table"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Do", "[", "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"res", "=", 
+         RowBox[{"Timing", "[", 
+          RowBox[{"ellipsePerim1", "[", 
+           RowBox[{"polyInner1", ",", 
+            RowBox[{"param", "[", 
+             RowBox[{"[", "1", "]"}], "]"}], ",", 
+            RowBox[{"param", "[", 
+             RowBox[{"[", "2", "]"}], "]"}], ",", 
+            RowBox[{"list", "[", 
+             RowBox[{"[", "i", "]"}], "]"}], ",", "\"\<off\>\""}], "]"}], 
+          "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"sum", "=", 
+         RowBox[{"sum", "+", 
+          RowBox[{"res", "[", 
+           RowBox[{"[", "1", "]"}], "]"}]}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{"Row", "[", 
+          RowBox[{"{", 
+           RowBox[{"\"\<      \>\"", ",", 
+            RowBox[{"ScientificForm", "[", 
+             RowBox[{"list", "[", 
+              RowBox[{"[", "i", "]"}], "]"}], "]"}], ",", 
+            "\"\<               \>\"", ",", 
+            RowBox[{"ScientificForm", "[", 
+             RowBox[{"res", "[", 
+              RowBox[{"[", "2", "]"}], "]"}], "]"}], ",", 
+            "\"\<             \>\"", ",", 
+            RowBox[{"ScientificForm", "[", 
+             RowBox[{"res", "[", 
+              RowBox[{"[", "1", "]"}], "]"}], "]"}]}], "}"}], "]"}], "]"}], 
+        ";"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"{", 
+        RowBox[{"i", ",", "1", ",", 
+         RowBox[{"Length", "[", "list", "]"}]}], "}"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "print", " ", "the", " ", "overall", " ", "elapsed", " ", "time", " ", 
+       "taken"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\<Elapsed time in seconds = \>\"", "<>", 
+       RowBox[{"ToString", "[", "sum", "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Return", "[", "]"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.684772777314754*^9, 3.6847728055033407`*^9}, {
+   3.68477284686594*^9, 3.684772913961911*^9}, {3.68477295025673*^9, 
+   3.6847730446508007`*^9}, {3.684773074734131*^9, 3.6847731450698853`*^9}, {
+   3.684773189237896*^9, 3.684773398631621*^9}, {3.6847734421136303`*^9, 
+   3.6847736513351517`*^9}, {3.684773951960389*^9, 3.684773973596621*^9}, {
+   3.684774506513392*^9, 3.6847745422079372`*^9}, {3.684774761586228*^9, 
+   3.6847748012874823`*^9}, {3.684774852928042*^9, 3.684775024043755*^9}, {
+   3.68478760021467*^9, 3.684787605445208*^9}, 3.684796844965561*^9, {
+   3.684804760305184*^9, 3.684804764993926*^9}, {3.6848048008866796`*^9, 
+   3.68480481474378*^9}, {3.684805750007441*^9, 3.684805815972302*^9}, {
+   3.6848058833950233`*^9, 3.6848059017814074`*^9}, {3.684806000907514*^9, 
+   3.684806024188315*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"perimPerform1", "[", 
+  RowBox[{"polyInner1", ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "3"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6847971096990128`*^9, 3.6847971098423*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Performance of Function polyInner1\"\>"], "Print",
+ CellChangeTimes->{3.684797110383601*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "                        ","\"                        \"",
+   "\"     tolerance\"","\"Perimeter Estimate\"","\"Timing\""},
+  "RowWithSeparators"]], "Print",
+ CellChangeTimes->{3.68479711038907*^9}],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+-------\"\>"], "Print",
+ CellChangeTimes->{3.6847971103959103`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 0.1, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.10707\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 21.070660289094178`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"6.31\"", "\[Times]", 
+       SuperscriptBox["10", "\"-4\""]}], 
+     0.00063100000000000005043188089359773585`2.8206292725237585, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797110403379*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-2\""]}], 0.01, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.48832\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 24.883241220330383`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"4.763\"", "\[Times]", 
+       SuperscriptBox["10", "\"-3\""]}], 
+     0.00476299999999999987276844137795706047`3.6984804947912147, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797110411613*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-3\""]}], 0.001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.53633\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.363300133499983`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.8100\"", "\[Times]", 
+       SuperscriptBox["10", "\"-2\""]}], 
+     0.02809999999999999997779553950749686919`4.469306233184704, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797110419464*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-4\""]}], 0.0001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.54885\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.48845781078795, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.34135\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 
+     0.13413500000000000422772927777259610593`5.148142026877512, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797110538382*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-5\""]}], 0.00001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55184\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.518430291681582`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"7.21961\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 
+     0.72196099999999996388311274131410755217`5.879113651095436, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797111264317*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-6\""]}], 1.*^-6, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55251\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.525132671881877`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+    "\"5.103449\"", 
+     5.10344900000000034623326428118161857128`6.728463692398487, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797116383247*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-7\""]}], 1.*^-7, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55266\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.52659135542599, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"3.8088428\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 
+     38.08842800000000039517544792033731937408`7.6013929619444065, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797154608362*^9}],
+
+Cell[BoxData["\<\"Elapsed time in seconds = 44.08147\"\>"], "Print",
+ CellChangeTimes->{3.68479715461522*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"perimPerform1", "[", 
+  RowBox[{"polyInner2", ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "3"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6847970963072233`*^9, 3.684797096408634*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Performance of Function polyInner2\"\>"], "Print",
+ CellChangeTimes->{3.6847970968946133`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "                        ","\"                        \"",
+   "\"     tolerance\"","\"Perimeter Estimate\"","\"Timing\""},
+  "RowWithSeparators"]], "Print",
+ CellChangeTimes->{3.684797096900586*^9}],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+-------\"\>"], "Print",
+ CellChangeTimes->{3.6847970969072113`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 0.1, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.52366\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.23664030267119, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"8.64\"", "\[Times]", 
+       SuperscriptBox["10", "\"-4\""]}], 
+     0.00086399999999999996767863219560013022`2.9571136557585174, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797096914855*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-2\""]}], 0.01, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.53633\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.363300133499983`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.656\"", "\[Times]", 
+       SuperscriptBox["10", "\"-3\""]}], 
+     0.00165599999999999991998067550014184235`3.2396602457284853, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797096922669*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-3\""]}], 0.001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.54735\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.473473599498988`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"8.145\"", "\[Times]", 
+       SuperscriptBox["10", "\"-3\""]}], 
+     0.00814499999999999946265205608142423443`3.9314910019241522, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797096929984*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-4\""]}], 0.0001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55136\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.51361122852019, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.0838\"", "\[Times]", 
+       SuperscriptBox["10", "\"-2\""]}], 
+     0.02083799999999999888466994946156773949`4.33945594697403, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.6847970969373217`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-5\""]}], 0.00001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55237\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.52365155965191, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.00975\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 
+     0.10097499999999999531485883608183939941`5.0248137751216495, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.6847970970176888`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-6\""]}], 1.*^-6, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55263\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.526269872594124`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"5.75700\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 
+     0.5756999999999999895194946475385222584`5.780796142734759, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.6847970975971947`*^9}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-7\""]}], 1.*^-7, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55268\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.52683868368389, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+    "\"4.112121\"", 
+     4.11212100000000013722001312999054789543`6.634665798658663, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{3.684797101819581*^9}],
+
+Cell[BoxData["\<\"Elapsed time in seconds = 4.82030\"\>"], "Print",
+ CellChangeTimes->{3.684797101826425*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"perimPerform1", "[", 
+  RowBox[{"polyInner3", ",", 
+   RowBox[{"{", 
+    RowBox[{"5", ",", "3"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6847728975866337`*^9, 3.684772899725782*^9}, {
+  3.6847736895478992`*^9, 3.684773700154236*^9}, {3.6847970152515783`*^9, 
+  3.684797027654956*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Performance of Function polyInner3\"\>"], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.684797027953018*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{
+  "                        ","\"                        \"",
+   "\"     tolerance\"","\"Perimeter Estimate\"","\"Timing\""},
+  "RowWithSeparators"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.684797027956787*^9}}],
+
+Cell[BoxData["\<\"------------------------------------------------------------\
+-------\"\>"], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.68479702796213*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 0.1, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.10707\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 21.070660289094178`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.912\"", "\[Times]", 
+       SuperscriptBox["10", "\"-3\""]}], 
+     0.00191200000000000007102651800039438967`3.302087801219705, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.684797027964512*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-2\""]}], 0.01, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.48832\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 24.883241220330383`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.0705\"", "\[Times]", 
+       SuperscriptBox["10", "\"-2\""]}], 
+     0.01070499999999999923838700510714261327`4.050186584910081, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.6847970279672327`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-3\""]}], 0.001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.53633\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.363300133499983`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"3.8528\"", "\[Times]", 
+       SuperscriptBox["10", "\"-2\""]}], 
+     0.0385279999999999997473132395953143714`4.606376378521336, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.6847970279961443`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-4\""]}], 0.0001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.54885\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.48845781078795, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.80745\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 
+     0.18074499999999998900435116411244962364`5.277666205401411, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.684797028178946*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-5\""]}], 0.00001, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55184\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.518430291681582`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"9.64541\"", "\[Times]", 
+       SuperscriptBox["10", "\"-1\""]}], 
+     0.96454099999999998171773540889262221754`6.0049206063225755, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.68479702914554*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-6\""]}], 1.*^-6, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55251\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.52513267188188, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+    "\"6.233574\"", 
+     6.23357399999999994832933225552551448345`6.815337032720143, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, {3.684797016259358*^9, 3.684797035382985*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"\"      \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"1.\"", "\[Times]", 
+       SuperscriptBox["10", "\"-7\""]}], 1.*^-7, AutoDelete -> True], 
+    ScientificForm],"\"               \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"2.55266\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 25.526591355425992`, AutoDelete -> 
+     True], ScientificForm],"\"             \"",TagBox[
+    InterpretationBox[
+     RowBox[{"\"4.5271517\"", "\[Times]", 
+       SuperscriptBox["10", "\"1\""]}], 
+     45.27151700000000289492163574323058128357`7.676424960761196, AutoDelete -> 
+     True], ScientificForm]},
+  "RowDefault"]], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, 3.684797016259358*^9, 3.6847970818581057`*^9}],
+
+Cell[BoxData["\<\"Elapsed time in seconds = 52.70152\"\>"], "Print",
+ CellChangeTimes->{
+  3.684773716607189*^9, 3.6847739754040194`*^9, 3.684774575689231*^9, 
+   3.684774716998781*^9, {3.68477477565933*^9, 3.684774811410927*^9}, {
+   3.6847749167827387`*^9, 3.684774952436326*^9}, 3.68477503093682*^9, 
+   3.68479685150124*^9, 3.684797016259358*^9, 3.684797081861248*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{28, Automatic}, {36, Automatic}},
+FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (December 4, \
+2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 4581, 109, 556, "Input"],
+Cell[5142, 131, 5031, 119, 556, "Input"],
+Cell[10176, 252, 4668, 120, 420, "Input"],
+Cell[14847, 374, 9120, 208, 845, "Input"],
+Cell[23970, 584, 6024, 136, 471, "Input"],
+Cell[CellGroupData[{
+Cell[30019, 724, 213, 5, 28, "Input"],
+Cell[CellGroupData[{
+Cell[30257, 733, 110, 1, 22, "Print"],
+Cell[30370, 736, 228, 5, 22, "Print"],
+Cell[30601, 743, 147, 2, 21, "Print"],
+Cell[30751, 747, 704, 16, 23, "Print"],
+Cell[31458, 765, 706, 16, 23, "Print"],
+Cell[32167, 783, 707, 16, 23, "Print"],
+Cell[32877, 801, 707, 16, 23, "Print"],
+Cell[33587, 819, 710, 16, 23, "Print"],
+Cell[34300, 837, 647, 15, 23, "Print"],
+Cell[34950, 854, 710, 16, 23, "Print"],
+Cell[35663, 872, 109, 1, 22, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[35821, 879, 215, 5, 28, "Input"],
+Cell[CellGroupData[{
+Cell[36061, 888, 112, 1, 22, "Print"],
+Cell[36176, 891, 229, 5, 22, "Print"],
+Cell[36408, 898, 147, 2, 21, "Print"],
+Cell[36558, 902, 702, 16, 23, "Print"],
+Cell[37263, 920, 706, 16, 23, "Print"],
+Cell[37972, 938, 707, 16, 23, "Print"],
+Cell[38682, 956, 707, 16, 23, "Print"],
+Cell[39392, 974, 711, 16, 23, "Print"],
+Cell[40106, 992, 710, 16, 23, "Print"],
+Cell[40819, 1010, 645, 15, 23, "Print"],
+Cell[41467, 1027, 109, 1, 22, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[41625, 1034, 317, 7, 28, "Input"],
+Cell[CellGroupData[{
+Cell[41967, 1045, 374, 5, 22, "Print"],
+Cell[42344, 1052, 493, 9, 22, "Print"],
+Cell[42840, 1063, 408, 6, 21, "Print"],
+Cell[43251, 1071, 968, 20, 23, "Print"],
+Cell[44222, 1093, 972, 20, 23, "Print"],
+Cell[45197, 1115, 972, 20, 23, "Print"],
+Cell[46172, 1137, 971, 20, 23, "Print"],
+Cell[47146, 1159, 974, 20, 23, "Print"],
+Cell[48123, 1181, 909, 19, 23, "Print"],
+Cell[49035, 1202, 975, 20, 23, "Print"],
+Cell[50013, 1224, 372, 5, 22, "Print"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
